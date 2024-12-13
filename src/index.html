@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo Factoriabiz</title>
+    <script type="module" src="./js/main.js"></script>
+    <link href="./css/styles.css" rel="stylesheet" />
+  </head>
+  <body class="bg-gray-100">
+    <div class="container mx-auto py-10">
+      <h2 class="text-2xl font-bold mb-4 flex items-center">
+        <span class="mr-2">⏳</span> Actividades pendientes
+        <a href="#" class="ml-auto text-yellow-500 font-medium hover:underline"
+          >Ver más</a
+        >
+      </h2>
+
+      <div
+        x-data="{
+          skip: 4,
+          atBeginning: false,
+          atEnd: false,
+          next() {
+            this.to((current, offset) => current + (offset * this.skip));
+          },
+          prev() {
+            this.to((current, offset) => current - (offset * this.skip));
+          },
+          to(strategy) {
+            let slider = this.$refs.slider;
+            let current = slider.scrollLeft;
+            let offset =
+              slider.firstElementChild.getBoundingClientRect().width;
+            slider.scrollTo({
+              left: strategy(current, offset),
+              behavior: 'smooth',
+            });
+          },
+        }"
+        class="relative"
+      >
+        <!-- Botón Izquierdo -->
+        <button
+          x-on:click="prev"
+          class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black text-white p-2 rounded-full z-10"
+        >
+          ←
+        </button>
+
+        <!-- Contenedor del Carrusel -->
+        <ul
+          x-ref="slider"
+          class="ul-slider"
+        >
+          <!-- Tarjeta 01-->
+          <li>
+            <div class="relative">
+              <img
+                src="https://via.placeholder.com/400x200"
+                alt="Imagen de actividad"
+                class="w-full h-40 object-cover"
+              />
+              <span
+                class="absolute top-2 left-2 bg-gray-800 text-white text-xs font-bold px-2 py-1 rounded"
+              >
+                Obligatorio
+              </span>
+              <button
+                class="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white font-medium px-4 py-2 rounded"
+              >
+                Acceder
+              </button>
+            </div>
+            <div class="p-4">
+              <h3 class="text-lg font-bold">Gestión del cambio</h3>
+              <p class="text-sm text-yellow-500">GRUPO SIETE NOVENTA</p>
+              <div class="mt-2 h-1 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-green-500" style="width: 50%"></div>
+              </div>
+            </div>
+          </li>
+          <!-- Tarjeta 02-->
+          <li>
+            <div class="relative">
+              <img
+                src="https://via.placeholder.com/400x200"
+                alt="Imagen de actividad"
+                class="w-full h-40 object-cover"
+              />
+              <span
+                class="absolute top-2 left-2 bg-gray-800 text-white text-xs font-bold px-2 py-1 rounded"
+              >
+                Obligatorio
+              </span>
+              <button
+                class="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white font-medium px-4 py-2 rounded"
+              >
+                Acceder
+              </button>
+            </div>
+            <div class="p-4">
+              <h3 class="text-lg font-bold">Gestión del cambio</h3>
+              <p class="text-sm text-yellow-500">GRUPO SIETE NOVENTA</p>
+              <div class="mt-2 h-1 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-green-500" style="width: 50%"></div>
+              </div>
+            </div>
+          </li>
+          <!-- Tarjeta 03-->
+          <li>
+            <div class="relative">
+              <img
+                src="https://via.placeholder.com/400x200"
+                alt="Imagen de actividad"
+                class="w-full h-40 object-cover"
+              />
+              <span
+                class="absolute top-2 left-2 bg-gray-800 text-white text-xs font-bold px-2 py-1 rounded"
+              >
+                Obligatorio
+              </span>
+              <button
+                class="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white font-medium px-4 py-2 rounded"
+              >
+                Acceder
+              </button>
+            </div>
+            <div class="p-4">
+              <h3 class="text-lg font-bold">Gestión del cambio</h3>
+              <p class="text-sm text-yellow-500">GRUPO SIETE NOVENTA</p>
+              <div class="mt-2 h-1 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-green-500" style="width: 50%"></div>
+              </div>
+            </div>
+          </li>
+          <!-- Tarjeta 04-->
+          <li>
+            <div class="relative">
+              <img
+                src="https://via.placeholder.com/400x200"
+                alt="Imagen de actividad"
+                class="w-full h-40 object-cover"
+              />
+              <span
+                class="absolute top-2 left-2 bg-gray-800 text-white text-xs font-bold px-2 py-1 rounded"
+              >
+                Obligatorio
+              </span>
+              <button
+                class="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white font-medium px-4 py-2 rounded"
+              >
+                Acceder
+              </button>
+            </div>
+            <div class="p-4">
+              <h3 class="text-lg font-bold">Gestión del cambio</h3>
+              <p class="text-sm text-yellow-500">GRUPO SIETE NOVENTA</p>
+              <div class="mt-2 h-1 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-green-500" style="width: 50%"></div>
+              </div>
+            </div>
+          </li>
+          <!-- Tarjeta 05-->
+          <li>
+            <div class="relative">
+              <img
+                src="https://via.placeholder.com/400x200"
+                alt="Imagen de actividad"
+                class="w-full h-40 object-cover"
+              />
+              <span
+                class="absolute top-2 left-2 bg-gray-800 text-white text-xs font-bold px-2 py-1 rounded"
+              >
+                Obligatorio
+              </span>
+              <button
+                class="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white font-medium px-4 py-2 rounded"
+              >
+                Acceder
+              </button>
+            </div>
+            <div class="p-4">
+              <h3 class="text-lg font-bold">Gestión del cambio</h3>
+              <p class="text-sm text-yellow-500">GRUPO SIETE NOVENTA</p>
+              <div class="mt-2 h-1 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-green-500" style="width: 50%"></div>
+              </div>
+            </div>
+          </li>
+          <!-- Tarjeta 06-->
+          <li>
+            <div class="relative">
+              <img
+                src="https://via.placeholder.com/400x200"
+                alt="Imagen de actividad"
+                class="w-full h-40 object-cover"
+              />
+              <span
+                class="absolute top-2 left-2 bg-gray-800 text-white text-xs font-bold px-2 py-1 rounded"
+              >
+                Obligatorio
+              </span>
+              <button
+                class="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white font-medium px-4 py-2 rounded"
+              >
+                Acceder
+              </button>
+            </div>
+            <div class="p-4">
+              <h3 class="text-lg font-bold">Gestión del cambio</h3>
+              <p class="text-sm text-yellow-500">GRUPO SIETE NOVENTA</p>
+              <div class="mt-2 h-1 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-green-500" style="width: 50%"></div>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <!-- Botón Derecho -->
+        <button
+          x-on:click="next"
+          class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black text-white p-2 rounded-full z-10"
+        >
+          →
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

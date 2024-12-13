@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CUSTOM CSS */
+@layer utilities {
+  .ul-slider {
+    @apply flex overflow-x-scroll snap-x snap-mandatory space-x-6;
+
+    li {
+        @apply flex-none w-full sm:w-1/2 lg:w-1/4 snap-start bg-white rounded-lg shadow-md overflow-hidden;
+    }
+  }
+}
