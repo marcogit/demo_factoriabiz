@@ -5,226 +5,715 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Demo Factoriabiz</title>
     <script type="module" src="./js/main.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css"
+    />
     <link href="./css/styles.css" rel="stylesheet" />
   </head>
-  <body class="bg-gray-100">
-    <div class="container mx-auto py-10">
-      <h2 class="text-2xl font-bold mb-4 flex items-center">
-        <span class="mr-2">⏳</span> Actividades pendientes
-        <a href="#" class="ml-auto text-yellow-500 font-medium hover:underline"
-          >Ver más</a
-        >
-      </h2>
-
-      <div
-        x-data="{
-          skip: 4,
-          atBeginning: false,
-          atEnd: false,
-          next() {
-            this.to((current, offset) => current + (offset * this.skip));
-          },
-          prev() {
-            this.to((current, offset) => current - (offset * this.skip));
-          },
-          to(strategy) {
-            let slider = this.$refs.slider;
-            let current = slider.scrollLeft;
-            let offset =
-              slider.firstElementChild.getBoundingClientRect().width;
-            slider.scrollTo({
-              left: strategy(current, offset),
-              behavior: 'smooth',
-            });
-          },
-        }"
-        class="relative"
-      >
-        <!-- Botón Izquierdo -->
-        <button
-          x-on:click="prev"
-          class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black text-white p-2 rounded-full z-10"
-        >
-          ←
-        </button>
-
-        <!-- Contenedor del Carrusel -->
-        <ul
-          x-ref="slider"
-          class="ul-slider"
-        >
-          <!-- Tarjeta 01-->
-          <li>
-            <div class="relative">
-              <img
-                src="https://via.placeholder.com/400x200"
-                alt="Imagen de actividad"
-                class="w-full h-40 object-cover"
-              />
-              <span
-                class="absolute top-2 left-2 bg-gray-800 text-white text-xs font-bold px-2 py-1 rounded"
-              >
-                Obligatorio
-              </span>
-              <button
-                class="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white font-medium px-4 py-2 rounded"
-              >
-                Acceder
-              </button>
-            </div>
-            <div class="p-4">
-              <h3 class="text-lg font-bold">Gestión del cambio</h3>
-              <p class="text-sm text-yellow-500">GRUPO SIETE NOVENTA</p>
-              <div class="mt-2 h-1 bg-gray-200 rounded-full overflow-hidden">
-                <div class="h-full bg-green-500" style="width: 50%"></div>
-              </div>
-            </div>
-          </li>
-          <!-- Tarjeta 02-->
-          <li>
-            <div class="relative">
-              <img
-                src="https://via.placeholder.com/400x200"
-                alt="Imagen de actividad"
-                class="w-full h-40 object-cover"
-              />
-              <span
-                class="absolute top-2 left-2 bg-gray-800 text-white text-xs font-bold px-2 py-1 rounded"
-              >
-                Obligatorio
-              </span>
-              <button
-                class="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white font-medium px-4 py-2 rounded"
-              >
-                Acceder
-              </button>
-            </div>
-            <div class="p-4">
-              <h3 class="text-lg font-bold">Gestión del cambio</h3>
-              <p class="text-sm text-yellow-500">GRUPO SIETE NOVENTA</p>
-              <div class="mt-2 h-1 bg-gray-200 rounded-full overflow-hidden">
-                <div class="h-full bg-green-500" style="width: 50%"></div>
-              </div>
-            </div>
-          </li>
-          <!-- Tarjeta 03-->
-          <li>
-            <div class="relative">
-              <img
-                src="https://via.placeholder.com/400x200"
-                alt="Imagen de actividad"
-                class="w-full h-40 object-cover"
-              />
-              <span
-                class="absolute top-2 left-2 bg-gray-800 text-white text-xs font-bold px-2 py-1 rounded"
-              >
-                Obligatorio
-              </span>
-              <button
-                class="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white font-medium px-4 py-2 rounded"
-              >
-                Acceder
-              </button>
-            </div>
-            <div class="p-4">
-              <h3 class="text-lg font-bold">Gestión del cambio</h3>
-              <p class="text-sm text-yellow-500">GRUPO SIETE NOVENTA</p>
-              <div class="mt-2 h-1 bg-gray-200 rounded-full overflow-hidden">
-                <div class="h-full bg-green-500" style="width: 50%"></div>
-              </div>
-            </div>
-          </li>
-          <!-- Tarjeta 04-->
-          <li>
-            <div class="relative">
-              <img
-                src="https://via.placeholder.com/400x200"
-                alt="Imagen de actividad"
-                class="w-full h-40 object-cover"
-              />
-              <span
-                class="absolute top-2 left-2 bg-gray-800 text-white text-xs font-bold px-2 py-1 rounded"
-              >
-                Obligatorio
-              </span>
-              <button
-                class="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white font-medium px-4 py-2 rounded"
-              >
-                Acceder
-              </button>
-            </div>
-            <div class="p-4">
-              <h3 class="text-lg font-bold">Gestión del cambio</h3>
-              <p class="text-sm text-yellow-500">GRUPO SIETE NOVENTA</p>
-              <div class="mt-2 h-1 bg-gray-200 rounded-full overflow-hidden">
-                <div class="h-full bg-green-500" style="width: 50%"></div>
-              </div>
-            </div>
-          </li>
-          <!-- Tarjeta 05-->
-          <li>
-            <div class="relative">
-              <img
-                src="https://via.placeholder.com/400x200"
-                alt="Imagen de actividad"
-                class="w-full h-40 object-cover"
-              />
-              <span
-                class="absolute top-2 left-2 bg-gray-800 text-white text-xs font-bold px-2 py-1 rounded"
-              >
-                Obligatorio
-              </span>
-              <button
-                class="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white font-medium px-4 py-2 rounded"
-              >
-                Acceder
-              </button>
-            </div>
-            <div class="p-4">
-              <h3 class="text-lg font-bold">Gestión del cambio</h3>
-              <p class="text-sm text-yellow-500">GRUPO SIETE NOVENTA</p>
-              <div class="mt-2 h-1 bg-gray-200 rounded-full overflow-hidden">
-                <div class="h-full bg-green-500" style="width: 50%"></div>
-              </div>
-            </div>
-          </li>
-          <!-- Tarjeta 06-->
-          <li>
-            <div class="relative">
-              <img
-                src="https://via.placeholder.com/400x200"
-                alt="Imagen de actividad"
-                class="w-full h-40 object-cover"
-              />
-              <span
-                class="absolute top-2 left-2 bg-gray-800 text-white text-xs font-bold px-2 py-1 rounded"
-              >
-                Obligatorio
-              </span>
-              <button
-                class="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white font-medium px-4 py-2 rounded"
-              >
-                Acceder
-              </button>
-            </div>
-            <div class="p-4">
-              <h3 class="text-lg font-bold">Gestión del cambio</h3>
-              <p class="text-sm text-yellow-500">GRUPO SIETE NOVENTA</p>
-              <div class="mt-2 h-1 bg-gray-200 rounded-full overflow-hidden">
-                <div class="h-full bg-green-500" style="width: 50%"></div>
-              </div>
-            </div>
-          </li>
-        </ul>
-
-        <!-- Botón Derecho -->
-        <button
-          x-on:click="next"
-          class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black text-white p-2 rounded-full z-10"
-        >
-          →
-        </button>
+  <body>
+    <section class="panel">
+      <div class="container">
+        <!-- HEADER-->
+        <header class="panel-header">
+          <h2 class="title-med">
+            <img
+              src="./assets/images/icon-time.svg"
+              alt="Actividades pendientes"
+            />
+            Slider Carousel
+          </h2>
+          <a href="#" class="btn btn-brand">Ver más</a>
+        </header>
+        <!-- BODY-->
+        <div class="panel-body">
+          <div
+            x-data="{
+              skip: 4,
+              atBeginning: false,
+              atEnd: false,
+              startX: 0,
+              endX: 0,
+              isDragging: false,
+              touchStart(event) {
+                this.isDragging = true;
+                this.startX = event.type === 'touchstart' 
+                  ? event.touches[0].clientX 
+                  : event.clientX; // Captura posición inicial del toque o mouse
+              },
+              touchEnd(event) {
+                if (!this.isDragging) return;
+                this.isDragging = false;
+                this.endX = event.type === 'touchend' 
+                  ? event.changedTouches[0].clientX 
+                  : event.clientX; // Captura posición final del toque o mouse
+                this.handleSwipe();
+              },
+              handleSwipe() {
+                if (this.startX > this.endX + 50) { // Swipe izquierda
+                  this.next();
+                } else if (this.startX < this.endX - 50) { // Swipe derecha
+                  this.prev();
+                }
+              },
+              next() {
+                this.to((current, offset) => current + (offset * this.skip));
+              },
+              prev() {
+                this.to((current, offset) => current - (offset * this.skip));
+              },
+              to(strategy) {
+                let slider = this.$refs.slider;
+                let current = slider.scrollLeft;
+                let offset =
+                  slider.firstElementChild.getBoundingClientRect().width;
+                slider.scrollTo({
+                  left: strategy(current, offset),
+                  behavior: 'smooth',
+                });
+              },
+            }"
+            class="relative"
+          >
+            <!-- Botón Izquierdo -->
+            <button
+              x-on:click="prev"
+              class="btn btn-icon btn-dark btn-control btn-control--prev"
+            >
+              <img src="./assets/images/arrow-prev--white.svg" alt="Previous" />
+            </button>
+            <!-- Contenedor del Carrusel -->
+            <ul
+              x-ref="slider"
+              @touchstart="touchStart"
+              @touchend="touchEnd"
+              @mousedown="touchStart"
+              @mouseup="touchEnd"
+              @mouseleave="isDragging = false"
+              class="ul-slider"
+            >
+              <li>
+                <!-- Card -->
+                <div class="card">
+                  <!-- Card HEADER-->
+                  <div class="card-header">
+                    <div class="card-header--top">
+                      <span class="badge badge-dark">Obligatorio </span>
+                      <img
+                        src="./assets/images/icon-save--white.svg"
+                        alt="Save item"
+                      />
+                    </div>
+                    <button type="button" class="btn btn-brand">Acceder</button>
+                    <div class="card-header--bottom">
+                      <div class="progress progress-green">
+                        <div class="progress-bar" style="width: 50%"></div>
+                      </div>
+                    </div>
+                    <img
+                      src="https://via.placeholder.com/400x200"
+                      alt="Imagen de actividad"
+                    />
+                  </div>
+                  <!-- Card BODY-->
+                  <div class="card-body">
+                    <span class="badge badge-default pretitle"
+                      ><img
+                        src="./assets/images/icon-aulav.svg"
+                        alt="Aula Virtual"
+                      />
+                      Aula virtual</span
+                    >
+                    <h3 class="title-small">Gestión del cambio</h3>
+                    <p class="subtitle-small subtitle-small--brand">
+                      GRUPO SIETE NOVENTA
+                    </p>
+                    <div class="card-body--display">
+                      <p>
+                        Bienvenidos al sistema de gestión de aprendizaje. Te
+                        recordamos que debes cumplir con las normas del curso y
+                        estar atento a los plazos de entrega, ya que no se
+                        aceptarán tareas después de la fecha límite.
+                      </p>
+                      <div class="card-body--display---buttons" role="group">
+                        <a href="#" class="btn btn-small btn-light">Ver más</a>
+                        <a href="#" class="btn btn-small btn-light">Ver más</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <!-- Card -->
+                <div class="card">
+                  <!-- Card HEADER-->
+                  <div class="card-header">
+                    <div class="card-header--top">
+                      <span class="badge badge-dark">Obligatorio </span>
+                      <img
+                        src="./assets/images/icon-save--white.svg"
+                        alt="Save item"
+                      />
+                    </div>
+                    <button type="button" class="btn btn-brand">Acceder</button>
+                    <div class="card-header--bottom">
+                      <div class="progress progress-green">
+                        <div class="progress-bar" style="width: 50%"></div>
+                      </div>
+                    </div>
+                    <img
+                      src="https://via.placeholder.com/400x200"
+                      alt="Imagen de actividad"
+                    />
+                  </div>
+                  <!-- Card BODY-->
+                  <div class="card-body">
+                    <span class="badge badge-default pretitle"
+                      ><img
+                        src="./assets/images/icon-aulav.svg"
+                        alt="Aula Virtual"
+                      />
+                      Aula virtual</span
+                    >
+                    <h3 class="title-small">Gestión del cambio</h3>
+                    <p class="subtitle-small subtitle-small--brand">
+                      GRUPO SIETE NOVENTA
+                    </p>
+                    <div class="card-body--display">
+                      <p>
+                        Bienvenidos al sistema de gestión de aprendizaje. Te
+                        recordamos que debes cumplir con las normas del curso y
+                        estar atento a los plazos de entrega, ya que no se
+                        aceptarán tareas después de la fecha límite.
+                      </p>
+                      <div class="card-body--display---buttons" role="group">
+                        <a href="#" class="btn btn-small btn-light">Ver más</a>
+                        <a href="#" class="btn btn-small btn-light">Ver más</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <!-- Card -->
+                <div class="card">
+                  <!-- Card HEADER-->
+                  <div class="card-header">
+                    <div class="card-header--top">
+                      <span class="badge badge-dark">Obligatorio </span>
+                      <img
+                        src="./assets/images/icon-save--white.svg"
+                        alt="Save item"
+                      />
+                    </div>
+                    <button type="button" class="btn btn-brand">Acceder</button>
+                    <div class="card-header--bottom">
+                      <div class="progress progress-green">
+                        <div class="progress-bar" style="width: 50%"></div>
+                      </div>
+                    </div>
+                    <img
+                      src="https://via.placeholder.com/400x200"
+                      alt="Imagen de actividad"
+                    />
+                  </div>
+                  <!-- Card BODY-->
+                  <div class="card-body">
+                    <span class="badge badge-default pretitle"
+                      ><img
+                        src="./assets/images/icon-aulav.svg"
+                        alt="Aula Virtual"
+                      />
+                      Aula virtual</span
+                    >
+                    <h3 class="title-small">Gestión del cambio</h3>
+                    <p class="subtitle-small subtitle-small--brand">
+                      GRUPO SIETE NOVENTA
+                    </p>
+                    <div class="card-body--display">
+                      <p>
+                        Bienvenidos al sistema de gestión de aprendizaje. Te
+                        recordamos que debes cumplir con las normas del curso y
+                        estar atento a los plazos de entrega, ya que no se
+                        aceptarán tareas después de la fecha límite.
+                      </p>
+                      <div class="card-body--display---buttons" role="group">
+                        <a href="#" class="btn btn-small btn-light">Ver más</a>
+                        <a href="#" class="btn btn-small btn-light">Ver más</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <!-- Card -->
+                <div class="card">
+                  <!-- Card HEADER-->
+                  <div class="card-header">
+                    <div class="card-header--top">
+                      <span class="badge badge-dark">Obligatorio </span>
+                      <img
+                        src="./assets/images/icon-save--white.svg"
+                        alt="Save item"
+                      />
+                    </div>
+                    <button type="button" class="btn btn-brand">Acceder</button>
+                    <div class="card-header--bottom">
+                      <div class="progress progress-green">
+                        <div class="progress-bar" style="width: 50%"></div>
+                      </div>
+                    </div>
+                    <img
+                      src="https://via.placeholder.com/400x200"
+                      alt="Imagen de actividad"
+                    />
+                  </div>
+                  <!-- Card BODY-->
+                  <div class="card-body">
+                    <span class="badge badge-default pretitle"
+                      ><img
+                        src="./assets/images/icon-aulav.svg"
+                        alt="Aula Virtual"
+                      />
+                      Aula virtual</span
+                    >
+                    <h3 class="title-small">Gestión del cambio</h3>
+                    <p class="subtitle-small subtitle-small--brand">
+                      GRUPO SIETE NOVENTA
+                    </p>
+                    <div class="card-body--display">
+                      <p>
+                        Bienvenidos al sistema de gestión de aprendizaje. Te
+                        recordamos que debes cumplir con las normas del curso y
+                        estar atento a los plazos de entrega, ya que no se
+                        aceptarán tareas después de la fecha límite.
+                      </p>
+                      <div class="card-body--display---buttons" role="group">
+                        <a href="#" class="btn btn-small btn-light">Ver más</a>
+                        <a href="#" class="btn btn-small btn-light">Ver más</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <!-- Card -->
+                <div class="card">
+                  <!-- Card HEADER-->
+                  <div class="card-header">
+                    <div class="card-header--top">
+                      <span class="badge badge-dark">Obligatorio </span>
+                      <img
+                        src="./assets/images/icon-save--white.svg"
+                        alt="Save item"
+                      />
+                    </div>
+                    <button type="button" class="btn btn-brand">Acceder</button>
+                    <div class="card-header--bottom">
+                      <div class="progress progress-green">
+                        <div class="progress-bar" style="width: 50%"></div>
+                      </div>
+                    </div>
+                    <img
+                      src="https://via.placeholder.com/400x200"
+                      alt="Imagen de actividad"
+                    />
+                  </div>
+                  <!-- Card BODY-->
+                  <div class="card-body">
+                    <span class="badge badge-default pretitle"
+                      ><img
+                        src="./assets/images/icon-aulav.svg"
+                        alt="Aula Virtual"
+                      />
+                      Aula virtual</span
+                    >
+                    <h3 class="title-small">Gestión del cambio</h3>
+                    <p class="subtitle-small subtitle-small--brand">
+                      GRUPO SIETE NOVENTA
+                    </p>
+                    <div class="card-body--display">
+                      <p>
+                        Bienvenidos al sistema de gestión de aprendizaje. Te
+                        recordamos que debes cumplir con las normas del curso y
+                        estar atento a los plazos de entrega, ya que no se
+                        aceptarán tareas después de la fecha límite.
+                      </p>
+                      <div class="card-body--display---buttons" role="group">
+                        <a href="#" class="btn btn-small btn-light">Ver más</a>
+                        <a href="#" class="btn btn-small btn-light">Ver más</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <!-- Botón Derecho -->
+            <button
+              x-on:click="next"
+              class="btn btn-icon btn-dark btn-control btn-control--next"
+            >
+              <img src="./assets/images/arrow-next--white.svg" alt="Previous" />
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
+    <section class="panel">
+      <div class="container">
+        <!-- HEADER-->
+        <header class="panel-header">
+          <h2 class="title-med">
+            <img
+              src="./assets/images/icon-time.svg"
+              alt="Actividades pendientes"
+            />
+            Slider Spline
+          </h2>
+          <a href="#" class="btn btn-brand">Ver más</a>
+        </header>
+        <!-- BODY-->
+        <div class="panel-body">
+          <div
+            x-data="{
+        init() {
+            new Splide(this.$refs.splide, {
+                perPage: 4,
+                breakpoints: {
+                  975: {
+                    perPage: 3,
+                  }, 
+                  767: {
+                    perPage: 2,
+                  },  
+                 500: {
+                        perPage: 1,
+                    },
+                },
+            }).mount()
+        },
+    }"
+          >
+            <div
+              x-ref="splide"
+              class="splide"
+              aria-label="Splide/Alpine.js Carousel Example"
+            >
+              <div class="splide__track">
+                <ul class="splide__list">
+                  <li class="splide__slide">
+                    <!-- Card -->
+                    <div class="card">
+                      <!-- Card HEADER-->
+                      <div class="card-header">
+                        <div class="card-header--top">
+                          <span class="badge badge-dark">Obligatorio </span>
+                          <img
+                            src="./assets/images/icon-save--white.svg"
+                            alt="Save item"
+                          />
+                        </div>
+                        <button type="button" class="btn btn-brand">
+                          Acceder
+                        </button>
+                        <div class="card-header--bottom">
+                          <div class="progress progress-green">
+                            <div class="progress-bar" style="width: 50%"></div>
+                          </div>
+                        </div>
+                        <img
+                          src="https://via.placeholder.com/400x200"
+                          alt="Imagen de actividad"
+                        />
+                      </div>
+                      <!-- Card BODY-->
+                      <div class="card-body">
+                        <span class="badge badge-default pretitle"
+                          ><img
+                            src="./assets/images/icon-aulav.svg"
+                            alt="Aula Virtual"
+                          />
+                          Aula virtual</span
+                        >
+                        <h3 class="title-small">Gestión del cambio</h3>
+                        <p class="subtitle-small subtitle-small--brand">
+                          GRUPO SIETE NOVENTA
+                        </p>
+                        <div class="card-body--display">
+                          <p>
+                            Bienvenidos al sistema de gestión de aprendizaje. Te
+                            recordamos que debes cumplir con las normas del
+                            curso y estar atento a los plazos de entrega, ya que
+                            no se aceptarán tareas después de la fecha límite.
+                          </p>
+                          <div
+                            class="card-body--display---buttons"
+                            role="group"
+                          >
+                            <a href="#" class="btn btn-small btn-light"
+                              >Ver más</a
+                            >
+                            <a href="#" class="btn btn-small btn-light"
+                              >Ver más</a
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="splide__slide">
+                    <!-- Card -->
+                    <div class="card">
+                      <!-- Card HEADER-->
+                      <div class="card-header">
+                        <div class="card-header--top">
+                          <span class="badge badge-dark">Obligatorio </span>
+                          <img
+                            src="./assets/images/icon-save--white.svg"
+                            alt="Save item"
+                          />
+                        </div>
+                        <button type="button" class="btn btn-brand">
+                          Acceder
+                        </button>
+                        <div class="card-header--bottom">
+                          <div class="progress progress-green">
+                            <div class="progress-bar" style="width: 50%"></div>
+                          </div>
+                        </div>
+                        <img
+                          src="https://via.placeholder.com/400x200"
+                          alt="Imagen de actividad"
+                        />
+                      </div>
+                      <!-- Card BODY-->
+                      <div class="card-body">
+                        <span class="badge badge-default pretitle"
+                          ><img
+                            src="./assets/images/icon-aulav.svg"
+                            alt="Aula Virtual"
+                          />
+                          Aula virtual</span
+                        >
+                        <h3 class="title-small">Gestión del cambio</h3>
+                        <p class="subtitle-small subtitle-small--brand">
+                          GRUPO SIETE NOVENTA
+                        </p>
+                        <div class="card-body--display">
+                          <p>
+                            Bienvenidos al sistema de gestión de aprendizaje. Te
+                            recordamos que debes cumplir con las normas del
+                            curso y estar atento a los plazos de entrega, ya que
+                            no se aceptarán tareas después de la fecha límite.
+                          </p>
+                          <div
+                            class="card-body--display---buttons"
+                            role="group"
+                          >
+                            <a href="#" class="btn btn-small btn-light"
+                              >Ver más</a
+                            >
+                            <a href="#" class="btn btn-small btn-light"
+                              >Ver más</a
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="splide__slide">
+                    <!-- Card -->
+                    <div class="card">
+                      <!-- Card HEADER-->
+                      <div class="card-header">
+                        <div class="card-header--top">
+                          <span class="badge badge-dark">Obligatorio </span>
+                          <img
+                            src="./assets/images/icon-save--white.svg"
+                            alt="Save item"
+                          />
+                        </div>
+                        <button type="button" class="btn btn-brand">
+                          Acceder
+                        </button>
+                        <div class="card-header--bottom">
+                          <div class="progress progress-green">
+                            <div class="progress-bar" style="width: 50%"></div>
+                          </div>
+                        </div>
+                        <img
+                          src="https://via.placeholder.com/400x200"
+                          alt="Imagen de actividad"
+                        />
+                      </div>
+                      <!-- Card BODY-->
+                      <div class="card-body">
+                        <span class="badge badge-default pretitle"
+                          ><img
+                            src="./assets/images/icon-aulav.svg"
+                            alt="Aula Virtual"
+                          />
+                          Aula virtual</span
+                        >
+                        <h3 class="title-small">Gestión del cambio</h3>
+                        <p class="subtitle-small subtitle-small--brand">
+                          GRUPO SIETE NOVENTA
+                        </p>
+                        <div class="card-body--display">
+                          <p>
+                            Bienvenidos al sistema de gestión de aprendizaje. Te
+                            recordamos que debes cumplir con las normas del
+                            curso y estar atento a los plazos de entrega, ya que
+                            no se aceptarán tareas después de la fecha límite.
+                          </p>
+                          <div
+                            class="card-body--display---buttons"
+                            role="group"
+                          >
+                            <a href="#" class="btn btn-small btn-light"
+                              >Ver más</a
+                            >
+                            <a href="#" class="btn btn-small btn-light"
+                              >Ver más</a
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="splide__slide">
+                    <!-- Card -->
+                    <div class="card">
+                      <!-- Card HEADER-->
+                      <div class="card-header">
+                        <div class="card-header--top">
+                          <span class="badge badge-dark">Obligatorio </span>
+                          <img
+                            src="./assets/images/icon-save--white.svg"
+                            alt="Save item"
+                          />
+                        </div>
+                        <button type="button" class="btn btn-brand">
+                          Acceder
+                        </button>
+                        <div class="card-header--bottom">
+                          <div class="progress progress-green">
+                            <div class="progress-bar" style="width: 50%"></div>
+                          </div>
+                        </div>
+                        <img
+                          src="https://via.placeholder.com/400x200"
+                          alt="Imagen de actividad"
+                        />
+                      </div>
+                      <!-- Card BODY-->
+                      <div class="card-body">
+                        <span class="badge badge-default pretitle"
+                          ><img
+                            src="./assets/images/icon-aulav.svg"
+                            alt="Aula Virtual"
+                          />
+                          Aula virtual</span
+                        >
+                        <h3 class="title-small">Gestión del cambio</h3>
+                        <p class="subtitle-small subtitle-small--brand">
+                          GRUPO SIETE NOVENTA
+                        </p>
+                        <div class="card-body--display">
+                          <p>
+                            Bienvenidos al sistema de gestión de aprendizaje. Te
+                            recordamos que debes cumplir con las normas del
+                            curso y estar atento a los plazos de entrega, ya que
+                            no se aceptarán tareas después de la fecha límite.
+                          </p>
+                          <div
+                            class="card-body--display---buttons"
+                            role="group"
+                          >
+                            <a href="#" class="btn btn-small btn-light"
+                              >Ver más</a
+                            >
+                            <a href="#" class="btn btn-small btn-light"
+                              >Ver más</a
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="splide__slide">
+                    <!-- Card -->
+                    <div class="card">
+                      <!-- Card HEADER-->
+                      <div class="card-header">
+                        <div class="card-header--top">
+                          <span class="badge badge-dark">Obligatorio </span>
+                          <img
+                            src="./assets/images/icon-save--white.svg"
+                            alt="Save item"
+                          />
+                        </div>
+                        <button type="button" class="btn btn-brand">
+                          Acceder
+                        </button>
+                        <div class="card-header--bottom">
+                          <div class="progress progress-green">
+                            <div class="progress-bar" style="width: 50%"></div>
+                          </div>
+                        </div>
+                        <img
+                          src="https://via.placeholder.com/400x200"
+                          alt="Imagen de actividad"
+                        />
+                      </div>
+                      <!-- Card BODY-->
+                      <div class="card-body">
+                        <span class="badge badge-default pretitle"
+                          ><img
+                            src="./assets/images/icon-aulav.svg"
+                            alt="Aula Virtual"
+                          />
+                          Aula virtual</span
+                        >
+                        <h3 class="title-small">Gestión del cambio</h3>
+                        <p class="subtitle-small subtitle-small--brand">
+                          GRUPO SIETE NOVENTA
+                        </p>
+                        <div class="card-body--display">
+                          <p>
+                            Bienvenidos al sistema de gestión de aprendizaje. Te
+                            recordamos que debes cumplir con las normas del
+                            curso y estar atento a los plazos de entrega, ya que
+                            no se aceptarán tareas después de la fecha límite.
+                          </p>
+                          <div
+                            class="card-body--display---buttons"
+                            role="group"
+                          >
+                            <a href="#" class="btn btn-small btn-light"
+                              >Ver más</a
+                            >
+                            <a href="#" class="btn btn-small btn-light"
+                              >Ver más</a
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
   </body>
 </html>
