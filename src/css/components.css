@@ -1,0 +1,228 @@
+@tailwind components;
+
+@layer components {
+  /* card */
+  .card {
+    @apply bg-white shadow-none rounded-lg overflow-hidden;
+    .card-header {
+      @apply rounded-lg overflow-hidden relative;
+
+      .card-header--top {
+        @apply flex justify-between items-center absolute top-0 left-0 right-0 p-3;
+      }
+
+      .card-header--bottom {
+        @apply flex justify-center items-center absolute bottom-0 left-0 right-0 p-3;
+      }
+
+      .btn-location {
+        @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+      }
+    }
+
+    .card-body {
+      @apply px-3 py-2.5 relative;
+
+      .card-body--display {
+        @apply pt-3 pb-1 transition-all lg:opacity-0 lg:h-0;
+
+        p {
+          @apply text-sm;
+        }
+
+        .card-body--display---buttons {
+          @apply flex justify-start items-center pt-3 gap-2;
+
+          .btn {
+            @apply m-0;
+          }
+        }
+      }
+    }
+
+    &:hover {
+      @apply shadow-xl;
+      .card-header {
+        @apply rounded-none;
+      }
+      .card-body {
+        .card-body--display {
+          @apply opacity-100 h-full;
+        }
+      }
+    }
+  }
+  /* button */
+  .mobile-button {
+    @apply relative inline-flex items-center justify-start xl:hidden w-10 h-10;
+
+    svg {
+      @apply stroke-brand transition-all;
+    }
+  }
+
+  .btn {
+    @apply font-medium rounded-xl text-base px-3 py-2.5 lg:px-5 me-2 mb-2 transition-all;
+
+    &.btn-small {
+      @apply text-sm font-light px-2 py-1.5;
+    }
+    &.btn-accent {
+      @apply bg-accent hover:bg-neutral-dark hover:text-white focus:bg-neutral-dark focus:text-accent;
+    }
+
+    &.btn-icon {
+      @apply rounded-full w-12 h-12 p-0 flex items-center justify-center;
+    }
+
+    &.btn-dark {
+      @apply bg-black hover:bg-gray-800;
+    }
+
+    &.btn-light {
+      @apply text-gray-500 border-gray-300 border-solid border;
+    }
+
+    &.btn-control {
+      @apply absolute top-14 z-10 hidden xl:flex;
+
+      &.btn-control--prev {
+        @apply left-0 transform -translate-x-16;
+      }
+
+      &.btn-control--next {
+        @apply right-0 transform translate-x-16;
+      }
+    }
+  }
+  /* badge */
+  .badge {
+    @apply text-xs font-medium me-2 px-1 py-0.5 rounded flex align-middle justify-start gap-1;
+
+    &.badge-dark {
+      @apply bg-gray-950 bg-opacity-50 text-white;
+    }
+
+    &.badge-default {
+      @apply text-gray-500;
+    }
+  }
+  /* progress */
+  .progress {
+    @apply w-full bg-white bg-opacity-50 rounded-full h-1.5 overflow-hidden;
+
+    .progress-bar {
+      @apply h-1.5;
+    }
+
+    &.progress-green {
+      .progress-bar {
+        @apply bg-green-400;
+      }
+    }
+  }
+  /* navbar nav */
+  .navbar-nav {
+    @apply flex gap-10;
+
+    .navbar-nav-item {
+      .btn-icon {
+        margin: 0;
+      }
+
+      .navbar-nav--link {
+        @apply transition-all text-neutral hover:text-accent;
+      }
+    }
+
+    &.navbar-nav--right {
+      @apply gap-0 items-center;
+
+      .navbar-nav-item--responsive {
+        @apply hidden xl:flex;
+      }
+    }
+  }
+  /* navbar nav */
+  .user-box {
+    @apply relative;
+
+    .user-box--button {
+      @apply flex gap-4 items-center cursor-pointer border border-neutral-lighter hover:border-accent-lighter rounded-full pl-0 xl:pl-2 pr-0 xl:pr-5 py-0 xl:py-1 transition-all;
+
+      .user-box--button---info {
+        @apply flex flex-col gap-0 hidden xl:flex;
+
+        .user-box--button---info---name {
+          @apply font-bold -mb-1;
+        }
+
+        .user-box--button---info---subname {
+          @apply text-sm;
+        }
+      }
+    }
+
+    .user-box--modal {
+      @apply fixed sm:absolute top-0 sm:top-14 right-0 h-screen sm:h-auto w-screen sm:w-80 bg-white shadow-lg rounded-lg overflow-hidden p-5 z-10 origin-top-right;
+
+      .user-box--modal---section {
+        @apply border-b border-neutral-lighter;
+
+        .user-box--modal---section----header {
+          @apply flex justify-start items-center;
+
+          span {
+            @apply font-bold text-lg pt-3;
+          }
+        }
+      }
+
+      .user-box--modal---intro {
+        @apply flex gap-3 items-center;
+
+        .user-box--modal---user---avatar {
+          @apply w-12 h-12 rounded-full overflow-hidden;
+        }
+
+        .user-box--modal---user---info {
+          @apply flex flex-col gap-0;
+
+          .user-box--modal---user---info---name {
+            @apply font-bold text-lg -mb-1;
+          }
+
+          .user-box--modal---user---info---subname {
+            @apply text-sm;
+          }
+        }
+      }
+
+      .user-box--modal---logos {
+        @apply flex flex-wrap gap-3 items-center justify-center pt-3 mb-3;
+
+        img {
+          @apply w-auto h-10;
+        }
+      }
+
+      .user-box--modal---menu {
+        @apply flex-col gap-3 py-3 px-2 m-0;
+
+        .navbar-nav-item {
+          .navbar-nav--link {
+            @apply transition-all text-neutral hover:text-accent;
+          }
+        }
+      }
+
+      .user-box--modal---footer {
+        @apply flex justify-start items-center gap-3 pt-4;
+
+        .btn {
+          @apply m-0;
+        }
+      }
+    }
+  }
+}

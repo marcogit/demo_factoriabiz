@@ -1,11 +1,11 @@
+@import './components.css'; 
+@import './base.css'; 
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* CUSTOM CSS */
-body {
-  @apply font-sans;
-}
 
 .splide__arrow {
   @apply rounded-full w-12 h-12 p-0 flex items-center justify-center bg-black hover:bg-gray-800 top-14 z-10 hidden xl:flex;
@@ -23,134 +23,7 @@ body {
   }
 }
 
-@layer components {
-  .panel {
-    @apply w-full py-5 lg:py-10;
-
-    .panel-header {
-      @apply flex justify-between items-center px-3 pb-3;
-
-      .btn {
-        @apply m-0
-      }
-    }
-  }
-  .card {
-    @apply bg-white shadow-none rounded-lg overflow-hidden;
-    .card-header {
-      @apply rounded-lg overflow-hidden relative;
-
-      .card-header--top {
-        @apply flex justify-between items-center absolute top-0 left-0 right-0 p-3;
-      }
-
-      .card-header--bottom {
-        @apply flex justify-center items-center absolute bottom-0 left-0 right-0 p-3;
-      }
-
-      .btn-brand {
-        @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
-      }
-    }
-
-    .card-body {
-      @apply px-3 py-2.5 relative;
-
-      .card-body--display {
-        @apply pt-3 pb-1 transition-all lg:opacity-0 lg:h-0;
-
-        p {
-          @apply text-sm;
-        }
-
-        .card-body--display---buttons {
-          @apply flex justify-start items-center pt-3 gap-2;
-
-          .btn {
-            @apply m-0;
-          }
-        }
-      }
-    }
-
-    &:hover {
-      @apply shadow-xl;
-      .card-header {
-        @apply rounded-none;
-      }
-      .card-body {
-        .card-body--display {
-          @apply opacity-100 h-full;
-        }
-      }
-    }
-  }
-
-  .btn {
-    @apply font-medium rounded-xl text-base px-3 py-2.5 lg:px-5 me-2 mb-2 transition-all;
-
-    &.btn-small {
-      @apply text-sm font-light px-2 py-1.5;
-    }
-    &.btn-brand {
-      @apply bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300;
-    }
-
-    &.btn-icon {
-      @apply rounded-full w-12 h-12 p-0 flex items-center justify-center;
-    }
-
-    &.btn-dark {
-      @apply bg-black hover:bg-gray-800;
-    }
-
-    &.btn-light {
-      @apply text-gray-500 border-gray-300 border-solid border;
-    }
-
-    &.btn-control {
-      @apply absolute top-14 z-10 hidden xl:flex;
-
-      &.btn-control--prev {
-        @apply left-0 transform -translate-x-16;
-      }
-
-      &.btn-control--next {
-        @apply right-0 transform translate-x-16;
-      }
-    }
-  }
-
-  .badge {
-    @apply text-xs font-medium me-2 px-1 py-0.5 rounded flex align-middle justify-start gap-1;
-
-    &.badge-dark {
-      @apply bg-gray-950 bg-opacity-50 text-white;
-    }
-
-    &.badge-default {
-      @apply text-gray-500;
-    }
-  }
-
-  .progress {
-    @apply w-full bg-white bg-opacity-50 rounded-full h-1.5 overflow-hidden;
-
-    .progress-bar {
-      @apply h-1.5;
-    }
-
-    &.progress-green {
-      .progress-bar {
-        @apply bg-green-400;
-      }
-    }
-  }
-}
 @layer utilities {
-  .container {
-    @apply max-w-screen-xl mx-auto px-1 lg:px-2 xl:px-4;
-  }
   .ul-slider {
     @apply flex overflow-x-scroll snap-x snap-mandatory;
 
@@ -162,26 +35,6 @@ body {
   .splide__list {
     li {
       @apply px-3 pb-10
-    }
-  }
-
-  .title-small {
-    @apply text-lg font-medium;
-  }
-
-  .title-med {
-    @apply text-xl lg:text-2xl font-medium flex align-middle justify-start gap-2;
-  }
-
-  .pretitle {
-    @apply pl-0 mb-1;
-  }
-
-  .subtitle-small {
-    @apply text-xs font-medium tracking-wider;
-
-    &.subtitle-small--brand {
-      @apply text-yellow-500;
     }
   }
 }

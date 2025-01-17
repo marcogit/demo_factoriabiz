@@ -1,0 +1,122 @@
+@tailwind base;
+
+@layer base {
+  body {
+    @apply font-sans text-neutral-dark text-base h-svh flex flex-col min-h-screen;
+  }
+
+  /* typography */
+  a {
+    @apply transition-all;
+  }
+
+  .title-small {
+    @apply text-lg font-medium;
+  }
+
+  .title-med {
+    @apply text-xl lg:text-2xl font-medium flex align-middle justify-start gap-2;
+  }
+
+  .pretitle {
+    @apply pl-0 mb-1;
+  }
+
+  .subtitle-small {
+    @apply text-xs font-medium tracking-wider;
+
+    &.subtitle-small--accent {
+      @apply text-accent-dark;
+    }
+  }
+
+  .list-legal {
+    @apply flex gap-0;
+
+    li {
+      @apply border border-t-0 border-l-0  border-b-0;
+
+      a {
+        @apply px-3 block text-center;
+      }
+
+      &:last-child {
+        @apply border-r-0;
+      }
+    }
+  }
+
+  .link {
+    @apply transition-all text-neutral hover:text-accent underline hover:no-underline;
+
+    &.link-small {
+      @apply text-sm;
+    }
+
+    &.link-ghost {
+      @apply text-neutral-light hover:text-neutral;
+    }
+  }
+
+  /* grid */
+  .container {
+    @apply max-w-screen-xl mx-auto px-3 xl:px-4;
+  }
+
+  .panel {
+    @apply w-full py-5 lg:py-10;
+
+    .panel-header {
+      @apply flex justify-between items-center pb-3;
+
+      .btn {
+        @apply m-0;
+      }
+    }
+  }
+
+  main {
+    @apply flex-grow pt-14;
+  }
+
+  .main-header {
+    @apply border bg-white border-b-neutral-lighter fixed top-0 w-full z-10;
+
+    .container {
+      .navbar {
+        @apply flex justify-between items-center items-center py-1.5 xl:py-3;
+
+        .navbar-brand {
+          @apply flex items-center gap-2;
+        }
+
+        .navbar-group {
+          @apply flex gap-10 items-center;
+
+          .mobile-menu--control {
+            @apply hidden xl:block;
+          }
+        }
+      }
+    }
+  }
+
+  .main-footer {
+    @apply bg-brand text-accent-light text-sm;
+
+    .main-footer--content {
+      @apply flex flex-col md:flex-row gap-2 items-center justify-between py-6;
+
+      .list-legal {
+        @apply text-xs md:text-sm;
+        li {
+          @apply border-accent-light flex-1 md:flex-auto;
+
+          a {
+            @apply hover:text-accent-lighter;
+          }
+        }
+      }
+    }
+  }
+}
