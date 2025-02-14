@@ -1,6 +1,10 @@
 import Alpine from "alpinejs";
+import Splide from "@splidejs/splide";
+import flatpickr from "flatpickr";
 
 window.Alpine = Alpine;
+window.Splide = Splide;
+window.flatpickr = flatpickr;
 
 document.addEventListener("alpine:init", () => {
   Alpine.data("toggleActive", () => ({
@@ -45,7 +49,77 @@ document.addEventListener("alpine:init", () => {
     },
   }));
 
-  // ✅ Registrar correctamente chatApp en Alpine
+  Alpine.data("dropdown", (label, options) => ({
+    open: false,
+    selected: label,
+    options: options,
+    toggle(option) {
+      this.selected = option;
+      this.open = false;
+    },
+  }));
+
+  Alpine.data("multiSelect", (label, options) => ({
+    open: false,
+    selected: [],
+    options: options,
+    toggle(option) {
+      if (this.selected.includes(option)) {
+        this.selected = this.selected.filter((o) => o !== option);
+      } else {
+        this.selected.push(option);
+      }
+    },
+    displaySelected() {
+      return this.selected.length ? this.selected.join(", ") : label;
+    },
+  }));
+
+  Alpine.data("datePicker", () => ({
+    initFlatpickr() {
+      flatpickr(this.$refs.datepicker, {
+        mode: "range",
+        dateFormat: "d/m/Y",
+        locale: "es",
+        allowInput: true,
+      });
+    },
+  }));
+
+  Alpine.data("modalComponent", () => ({
+    openModal: false,
+    closeModal() {
+      this.openModal = false;
+      this.pauseVideo();
+    },
+    pauseVideo() {
+      const iframe = this.$refs.videoIframe;
+      if (iframe) {
+        iframe.contentWindow.postMessage(
+          '{"event":"command","func":"pauseVideo","args":""}',
+          "*"
+        );
+      }
+    },
+  }));
+
+  Alpine.data("accordion_filter", () => ({
+    expanded: window.innerWidth >= 976, // Abierto en escritorio, cerrado en móvil
+    toggleAccordion() {
+      this.expanded = !this.expanded;
+    },
+    updateState() {
+      this.expanded = window.innerWidth >= 976;
+    },
+    init() {
+      this.updateState(); // Estado inicial según la pantalla
+
+      window.addEventListener("resize", () => {
+        this.updateState();
+      });
+    },
+  }));
+
   Alpine.data("chatApp", () => ({
     newMessage: "",
     messages: [],
@@ -64,7 +138,26 @@ document.addEventListener("alpine:init", () => {
       }
     },
   }));
+
+  // Inicializar Splide
+  Alpine.data("splideCarousel", () => ({
+    init() {
+      new Splide(".splide", {
+        perPage: 4,
+        breakpoints: {
+          975: {
+            perPage: 3,
+          },
+          767: {
+            perPage: 2,
+          },
+          500: {
+            perPage: 1,
+          },
+        },
+      }).mount();
+    },
+  }));
 });
 
 Alpine.start();
-

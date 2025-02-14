@@ -1,6 +1,216 @@
 @tailwind components;
 
 @layer components {
+  /* BORRAR */
+  .btn-menu-auxiliar {
+    @apply fixed bottom-5 right-5;
+
+    z-index: 9999;
+
+    .btn-menu-auxiliar--panel {
+      @apply fixed bottom-10 right-5 shadow-md;
+    }
+  }
+  /* Card */
+  .card {
+    @apply relative transition-all shadow-none rounded-lg;
+
+    .card-header {
+      @apply rounded-lg overflow-hidden relative;
+
+      .card-header--top {
+        @apply flex justify-between items-center absolute top-0 left-0 right-0 p-3 z-10;
+
+        .btn-transparent {
+          svg {
+            path {
+              @apply fill-white;
+            }
+          }
+        }
+
+        #save-control {
+          @apply mr-1 ml-auto;
+
+          path:nth-child(1) {
+            opacity: 0;
+          }
+          &.active {
+            path:nth-child(1) {
+              opacity: 1;
+            }
+          }
+        }
+      }
+
+      .card-header--bottom {
+        @apply flex justify-center items-center absolute bottom-0 left-0 right-0 p-3;
+      }
+
+      .btn-location {
+        @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30;
+      }
+
+      .card-status {
+        @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-20;
+      }
+
+      img {
+        @apply w-full object-cover;
+      }
+
+      .card-header--link {
+        @apply block bg-brand-dark;
+
+        img {
+          @apply transition-all;
+        }
+
+        &:hover {
+          img {
+            @apply opacity-60;
+          }
+        }
+      }
+    }
+
+    .card-body {
+      @apply px-3 py-2.5;
+    }
+
+    &.card-item {
+      @apply bg-white max-w-[320px] md:mb-[25%];
+
+      .card-header {
+        &::before {
+          content: "";
+          @apply block absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-t from-transparent to-neutral-dark opacity-30;
+        }
+      }
+
+      .card-body {
+        @apply md:absolute top-full bg-white rounded-br-lg rounded-bl-lg;
+
+        .card-body--display {
+          @apply transition-all md:opacity-0 md:h-0;
+
+          .card-body--display---box {
+            @apply pt-3 pb-1;
+          }
+
+          p {
+            @apply text-sm;
+          }
+
+          .card-body--display---buttons {
+            @apply flex flex-wrap justify-start items-center pt-3 gap-2;
+
+            .btn {
+              @apply m-0;
+            }
+          }
+        }
+      }
+
+      &:hover {
+        @apply shadow-xl z-40;
+
+        .card-header {
+          @apply rounded-br-none rounded-bl-none;
+        }
+        .card-body {
+          @apply shadow-xl;
+
+          .card-body--display {
+            @apply opacity-100 h-full;
+          }
+        }
+      }
+    }
+
+    &.card-stories {
+      .card-body {
+        @apply bg-transparent px-1;
+
+        .card-title {
+          @apply mb-2 text-neutral-light transition-all;
+        }
+      }
+
+      &:hover {
+        .card-header {
+          @apply rounded-lg;
+        }
+
+        .card-body {
+          @apply shadow-none;
+
+          .card-title {
+            @apply text-neutral-dark;
+          }
+
+          .badge-default {
+            @apply bg-white;
+          }
+        }
+      }
+    }
+
+    &.card-post--thumb {
+      @apply bg-transparent hover:shadow-none;
+
+      .card-body {
+        @apply px-1;
+
+        .title-base {
+          @apply text-sm md:text-base leading-4 md:leading-tight text-neutral;
+        }
+      }
+
+      &:hover {
+        .card-header {
+          @apply rounded-lg;
+        }
+      }
+    }
+
+    &.disabled {
+      .card-header {
+        .card-img-thumb {
+          @apply opacity-30;
+        }
+      }
+    }
+  }
+  /* Modal */
+  .modal {
+    @apply fixed inset-0 z-10 overflow-y-auto;
+
+    .modal-overlay {
+      @apply fixed inset-0 bg-black/25;
+    }
+
+    .modal-panel {
+      @apply relative flex min-h-screen items-center justify-center p-5;
+
+      .modal-panel--box {
+        @apply relative w-full max-w-4xl rounded-md bg-white pt-3 pb-5 px-5 shadow-lg;
+
+        .modal-header {
+          @apply flex justify-between items-center pb-3;
+
+          .modal-header--title {
+            @apply flex gap-3 items-center;
+
+            img,
+            svg {
+              @apply max-h-6 w-auto;
+            }
+          }
+        }
+      }
+    }
+  }
   /* Docs */
   .doc {
     @apply flex gap-5 items-center justify-start;
@@ -17,7 +227,7 @@
     }
 
     .doc-buttons {
-      @apply flex gap-0 items-center ml-auto mr-2;
+      @apply flex gap-0 items-center ml-auto -mr-2;
 
       #save-control {
         path:nth-child(1) {
@@ -80,9 +290,26 @@
   .chat-panel {
     @apply flex h-svh gap-5;
   }
+  /* Filter */
+  .filter---display {
+    @apply relative;
+
+    .btn-filter {
+      @apply absolute right-0 -top-10 lg:hidden !important;
+    }
+  }
+
+  .panel {
+    .filter---display {
+      .btn-filter {
+        @apply -top-14 !important;
+      }
+    }  
+  }
+
   /* Post */
   .post {
-    @apply gap-10 mb-16 pb-16 relative;
+    @apply gap-5 md:gap-10 mb-10 pb-10 md:mb-16 md:pb-16 relative;
 
     &:after {
       content: "";
@@ -97,11 +324,11 @@
       @apply grid-cols-1 md:grid-cols-[1fr_1fr];
 
       .post-header {
-        @apply order-2;
+        @apply md:order-2;
       }
 
-      .post-header {
-        @apply order-2;
+      .post-body {
+        @apply md:order-1;
       }
     }
 
@@ -132,116 +359,6 @@
       }
     }
   }
-  /* card */
-  .card {
-    @apply bg-white shadow-none rounded-lg overflow-hidden;
-    .card-header {
-      @apply rounded-lg overflow-hidden relative;
-
-      .card-header--top {
-        @apply flex justify-between items-center absolute top-0 left-0 right-0 p-3;
-
-        #save-control {
-          @apply mr-1 ml-auto;
-
-          path:nth-child(1) {
-            opacity: 0;
-          }
-          &.active {
-            path:nth-child(1) {
-              opacity: 1;
-            }
-          }
-        }
-      }
-
-      .card-header--bottom {
-        @apply flex justify-center items-center absolute bottom-0 left-0 right-0 p-3;
-      }
-
-      .btn-location {
-        @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
-      }
-
-      img {
-        @apply w-full object-cover;
-      }
-    }
-
-    .card-body {
-      @apply px-3 py-2.5 relative;
-
-      .card-body--display {
-        @apply pt-3 pb-1 transition-all lg:opacity-0 lg:h-0;
-
-        p {
-          @apply text-sm;
-        }
-
-        .card-body--display---buttons {
-          @apply flex justify-start items-center pt-3 gap-2;
-
-          .btn {
-            @apply m-0;
-          }
-        }
-      }
-    }
-
-    &:hover {
-      @apply shadow-xl;
-      .card-header {
-        @apply rounded-none;
-      }
-      .card-body {
-        .card-body--display {
-          @apply opacity-100 h-full;
-        }
-      }
-    }
-
-    &.card-stories {
-      @apply bg-transparent hover:shadow-none;
-
-      .card-body {
-        @apply bg-transparent;
-
-        .card-title {
-          @apply mb-2 text-neutral-light transition-all;
-        }
-      }
-
-      &:hover {
-        .card-header {
-          @apply rounded-lg;
-        }
-
-        .card-body {
-          .card-title {
-            @apply text-neutral-dark;
-          }
-
-          .badge-default {
-            @apply bg-white;
-          }
-        }
-      }
-    }
-
-    &.card-post--thumb {
-      @apply bg-transparent hover:shadow-none;
-
-      .card-body {
-        @apply px-1;
-      }
-
-      &:hover {
-        .card-header {
-          @apply rounded-lg;
-        }
-      }
-    }
-  }
   /* box */
   .box {
     @apply rounded-xl p-5 flex flex-col gap-5 border border-neutral-lighter mb-5;
@@ -265,16 +382,18 @@
     &.box-white {
       @apply border-white bg-white;
 
-      #save-control {
-        path:nth-child(1) {
-          @apply fill-transparent;
-        }
-        path:nth-child(2) {
-          @apply fill-neutral-dark;
-        }
-        &.active {
+      .box-header {
+        #save-control {
           path:nth-child(1) {
+            @apply fill-transparent;
+          }
+          path:nth-child(2) {
             @apply fill-neutral-dark;
+          }
+          &.active {
+            path:nth-child(1) {
+              @apply fill-neutral-dark;
+            }
           }
         }
       }
@@ -285,11 +404,11 @@
     }
 
     &.box-compact {
-      @apply mb-0
+      @apply mb-0;
     }
 
     &.box-full {
-      @apply h-full justify-center
+      @apply h-full justify-center;
     }
 
     &.box-sidebar {
@@ -299,7 +418,24 @@
     }
 
     .box {
-      @apply mb-0;
+      @apply mb-0 p-0 md:p-5 border-transparent md:border-neutral-lighter;
+    }
+
+    .splide {
+      &::before {
+        @apply bg-gradient-to-r from-white to-transparent !important;
+      }
+
+      &::after {
+        @apply bg-gradient-to-l from-white to-transparent !important;
+      }
+
+      .splide__track {
+        &::after,
+        &::before {
+          @apply bg-white;
+        }
+      }
     }
   }
   /* button */
@@ -312,11 +448,11 @@
   }
   /* alerts */
   .alert {
-    @apply flex gap-5 rounded-xl p-5 border border-neutral-lighter;
+    @apply flex flex-col md:flex-row gap-5 rounded-xl p-5 border border-neutral-lighter h-full;
 
     .alert-header {
       img {
-        @apply rounded-xl;
+        @apply rounded-xl md:max-w-[208px];
       }
     }
 
@@ -324,7 +460,7 @@
       @apply flex flex-col gap-2 text-neutral-light text-sm;
 
       .alert-title--box {
-        @apply flex gap-3 items-center justify-start;
+        @apply flex gap-3 items-center justify-start mb-3 mt-1;
 
         svg {
           @apply m-0;
@@ -337,11 +473,11 @@
     }
 
     &.alert-success {
-      @apply bg-success-bg;
+      @apply bg-success-bg border-success-bg;
     }
 
     &.alert-big {
-      @apply p-10 gap-10;
+      @apply md:p-10 md:gap-10;
     }
   }
   /* progress */
@@ -374,26 +510,74 @@
   }
   /*buttons*/
   .btn {
-    @apply font-medium rounded-xl text-base px-3 py-3 lg:px-5 transition-all text-center leading-tight;
+    @apply flex gap-1 font-medium rounded-xl text-base px-3 lg:px-5 py-2 lg:py-3  transition-all text-center leading-tight relative;
+
+    .not {
+      @apply block w-2 h-2 bg-danger rounded-full absolute top-0 right-0 border border-white;
+    }
+    img {
+      @apply w-auto;
+    }
+
+    svg {
+      @apply transition-all;
+
+      path {
+        @apply fill-neutral;
+      }
+    }
+
+    &:hover {
+      svg {
+        path {
+          @apply fill-accent;
+        }
+      }
+    }
 
     &.btn-small {
       @apply text-sm font-light px-2 py-1.5;
     }
+
+    &.btn-icon {
+      @apply rounded-full w-12 h-12 p-0 flex items-center justify-center;
+
+      .not {
+        @apply right-2.5 top-3;
+      }
+    }
+
     &.btn-accent {
       @apply bg-accent hover:bg-neutral-dark hover:text-white focus:bg-neutral-dark focus:text-accent;
 
       &.is--lighter {
         @apply bg-accent-lighter hover:bg-neutral-dark;
       }
+
+      svg {
+        path {
+          @apply fill-neutral-dark;
+        }
+      }
+
+      &:hover,
+      &:focus {
+        svg {
+          path,
+          rect {
+            @apply fill-accent;
+          }
+        }
+      }
     }
 
-    &.btn-icon {
-      @apply rounded-full w-12 h-12 p-0 flex items-center justify-center;
+    &.btn-accent--line {
+      @apply bg-transparent border border-accent text-neutral hover:bg-accent hover:text-white;
     }
 
     &.btn-icon--small {
       @apply w-9 h-9 p-0 flex items-center justify-center m-0;
-      
+
       &:hover {
         svg {
           path {
@@ -408,7 +592,7 @@
     }
 
     &.btn-light {
-      @apply text-gray-500 border-gray-300 border-solid border;
+      @apply text-neutral-light border border-solid border-neutral-lighter hover:border-neutral-light;
     }
 
     &.btn-control {
@@ -425,6 +609,19 @@
 
     &.btn-transparent {
       @apply bg-transparent p-0 m-0;
+    }
+
+    &.btn-square {
+      @apply bg-neutral-bg rounded-md p-0 w-10 h-10 hover:bg-neutral-lighter;
+
+      svg,
+      img {
+        @apply w-3;
+
+        path {
+          @apply fill-neutral-light;
+        }
+      }
     }
   }
   /* badge */
@@ -452,7 +649,7 @@
     }
 
     &.badge-transparent {
-      @apply border-transparent;
+      @apply border-transparent pl-0;
     }
   }
   /* progress */
@@ -479,7 +676,12 @@
       }
 
       .navbar-nav--link {
-        @apply transition-all text-neutral hover:text-accent;
+        @apply transition-all text-neutral hover:text-accent flex gap-3 justify-start items-start;
+
+        svg,
+        img {
+          @apply m-0 w-5;
+        }
       }
     }
 
@@ -490,13 +692,35 @@
         @apply hidden xl:flex;
       }
     }
+
+    &.navbar-nav--mobile {
+      @apply flex-col gap-5;
+
+      .navbar-nav-item {
+        .navbar-nav--link {
+          @apply text-white hover:text-accent;
+
+          &.active {
+            @apply text-accent;
+          }
+        }
+      }
+    }
   }
-  /* navbar nav */
+  /* user box */
   .user-box {
     @apply relative;
 
     .user-box--button {
-      @apply flex gap-4 items-center cursor-pointer border border-neutral-lighter hover:border-accent-lighter rounded-full pl-0 xl:pl-2 pr-0 xl:pr-5 py-0 xl:py-1 transition-all;
+      @apply flex gap-4 items-center cursor-pointer border border-neutral-lighter hover:border-accent-lighter rounded-full pl-0 xl:pl-1 pr-0 xl:pr-4 py-0 xl:py-1 transition-all;
+
+      .user-box--button---img {
+        @apply relative;
+
+        span {
+          @apply absolute top-0 -right-1/4;
+        }
+      }
 
       .user-box--button---info {
         @apply flex flex-col gap-0 hidden xl:flex;
@@ -512,7 +736,7 @@
     }
 
     .user-box--modal {
-      @apply fixed sm:absolute top-0 sm:top-14 right-0 h-screen sm:h-auto w-screen sm:w-80 bg-white shadow-lg rounded-lg overflow-hidden p-5 z-10 origin-top-right;
+      @apply fixed sm:absolute top-0 sm:top-9 xl:top-12 right-0 h-screen sm:h-auto w-screen sm:w-80 bg-white shadow-lg rounded-lg overflow-hidden p-5 z-10 origin-top-right border border-neutral-lighter;
 
       .user-box--modal---section {
         @apply border-b border-neutral-lighter;
@@ -521,16 +745,20 @@
           @apply flex justify-start items-center;
 
           span {
-            @apply font-bold text-lg pt-3;
+            @apply font-bold text-base md:text-lg pt-3;
           }
         }
       }
 
       .user-box--modal---intro {
-        @apply flex gap-3 items-center;
+        @apply flex gap-3 items-center relative;
 
-        .user-box--modal---user---avatar {
-          @apply w-12 h-12 rounded-full overflow-hidden;
+        .user-box--modal---user----avatar {
+          @apply w-12 h-12 relative;
+
+          span {
+            @apply absolute top-0 right-0 transform scale-125;
+          }
         }
 
         .user-box--modal---user---info {
@@ -544,6 +772,14 @@
             @apply text-sm;
           }
         }
+
+        .user-box--modal---close {
+          @apply absolute -top-5 -right-5;
+
+          .btn-close {
+            @apply opacity-30 hover:opacity-100;
+          }
+        }
       }
 
       .user-box--modal---logos {
@@ -555,11 +791,28 @@
       }
 
       .user-box--modal---menu {
-        @apply flex-col gap-3 py-3 px-2 m-0;
+        @apply flex-col gap-0 py-3 md:py-4 px-0 m-0;
 
         .navbar-nav-item {
           .navbar-nav--link {
-            @apply transition-all text-neutral hover:text-accent;
+            @apply py-2 px-2 rounded-md hover:bg-accent-bg hover:text-neutral-dark;
+            &:hover {
+              svg {
+                path {
+                  @apply fill-accent;
+                }
+              }
+            }
+
+            &.active {
+              @apply text-accent-dark hover:bg-transparent;
+
+              svg {
+                path {
+                  @apply fill-accent;
+                }
+              }
+            }
           }
         }
       }
@@ -573,54 +826,284 @@
       }
     }
   }
-  /* Slide */
-  .splide--slide {
-    .splide__list {
-      li {
-        @apply pb-0;
+  /* mobile menu */
+  .mobile-menu-panel {
+    @apply fixed top-0 left-0 w-full h-full bg-brand-dark;
+
+    z-index: 9999;
+
+    .mobile-menu-panel--header {
+      @apply flex justify-between py-1.5 px-2.5 border-b border-b-brand-light;
+
+      .btn-icon {
+        .not {
+          @apply bg-success;
+        }
+        svg {
+          path {
+            @apply fill-white;
+          }
+        }
+
+        &:hover {
+          svg {
+            path {
+              @apply fill-accent;
+            }
+          }
+        }
       }
     }
+
+    .mobile-menu-panel--body {
+      @apply p-5;
+    }
   }
+  /* Slide */
+  .splide {
+    @apply relative;
 
-  .splide__arrows {
-    .splide__arrow {
-      @apply top-1/4;
+    &::after,
+    &::before {
+      content: "";
+      @apply hidden md:block absolute top-0 bottom-0 z-10 w-8;
+    }
 
-      &.splide__arrow--prev {
-        @apply left-2;
+    &::before {
+      @apply -left-8 bg-gradient-to-r from-white to-transparent;
+    }
+
+    &::after {
+      @apply right-0 w-20 bg-gradient-to-l from-white to-transparent;
+    }
+
+    .splide__track {
+      @apply relative overflow-visible;
+
+      &::after,
+      &::before {
+        content: "";
+        @apply hidden md:block absolute top-0 bottom-0 z-10 bg-white;
       }
 
-      &.splide__arrow--next {
-        @apply right-2;
+      &::after {
+        right: -9999px;
+        left: 100%;
       }
+
+      &::before {
+        left: -9999px;
+        right: calc(100% + 2rem);
+      }
+    }
+
+    .splide__list {
+      .splide__slide {
+        @apply pr-2 pl-2;
+
+        .card-item {
+          .card-body {
+            @apply transition-all md:opacity-0;
+          }
+        }
+
+        &.is-active,
+        &.is-visible {
+          .card-item {
+            .card-body {
+              @apply opacity-100;
+            }
+          }
+        }
+      }
+    }
+
+    .splide__arrows {
+      @apply hidden md:block;
+
+      .splide__arrow {
+        @apply top-24 w-10 h-10 z-20 bg-brand opacity-100 transition-all hover:bg-brand-dark hover:opacity-100 cursor-pointer;
+
+        &[disabled] {
+          @apply opacity-0;
+        }
+
+        &.splide__arrow--prev {
+          @apply -left-10;
+        }
+
+        &.splide__arrow--next {
+          @apply -right-10;
+        }
+
+        svg {
+          @apply transition-all fill-white w-3 h-3;
+        }
+
+        &:hover {
+          svg {
+            @apply fill-accent;
+          }
+        }
+      }
+    }
+
+    &:hover {
+      @apply z-50;
+    }
+
+    &.splide-mini {
+      @apply -mr-5 -ml-5;
+
+      &::before {
+        @apply left-0;
+      }
+
+      .splide__arrows {
+        .splide__arrow {
+          @apply bg-accent w-8 h-8 top-24;
+
+          svg {
+            @apply fill-brand w-3;
+          }
+
+          &.splide__arrow--prev {
+            @apply left-2;
+          }
+
+          &.splide__arrow--next {
+            @apply right-2;
+          }
+        }
+      }
+
+      .splide__track {
+        @apply overflow-x-hidden -mb-6 pb-6 pl-3 !important;
+
+        overflow: hidden;
+        &::after,
+        &::before {
+          @apply content-none;
+        }
+      }
+
+      .card {
+        &.card-item {
+          @apply hover:shadow-sm;
+          .card-body {
+            @apply relative;
+
+            .card-body--display {
+              @apply hidden;
+            }
+          }
+        }
+      }
+    }
+    &.splide-stories {
+      .splide__arrows {
+        .splide__arrow {
+          @apply top-1/2;
+        }
+      }
+    }
+    &.splide-absolute {
+      @apply md:pb-5;
     }
   }
   /* Form */
-  .form-block {
-    @apply py-10;
-
-    .form-row {
-      @apply flex  gap-3 items-end;
-    }
+  .dropdown {
+    @apply relative w-full;
   }
-
   .formcontrol {
-    @apply text-neutral flex w-full px-2 py-3 rounded-xl text-sm mb-0 transition-all text-left leading-tight border border-neutral-lighter focus:outline-none focus:ring-1 focus:ring-neutral-lighter;
+    @apply relative text-neutral flex w-full px-2 py-3 rounded-lg text-sm mb-0 transition-all text-left leading-tight border border-neutral-lighter focus:outline-none focus:ring-1 focus:ring-neutral-lighter bg-transparent;
 
     &.formcontrol-select {
-      @apply w-full pr-12 focus:rounded-br-none focus:rounded-bl-none;  
+      @apply w-full pr-12 focus:rounded-br-none focus:rounded-bl-none;
+    }
+
+    &.formcontrol-filter {
+      @apply font-bold;
     }
 
     .formcontrol-icon {
-      @apply w-6 h-6 p-1 absolute top-1/2 right-2 transform -translate-y-1/2 bg-neutral-bg rounded-md hover:bg-neutral-lighter;
+      @apply w-7 h-7 p-2 absolute top-1/2 right-2 transform -translate-y-1/2 bg-neutral-bg rounded-md hover:bg-neutral-lighter;
+    }
+  }
+  .formcontrol-datepicker {
+    @apply relative w-full;
+    .formcontrol-icon {
+      @apply w-7 h-7 p-2 absolute top-1/2 right-2 transform -translate-y-1/2 bg-neutral-bg rounded-md hover:bg-neutral-lighter;
+    }
+  }
+  .form-group {
+    @apply flex gap-3 bg-white p-1 rounded-lg mb-5;
+
+    .formcontrol {
+      @apply rounded-md border-transparent focus:border-transparent hover:border-transparent active:border-transparent;
+    }
+
+    .btn-icon {
+      @apply rounded-md min-w-12;
+    }
+  }
+  .formcontrol-show {
+    @apply absolute z-20 w-full bg-white border border-neutral-lighter rounded-lg rounded-tl-none rounded-tr-none;
+
+    li {
+      @apply text-neutral-light hover:text-neutral text-sm py-2 px-3 cursor-pointer flex gap-2 items-center;
+
+      .checkbox {
+        @apply w-3.5 h-3.5 rounded-md flex items-center justify-center !important;
+      }
     }
   }
 
-  .formcontrol-show {
-    @apply absolute z-10 w-full bg-white border border-neutral-lighter rounded-lg rounded-tl-none rounded-tr-none;
+  .flatpickr-current-month,
+  .flatpickr-monthDropdown-months {
+    @apply gap-5 flex;
 
-    li {
-      @apply text-neutral-light hover:text-neutral text-sm py-2 px-3 cursor-pointer;
+    .flatpickr-monthDropdown-months,
+    .cur-year {
+      @apply text-xs font-bold text-neutral-dark bg-neutral-bg rounded-lg p-1 flex-1 !important;
+    }
+  }
+
+  .flatpickr-day {
+    &.selected,
+    &.startRange {
+      &.startRange,
+      &.endRange {
+        @apply rounded-full;
+
+        &::before {
+          content: "";
+          @apply absolute block top-0 bottom-0 bg-success-bg -z-10;
+        }
+      }
+      &.startRange {
+        &::before {
+          @apply left-1.5 -right-2 rounded-tl-full rounded-bl-full;
+        }
+      }
+      &.endRange {
+        &::before {
+          @apply right-1.5 -left-2 rounded-tl-none rounded-bl-none rounded-tr-full rounded-br-full;
+        }
+      }
+    }
+
+    &.selected {
+      @apply bg-success-lighter border-transparent text-success-dark hover:bg-success hover:border-transparent;
+    }
+
+    &.inRange {
+      @apply bg-success-bg text-success shadow-[inset_-5px_0_0_border-success-bg,inset_5px_0_0_border-success-bg] border-success-bg;
+
+      &::before {
+        content: "";
+        @apply absolute block top-0 bottom-0 -left-5 -right-5 bg-success-bg -z-10;
+      }
     }
   }
 }

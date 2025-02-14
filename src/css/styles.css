@@ -1,3 +1,5 @@
+@import "@splidejs/splide/css";
+@import "flatpickr/dist/flatpickr.min.css";
 @import './components.css'; 
 @import './base.css'; 
 
@@ -7,34 +9,5 @@
 
 /* CUSTOM CSS */
 
-.splide__arrow {
-  @apply rounded-full w-12 h-12 p-0 flex items-center justify-center bg-black hover:bg-gray-800 top-14 z-10 hidden xl:flex;
-
-  svg {
-    @apply fill-white;
-  }
-
-  &.splide__arrow--prev {
-    @apply left-0 transform -translate-x-12;
-  }
-
-  &.splide__arrow--next {
-    @apply right-0 transform translate-x-12;
-  }
-}
-
 @layer utilities {
-  .ul-slider {
-    @apply flex overflow-x-scroll snap-x snap-mandatory;
-
-    li {
-      @apply flex-none w-full sm:w-1/2 lg:w-1/4 snap-start px-3 pb-10;
-    }
-  }
-
-  .splide__list {
-    li {
-      @apply px-3 pb-10
-    }
-  }
 }
