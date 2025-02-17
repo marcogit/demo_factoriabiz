@@ -184,7 +184,6 @@
         @apply text-lg md:text-xl;
       }
     }
-
     .panel-body {
       .panel-body--filter {
         .form-block {
@@ -192,11 +191,9 @@
         }
       }
     }
-
     &.bg {
       @apply pt-10;
     }
-
     &.bg-light {
       @apply bg-neutral-bg;
 
@@ -220,6 +217,18 @@
     &:hover {
       z-index: 5000;
     }
+    &.panel-full {
+      @apply pt-0 md:pt-7 pb-0 h-full;
+
+      .container {
+        @apply h-full;
+        @media (max-width: 768px) {
+          max-width: inherit;
+          padding-left: 0;
+          padding-right: 0;
+        }
+      }
+    }
   }
 
   main {
@@ -228,7 +237,7 @@
 
   .main-header {
     @apply border bg-white border-b-neutral-lighter fixed top-0 w-full;
-    z-index: 9998;
+    z-index: 4000;
 
     .container {
       .navbar {

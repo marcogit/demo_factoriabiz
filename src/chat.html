@@ -353,12 +353,12 @@
     <div class="scroll-fix">
       <main>
         <!-- Grid Chat -->
-        <section class="panel bg-light pb-0 h-full">
-          <div class="container h-full">
+        <section class="panel panel-full bg-light">
+          <div class="container">
             <div class="chat-panel" x-data="chatApp()">
               <div class="grid grid-cols-1 lg:grid-cols-[1fr_2fr]">
                 <!-- Sidebar -->
-                <div class="column">
+                <div class="column chat-panel--menu">
                   <div class="box box-white box-sidebar">
                     <div class="box-header">
                       <span class="title-med">Mensajes</span>
@@ -404,7 +404,7 @@
                               <div class="modal-header">
                                 <div class="modal-header--title">
                                   <img
-                                    src="./assets/images/icon-doc-html.svg"
+                                    src="./assets/images/icon-message.svg"
                                     alt="pdf"
                                   />
                                   <!-- Title -->
@@ -469,8 +469,13 @@
                                         </ul>
                                       </div>
                                     </div>
-                                    <div class="column items-center justify-center">
-                                      <button type="submit" class="btn btn-accent">
+                                    <div
+                                      class="column items-center justify-center"
+                                    >
+                                      <button
+                                        type="submit"
+                                        class="btn btn-accent"
+                                      >
                                         Crear nueva conversación
                                       </button>
                                     </div>
@@ -501,24 +506,118 @@
                         <!-- Lista de conversaciones -->
                         <ul class="list-columns">
                           <li>
-                            <button rel="href" class="box box-list--item">
-                              <img
-                                class="thumb"
-                                src="./assets/images/cms-images/chat-thumb.jpg"
-                                alt="Avatar"
-                              />
-                              <span class="title-base"
-                                >Curso Hyundai Tucson</span
+                            <!-- Mobile menu button-->
+                            <div
+                              x-data="{ openChat: false }"
+                              class="app-control"
+                            >
+                              <button
+                                rel="href"
+                                class="box box-list--item"
+                                @click="openChat = true"
                               >
-                              <small class="date">Hoy</small>
-                              <span class="btn btn-accent">2</span>
-                            </button>
+                                <img
+                                  class="thumb"
+                                  src="./assets/images/cms-images/chat-thumb.jpg"
+                                  alt="Avatar"
+                                />
+                                <span class="title-base"
+                                  >Curso Hyundai Tucson</span
+                                >
+                                <small class="date">Hoy</small>
+                                <span class="btn btn-accent">2</span>
+                              </button>
+                              <!-- chat MOBILE -->
+                              <div
+                                class="mobile-chat-panel"
+                                x-show="openChat"
+                                x-transition:enter="transform transition-transform duration-300 ease-out"
+                                x-transition:enter-start="-translate-x-full"
+                                x-transition:enter-end="translate-x-0"
+                                x-transition:leave="transform transition-transform duration-300 ease-in"
+                                x-transition:leave-start="translate-x-0"
+                                x-transition:leave-end="-translate-x-full"
+                              >
+                                <div class="mobile-chat-panel--body">
+                                  <div class="box box-white box-chat">
+                                    <div class="box-header">
+                                      <button
+                                        @click="openChat = false"
+                                        class="btn btn-icon btn-dark btn-close"
+                                      >
+                                        <img
+                                          src="./assets/images/icon-back.svg"
+                                          alt="Volver"
+                                        />
+                                      </button>
+                                      <span class="title-med"
+                                        >Hyundai Tucson</span
+                                      >
+                                    </div>
+                                    <!-- Mensajes -->
+                                    <div class="box-body" id="chat-messages">
+                                      <div class="box-body--scroll">
+                                        <!-- Renderizar mensajes con Alpine -->
+                                        <template
+                                          x-for="message in messages"
+                                          :key="message.text"
+                                        >
+                                          <div
+                                            :class="message.sender === 'user' ? 'message-in message-in--me' : 'message-in message-in--you'"
+                                          >
+                                            <template
+                                              x-if="message.sender !== 'user'"
+                                            >
+                                              <div
+                                                class="flex items-center gap-2"
+                                              >
+                                                <img
+                                                  src="./assets/images/cms-images/avatar-34.jpg"
+                                                  class="avatar"
+                                                />
+                                                <span
+                                                  class="message-in--name"
+                                                  x-text="message.senderName"
+                                                ></span>
+                                              </div>
+                                            </template>
+                                            <div
+                                              :class="message.sender === 'user' ? 'btn message-me' : 'btn message-you'"
+                                            >
+                                              <span
+                                                x-text="message.text"
+                                              ></span>
+                                            </div>
+                                          </div>
+                                        </template>
+                                      </div>
+                                    </div>
+                                    <!-- Input de mensajes -->
+                                    <div class="box-chat--input">
+                                      <input
+                                        x-model="newMessage"
+                                        type="text"
+                                        placeholder="Escribe tu mensaje"
+                                        class="formcontrol"
+                                      />
+                                      <button
+                                        @click="sendMessage"
+                                        class="btn btn-icon btn-dark"
+                                      >
+                                        <img
+                                          src="./assets/images/icon-send.svg"
+                                          alt="Send"
+                                        />
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- END chat MOBILE -->
+                            </div>
                           </li>
                           <li>
-                            <button
-                              rel="href"
-                              class="box box-list--item active"
-                            >
+                            <button rel="href" class="box box-list--item">
                               <img
                                 class="thumb"
                                 src="./assets/images/cms-images/chat-thumb.jpg"
@@ -621,10 +720,7 @@
                             </button>
                           </li>
                           <li>
-                            <button
-                              rel="href"
-                              class="box box-list--item active"
-                            >
+                            <button rel="href" class="box box-list--item">
                               <img
                                 class="thumb"
                                 src="./assets/images/cms-images/chat-thumb.jpg"
@@ -656,7 +752,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="column">
+                <div class="column chat-panel--messages">
                   <div class="box box-white box-chat">
                     <div class="box-header">
                       <span class="title-med">Hyundai Tucson</span>
@@ -757,6 +853,7 @@
             <a class="link" href="express-trainings.html">Express Trainings</a>
           </li>
           <li><a class="link" href="busqueda.html">Búsqueda</a></li>
+          <li><a class="link" href="chat.html">Chat</a></li>
           <li><a class="link" href="components.html">Componentes</a></li>
         </ul>
       </div>

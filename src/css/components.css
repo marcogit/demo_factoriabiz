@@ -211,7 +211,7 @@
         }
 
         .modal-body {
-          @apply min-h-min max-h-[65vh] overflow-y-auto;
+          @apply max-h-[65vh] overflow-y-auto;
 
           &::-webkit-scrollbar {
             @apply w-2;
@@ -224,9 +224,6 @@
           &::-webkit-scrollbar-thumb {
             @apply bg-neutral-lighter rounded-full hover:bg-neutral-light transition-all;
           }
-
-          /* Estilizar scrollbar - Firefox */
-          scrollbar-width: thin;
 
           .post {
             @apply pr-5;
@@ -296,8 +293,6 @@
       @apply bg-neutral-lighter rounded-full hover:bg-neutral-light transition-all;
     }
 
-    /* Estilizar scrollbar - Firefox */
-    scrollbar-width: thin;
 
     .list-themes--item {
       @apply border-b border-neutral-lighter w-full;
@@ -353,16 +348,14 @@
         &::-webkit-scrollbar-thumb {
           @apply bg-neutral-lighter rounded-full hover:bg-neutral-light transition-all;
         }
-
-        /* Estilizar scrollbar - Firefox */
-        scrollbar-width: thin;
       }
     }
 
     .box-sidebar {
+      @apply rounded-tl-none rounded-tr-none md:rounded-tl-xl md:rounded-tr-xl;
       .box-body {
         .box-body--scroll {
-          @apply top-14 py-3 -bottom-5;
+          @apply top-16 py-3 -bottom-3 pr-3;
         }
       }
     }
@@ -370,11 +363,23 @@
     .box-chat {
       @apply gap-0;
 
+      .box-header {
+        @apply relative;
+
+        .btn-icon {
+          @apply absolute top-1/2 left-3 transform -translate-y-1/2;
+        }
+      }
+
       .box-body {
         .box-body--scroll {
           @apply top-0 bottom-0 p-5 flex flex-col justify-end;
         }
       }
+    }
+
+    .chat-panel--messages {
+      @apply hidden lg:block;
     }
   }
   /* Filter */
@@ -1039,6 +1044,24 @@
 
     .mobile-menu-panel--body {
       @apply p-5;
+    }
+  }
+  /* mobile chat menu */
+  .mobile-chat-panel {
+    @apply fixed top-0 left-0 w-full h-full bg-white;
+
+    z-index: 9999;
+
+    .mobile-chat-panel--header {
+      @apply hidden;
+    }
+
+    .mobile-chat-panel--body {
+      @apply p-0 h-full;
+
+      .box-chat {
+        @apply rounded-none border-0 p-0;
+      }
     }
   }
   /* Slide */
