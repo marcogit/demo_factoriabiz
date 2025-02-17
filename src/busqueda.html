@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Actividades - Factoriabiz</title>
+    <title>Búsqueda - Factoriabiz</title>
     <script type="module" src="./js/main.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -355,261 +355,28 @@
         <!-- PAGE HEADER -->
         <header class="main-header--page">
           <div class="container">
-            <h1 class="title-big">Actividades</h1>
-            <!-- DESPLEGABLE -->
-            <div x-data="accordion_filter()" class="filter---display">
-              <div
-                x-data="{
-                  id: 1
-            }"
-                class="filter---display----panel"
-                role="region"
-              >
-                <button
-                  type="button"
-                  x-on:click="expanded = !expanded"
-                  :aria-expanded="expanded"
-                  class="btn btn-icon btn-filter"
-                >
-                  <img src="./assets/images/icon-filter.svg" alt="Filter" />
-                </button>
-                <div class="control-expanded" x-show="expanded" x-collapse>
-                  <!-- LOGOS -->
-                  <div class="main-header--page---logos">
-                    <button class="btn btn-accent--line">Todas</button>
-                    <a href="#" class="main-header--page---logos----item"
-                      ><img
-                        src="./assets/images/cms-images/logo-user-01.png"
-                        alt="Logo Subaru"
-                    /></a>
-                    <a href="#" class="main-header--page---logos----item"
-                      ><img
-                        src="./assets/images/cms-images/logo-user-02.png"
-                        alt="Logo SsangYong"
-                    /></a>
-                    <a href="#" class="main-header--page---logos----item"
-                      ><img
-                        src="./assets/images/cms-images/logo-user-03.png"
-                        alt="Logo Aiways"
-                    /></a>
-                    <a href="#" class="main-header--page---logos----item"
-                      ><img
-                        src="./assets/images/cms-images/logo-user-04.png"
-                        alt="Logo Maxus"
-                    /></a>
-                  </div>
-                  <!-- END LOGOS -->
-                  <!-- FORM -->
-                  <form class="form-block" @submit.prevent>
-                    <div
-                      class="form-row grid grid-cols-1 lg:grid-cols-[2fr_1fr_auto] items-end"
-                    >
-                      <div class="column">
-                        <input
-                          type="text"
-                          placeholder="Realiza tu búsqueda..."
-                          class="formcontrol"
-                        />
-                      </div>
-
-                      <!-- Select "Situación Itinerario" -->
-                      <div
-                        class="column"
-                        x-data="dropdown('Por itinerario', ['itinerario 1', 'itinerario 2', 'itinerario 3'])"
-                      >
-                        <div class="dropdown">
-                          <label class="text-label">Por itinerario</label>
-                          <button
-                            @click="open = !open"
-                            class="formcontrol formcontrol-select"
-                          >
-                            <span x-text="selected"></span>
-                            <img
-                              class="formcontrol-icon"
-                              src="./assets/images/icon-dropdown.svg"
-                              alt="Arrow"
-                            />
-                          </button>
-                          <ul
-                            x-show="open"
-                            @click.away="open = false"
-                            class="formcontrol-show"
-                          >
-                            <template x-for="option in options" :key="option">
-                              <li
-                                @click="selected = option; open = false"
-                                x-text="option"
-                              ></li>
-                            </template>
-                          </ul>
-                        </div>
-                      </div>
-                      <!-- Botón Buscar -->
-                      <div class="column">
-                        <button type="submit" class="btn btn-accent">
-                          Buscar
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                  <!-- END FORM -->
-                </div>
-              </div>
-            </div>
-            <!-- END DESPLEGABLE -->
+            <p class="lead">
+              Resultados de búsqueda para:
+              <strong class="title-big">"vehículo eléctrico"</strong>
+            </p>
           </div>
         </header>
         <!-- END PAGE HEADER -->
+          <!-- Grid Actividades -->
         <section class="panel">
           <div class="container">
             <!-- HEADER-->
             <header class="panel-header">
               <h2 class="title-med">
                 <img
-                  src="./assets/images/icon-aulas.svg"
+                  src="./assets/images/icon-menu-06-book.svg"
                   alt="Actividades pendientes"
                 />
-                Aulas
+                Actividades
               </h2>
             </header>
             <!-- BODY-->
             <div class="panel-body">
-              <!-- FILTRO -->
-              <div class="panel-body--filter">
-                <!-- DESPLEGABLE -->
-                <div x-data="accordion_filter()" class="filter---display">
-                  <div
-                    x-data="{
-                  id: 1
-            }"
-                    class="filter---display----panel"
-                    role="region"
-                  >
-                    <button
-                      type="button"
-                      x-on:click="expanded = !expanded"
-                      :aria-expanded="expanded"
-                      class="btn btn-icon btn-filter"
-                    >
-                      <img src="./assets/images/icon-filter.svg" alt="Filter" />
-                    </button>
-                    <div class="control-expanded" x-show="expanded" x-collapse>
-                      <form class="form-block" @submit.prevent>
-                        <div
-                          class="form-row grid grid-cols-1 lg:grid-cols-[1fr_1fr_1fr] xl:grid-cols-[1fr_1fr_1fr_1fr]"
-                        >
-                          <!-- Select "Estado" -->
-                          <div
-                            class="column"
-                            x-data="dropdown('Todos', ['Todos', 'Estado 1', 'Estado 2'])"
-                          >
-                            <label class="text-label">Por estado</label>
-                            <div class="dropdown">
-                              <button
-                                @click="open = !open"
-                                class="formcontrol formcontrol-select"
-                              >
-                                <span x-text="selected"></span>
-                                <img
-                                  class="formcontrol-icon"
-                                  src="./assets/images/icon-dropdown.svg"
-                                  alt="Arrow"
-                                />
-                              </button>
-                              <ul
-                                x-show="open"
-                                @click.away="open = false"
-                                class="formcontrol-show"
-                              >
-                                <template
-                                  x-for="option in options"
-                                  :key="option"
-                                >
-                                  <li
-                                    @click="selected = option; open = false"
-                                    x-text="option"
-                                  ></li>
-                                </template>
-                              </ul>
-                            </div>
-                          </div>
-                          <!-- Select "Resultado" -->
-                          <div
-                            class="column"
-                            x-data="dropdown('Todos', ['Todos', 'resultado 1', 'resultado 2'])"
-                          >
-                            <label class="text-label">Por resultado</label>
-                            <div class="dropdown">
-                              <button
-                                @click="open = !open"
-                                class="formcontrol formcontrol-select"
-                              >
-                                <span x-text="selected"></span>
-                                <img
-                                  class="formcontrol-icon"
-                                  src="./assets/images/icon-dropdown.svg"
-                                  alt="Arrow"
-                                />
-                              </button>
-                              <ul
-                                x-show="open"
-                                @click.away="open = false"
-                                class="formcontrol-show"
-                              >
-                                <template
-                                  x-for="option in options"
-                                  :key="option"
-                                >
-                                  <li
-                                    @click="selected = option; open = false"
-                                    x-text="option"
-                                  ></li>
-                                </template>
-                              </ul>
-                            </div>
-                          </div>
-                          <!-- Select "Tipo de Aula" -->
-                          <div
-                            class="column"
-                            x-data="dropdown('Todos', ['Todos', 'tipo 1', 'tipo 2'])"
-                          >
-                            <label class="text-label">Por tipo de Aula</label>
-                            <div class="dropdown">
-                              <button
-                                @click="open = !open"
-                                class="formcontrol formcontrol-select"
-                              >
-                                <span x-text="selected"></span>
-                                <img
-                                  class="formcontrol-icon"
-                                  src="./assets/images/icon-dropdown.svg"
-                                  alt="Arrow"
-                                />
-                              </button>
-                              <ul
-                                x-show="open"
-                                @click.away="open = false"
-                                class="formcontrol-show"
-                              >
-                                <template
-                                  x-for="option in options"
-                                  :key="option"
-                                >
-                                  <li
-                                    @click="selected = option; open = false"
-                                    x-text="option"
-                                  ></li>
-                                </template>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-                <!-- END DESPLEGABLE -->
-              </div>
               <div
                 class="grid grid-cards grid-cols-1 md:grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr_1fr] xl:grid-cols-[1fr_1fr_1fr_1fr]"
               >
@@ -1008,6 +775,7 @@
             </div>
           </div>
         </section>
+        <!-- Grid Evaluaciones -->
         <section class="panel">
           <div class="container">
             <!-- HEADER-->
@@ -1022,106 +790,6 @@
             </header>
             <!-- BODY-->
             <div class="panel-body">
-              <div class="panel-body--filter">
-                <!-- DESPLEGABLE -->
-                <div x-data="accordion_filter()" class="filter---display">
-                  <div
-                    x-data="{
-                  id: 1
-            }"
-                    class="filter---display----panel"
-                    role="region"
-                  >
-                    <button
-                      type="button"
-                      x-on:click="expanded = !expanded"
-                      :aria-expanded="expanded"
-                      class="btn btn-icon btn-filter"
-                    >
-                      <img src="./assets/images/icon-filter.svg" alt="Filter" />
-                    </button>
-                    <div class="control-expanded" x-show="expanded" x-collapse>
-                      <form class="form-block" @submit.prevent>
-                        <div
-                          class="form-row grid grid-cols-1 lg:grid-cols-[1fr_1fr_1fr] xl:grid-cols-[1fr_1fr_1fr_1fr]"
-                        >
-                          <!-- Select "Estado" -->
-                          <div
-                            class="column"
-                            x-data="dropdown('Todos', ['Todos', 'Estado 1', 'Estado 2'])"
-                          >
-                            <label class="text-label">Por estado</label>
-                            <div class="dropdown">
-                              <button
-                                @click="open = !open"
-                                class="formcontrol formcontrol-select"
-                              >
-                                <span x-text="selected"></span>
-                                <img
-                                  class="formcontrol-icon"
-                                  src="./assets/images/icon-dropdown.svg"
-                                  alt="Arrow"
-                                />
-                              </button>
-                              <ul
-                                x-show="open"
-                                @click.away="open = false"
-                                class="formcontrol-show"
-                              >
-                                <template
-                                  x-for="option in options"
-                                  :key="option"
-                                >
-                                  <li
-                                    @click="selected = option; open = false"
-                                    x-text="option"
-                                  ></li>
-                                </template>
-                              </ul>
-                            </div>
-                          </div>
-                          <!-- Select "Resultado" -->
-                          <div
-                            class="column"
-                            x-data="dropdown('Todos', ['Todos', 'resultado 1', 'resultado 2'])"
-                          >
-                            <label class="text-label">Por resultado</label>
-                            <div class="dropdown">
-                              <button
-                                @click="open = !open"
-                                class="formcontrol formcontrol-select"
-                              >
-                                <span x-text="selected"></span>
-                                <img
-                                  class="formcontrol-icon"
-                                  src="./assets/images/icon-dropdown.svg"
-                                  alt="Arrow"
-                                />
-                              </button>
-                              <ul
-                                x-show="open"
-                                @click.away="open = false"
-                                class="formcontrol-show"
-                              >
-                                <template
-                                  x-for="option in options"
-                                  :key="option"
-                                >
-                                  <li
-                                    @click="selected = option; open = false"
-                                    x-text="option"
-                                  ></li>
-                                </template>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-                <!-- END DESPLEGABLE -->
-              </div>
               <div
                 class="grid grid-cards grid-cols-1 md:grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr_1fr] xl:grid-cols-[1fr_1fr_1fr_1fr]"
               >
@@ -1165,10 +833,10 @@
                     <div class="card-body">
                       <span class="badge badge-transparent"
                         ><img
-                          src="./assets/images/icon-aulae.svg"
+                          src="./assets/images/icon-aulav.svg"
                           alt="Aula Virtual"
                         />
-                        Encuesta</span
+                        Aula virtual</span
                       >
                       <h3 class="title-small">Gestión del cambio</h3>
                       <p class="subtitle-small subtitle-small--accent">
@@ -1244,10 +912,10 @@
                     <div class="card-body">
                       <span class="badge badge-transparent"
                         ><img
-                          src="./assets/images/icon-evaulacion.svg"
+                          src="./assets/images/icon-aulav.svg"
                           alt="Aula Virtual"
                         />
-                        Evaulación</span
+                        Aula virtual</span
                       >
                       <h3 class="title-small">Gestión del cambio</h3>
                       <p class="subtitle-small subtitle-small--accent">
@@ -1437,100 +1105,131 @@
                     </div>
                   </div>
                 </div>
+                <div class="column">
+                  <!-- Card -->
+                  <div class="card card-item">
+                    <!-- Card HEADER-->
+                    <div class="card-header">
+                      <div class="card-header--top">
+                        <span class="badge badge-dark">Obligatorio </span>
+
+                        <button
+                          x-data="{ isActive: false }"
+                          :class="{ 'active': isActive }"
+                          x-on:click="isActive = !isActive"
+                          type="button"
+                          id="save-control"
+                          class="btn btn-transparent"
+                        >
+                          <img
+                            src="./assets/images/icon-save--white.svg"
+                            alt="Save item"
+                          />
+                        </button>
+                      </div>
+                      <button type="button" class="btn btn-accent btn-location">
+                        Acceder
+                      </button>
+                      <div class="card-header--bottom">
+                        <div class="progress progress-green">
+                          <div class="progress-bar" style="width: 50%"></div>
+                        </div>
+                      </div>
+                      <img
+                        src="./assets/images/dummy_330x206_ffffff_cccccc.jpg"
+                        alt="Imagen de actividad"
+                        class="card-img-thumb"
+                      />
+                    </div>
+                    <!-- Card BODY-->
+                    <div class="card-body">
+                      <span class="badge badge-transparent"
+                        ><img
+                          src="./assets/images/icon-aulav.svg"
+                          alt="Aula Virtual"
+                        />
+                        Aula virtual</span
+                      >
+                      <h3 class="title-small">Gestión del cambio</h3>
+                      <p class="subtitle-small subtitle-small--accent">
+                        GRUPO SIETE NOVENTA
+                      </p>
+                      <div class="card-body--display">
+                        <div class="card-body--display---box">
+                          <p>
+                            Bienvenidos al sistema de gestión de aprendizaje. Te
+                            recordamos que debes cumplir con las normas del
+                            curso y estar atento a los plazos de entrega, ya que
+                            no se aceptarán tareas después de la fecha límite.
+                          </p>
+                          <div
+                            class="card-body--display---buttons"
+                            role="group"
+                          >
+                            <a href="#" class="btn btn-small btn-light"
+                              ><img
+                                src="./assets/images/icon-diploma.svg"
+                                alt="Descarga tu diploma"
+                              />Descarga tu diploma</a
+                            >
+                            <a href="#" class="btn btn-small btn-light"
+                              ><img
+                                src="./assets/images/icon-form.svg"
+                                alt="Encuesta de satisfacción"
+                              />Encuesta de satisfacción</a
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
+        <!-- Grid Encuestas -->
         <section class="panel">
           <div class="container">
             <!-- HEADER-->
             <header class="panel-header">
               <h2 class="title-med">
                 <img
-                  src="./assets/images/icon-test.svg"
+                  src="./assets/images/icon-evau.svg"
                   alt="Actividades pendientes"
                 />
                 Encuestas
               </h2>
             </header>
+            <div class="panel-body">
+              <p>Sin resultados para esta búsqueda.</p>
+            </div>
+          </div>
+        </section>
+        <!-- Grid Express trainings -->
+        <section class="panel">
+          <div class="container">
+            <!-- HEADER-->
+            <header class="panel-header">
+              <h2 class="title-med">
+                <img
+                  src="./assets/images/icon-camera.svg"
+                  alt="Actividades pendientes"
+                />
+                Express trainings
+              </h2>
+            </header>
             <!-- BODY-->
             <div class="panel-body">
-              <div class="panel-body--filter">
-                <!-- DESPLEGABLE -->
-                <div x-data="accordion_filter()" class="filter---display">
-                  <div
-                    x-data="{
-                  id: 1
-            }"
-                    class="filter---display----panel"
-                    role="region"
-                  >
-                    <button
-                      type="button"
-                      x-on:click="expanded = !expanded"
-                      :aria-expanded="expanded"
-                      class="btn btn-icon btn-filter"
-                    >
-                      <img src="./assets/images/icon-filter.svg" alt="Filter" />
-                    </button>
-                    <div class="control-expanded" x-show="expanded" x-collapse>
-                      <form class="form-block" @submit.prevent>
-                        <div
-                          class="form-row grid grid-cols-1 lg:grid-cols-[1fr_1fr_1fr] xl:grid-cols-[1fr_1fr_1fr_1fr]"
-                        >
-                          <!-- Select "Estado" -->
-                          <div
-                            class="column"
-                            x-data="dropdown('Todos', ['Todos', 'Estado 1', 'Estado 2'])"
-                          >
-                            <label class="text-label">Por estado</label>
-                            <div class="dropdown">
-                              <button
-                                @click="open = !open"
-                                class="formcontrol formcontrol-select"
-                              >
-                                <span x-text="selected"></span>
-                                <img
-                                  class="formcontrol-icon"
-                                  src="./assets/images/icon-dropdown.svg"
-                                  alt="Arrow"
-                                />
-                              </button>
-                              <ul
-                                x-show="open"
-                                @click.away="open = false"
-                                class="formcontrol-show"
-                              >
-                                <template
-                                  x-for="option in options"
-                                  :key="option"
-                                >
-                                  <li
-                                    @click="selected = option; open = false"
-                                    x-text="option"
-                                  ></li>
-                                </template>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-                <!-- END DESPLEGABLE -->
-              </div>
               <div
-                class="grid grid-cards grid-cols-1 md:grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr_1fr] xl:grid-cols-[1fr_1fr_1fr_1fr]"
+                class="grid grid-cols-2 md:grid-cols-[1fr_1fr_1fr] lg:grid-cols-[1fr_1fr_1fr_1fr] xl:grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr]"
               >
                 <div class="column">
                   <!-- Card -->
-                  <div class="card card-item">
+                  <div class="card card-stories">
                     <!-- Card HEADER-->
                     <div class="card-header">
                       <div class="card-header--top">
-                        <span class="badge badge-dark">Obligatorio </span>
-
                         <button
                           x-data="{ isActive: false }"
                           :class="{ 'active': isActive }"
@@ -1545,71 +1244,30 @@
                           />
                         </button>
                       </div>
-                      <button type="button" class="btn btn-accent btn-location">
-                        Acceder
-                      </button>
-                      <div class="card-header--bottom">
-                        <div class="progress progress-green">
-                          <div class="progress-bar" style="width: 50%"></div>
-                        </div>
-                      </div>
-                      <img
-                        src="./assets/images/dummy_330x206_ffffff_cccccc.jpg"
-                        alt="Imagen de actividad"
-                        class="card-img-thumb"
-                      />
+                      <a href="#" class="card-header--link">
+                        <img
+                          src="./assets/images/dummy_213x378_ffffff_cccccc.png"
+                          alt="Imagen de actividad"
+                        />
+                      </a>
                     </div>
                     <!-- Card BODY-->
                     <div class="card-body">
-                      <span class="badge badge-transparent"
-                        ><img
-                          src="./assets/images/icon-aulav.svg"
-                          alt="Aula Virtual"
-                        />
-                        Aula virtual</span
-                      >
-                      <h3 class="title-small">Gestión del cambio</h3>
-                      <p class="subtitle-small subtitle-small--accent">
-                        GRUPO SIETE NOVENTA
-                      </p>
-                      <div class="card-body--display">
-                        <div class="card-body--display---box">
-                          <p>
-                            Bienvenidos al sistema de gestión de aprendizaje. Te
-                            recordamos que debes cumplir con las normas del
-                            curso y estar atento a los plazos de entrega, ya que
-                            no se aceptarán tareas después de la fecha límite.
-                          </p>
-                          <div
-                            class="card-body--display---buttons"
-                            role="group"
-                          >
-                            <a href="#" class="btn btn-small btn-light"
-                              ><img
-                                src="./assets/images/icon-diploma.svg"
-                                alt="Descarga tu diploma"
-                              />Descarga tu diploma</a
-                            >
-                            <a href="#" class="btn btn-small btn-light"
-                              ><img
-                                src="./assets/images/icon-form.svg"
-                                alt="Encuesta de satisfacción"
-                              />Encuesta de satisfacción</a
-                            >
-                          </div>
-                        </div>
-                      </div>
+                      <h3 class="card-title title-base">
+                        <a href="#">Gestión del cambio</a>
+                      </h3>
+                      <span class="badge badge-default">eléctricos</span>
+                      <span class="badge badge-default">híbridos</span>
+                      <span class="badge badge-default">consumo</span>
                     </div>
                   </div>
                 </div>
                 <div class="column">
                   <!-- Card -->
-                  <div class="card card-item">
+                  <div class="card card-stories">
                     <!-- Card HEADER-->
                     <div class="card-header">
                       <div class="card-header--top">
-                        <span class="badge badge-dark">Obligatorio </span>
-
                         <button
                           x-data="{ isActive: false }"
                           :class="{ 'active': isActive }"
@@ -1624,60 +1282,887 @@
                           />
                         </button>
                       </div>
-                      <button type="button" class="btn btn-accent btn-location">
-                        Acceder
-                      </button>
-                      <div class="card-header--bottom">
-                        <div class="progress progress-green">
-                          <div class="progress-bar" style="width: 50%"></div>
-                        </div>
-                      </div>
-                      <img
-                        src="./assets/images/dummy_330x206_ffffff_cccccc.jpg"
-                        alt="Imagen de actividad"
-                        class="card-img-thumb"
-                      />
+                      <a href="#" class="card-header--link">
+                        <img
+                          src="./assets/images/dummy_213x378_ffffff_cccccc.png"
+                          alt="Imagen de actividad"
+                        />
+                      </a>
                     </div>
                     <!-- Card BODY-->
                     <div class="card-body">
-                      <span class="badge badge-transparent"
-                        ><img
-                          src="./assets/images/icon-aulav.svg"
-                          alt="Aula Virtual"
-                        />
-                        Aula virtual</span
-                      >
-                      <h3 class="title-small">Gestión del cambio</h3>
-                      <p class="subtitle-small subtitle-small--accent">
-                        GRUPO SIETE NOVENTA
-                      </p>
-                      <div class="card-body--display">
-                        <div class="card-body--display---box">
-                          <p>
-                            Bienvenidos al sistema de gestión de aprendizaje. Te
-                            recordamos que debes cumplir con las normas del
-                            curso y estar atento a los plazos de entrega, ya que
-                            no se aceptarán tareas después de la fecha límite.
-                          </p>
-                          <div
-                            class="card-body--display---buttons"
-                            role="group"
-                          >
-                            <a href="#" class="btn btn-small btn-light"
-                              ><img
-                                src="./assets/images/icon-diploma.svg"
-                                alt="Descarga tu diploma"
-                              />Descarga tu diploma</a
-                            >
-                            <a href="#" class="btn btn-small btn-light"
-                              ><img
-                                src="./assets/images/icon-form.svg"
-                                alt="Encuesta de satisfacción"
-                              />Encuesta de satisfacción</a
-                            >
-                          </div>
-                        </div>
+                      <h3 class="card-title title-base">
+                        <a href="#">Gestión del cambio</a>
+                      </h3>
+                      <span class="badge badge-default">eléctricos</span>
+                      <span class="badge badge-default">híbridos</span>
+                      <span class="badge badge-default">consumo</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <!-- Card -->
+                  <div class="card card-stories">
+                    <!-- Card HEADER-->
+                    <div class="card-header">
+                      <div class="card-header--top">
+                        <button
+                          x-data="{ isActive: false }"
+                          :class="{ 'active': isActive }"
+                          x-on:click="isActive = !isActive"
+                          type="button"
+                          id="save-control"
+                          class="btn btn-transparent"
+                        >
+                          <img
+                            src="./assets/images/icon-save--white.svg"
+                            alt="Save item"
+                          />
+                        </button>
                       </div>
+                      <a href="#" class="card-header--link">
+                        <img
+                          src="./assets/images/dummy_213x378_ffffff_cccccc.png"
+                          alt="Imagen de actividad"
+                        />
+                      </a>
+                    </div>
+                    <!-- Card BODY-->
+                    <div class="card-body">
+                      <h3 class="card-title title-base">
+                        <a href="#">Gestión del cambio</a>
+                      </h3>
+                      <span class="badge badge-default">eléctricos</span>
+                      <span class="badge badge-default">híbridos</span>
+                      <span class="badge badge-default">consumo</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <!-- Card -->
+                  <div class="card card-stories">
+                    <!-- Card HEADER-->
+                    <div class="card-header">
+                      <div class="card-header--top">
+                        <button
+                          x-data="{ isActive: false }"
+                          :class="{ 'active': isActive }"
+                          x-on:click="isActive = !isActive"
+                          type="button"
+                          id="save-control"
+                          class="btn btn-transparent"
+                        >
+                          <img
+                            src="./assets/images/icon-save--white.svg"
+                            alt="Save item"
+                          />
+                        </button>
+                      </div>
+                      <a href="#" class="card-header--link">
+                        <img
+                          src="./assets/images/dummy_213x378_ffffff_cccccc.png"
+                          alt="Imagen de actividad"
+                        />
+                      </a>
+                    </div>
+                    <!-- Card BODY-->
+                    <div class="card-body">
+                      <h3 class="card-title title-base">
+                        <a href="#">Gestión del cambio</a>
+                      </h3>
+                      <span class="badge badge-default">eléctricos</span>
+                      <span class="badge badge-default">híbridos</span>
+                      <span class="badge badge-default">consumo</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <!-- Card -->
+                  <div class="card card-stories">
+                    <!-- Card HEADER-->
+                    <div class="card-header">
+                      <div class="card-header--top">
+                        <button
+                          x-data="{ isActive: false }"
+                          :class="{ 'active': isActive }"
+                          x-on:click="isActive = !isActive"
+                          type="button"
+                          id="save-control"
+                          class="btn btn-transparent"
+                        >
+                          <img
+                            src="./assets/images/icon-save--white.svg"
+                            alt="Save item"
+                          />
+                        </button>
+                      </div>
+                      <a href="#" class="card-header--link">
+                        <img
+                          src="./assets/images/dummy_213x378_ffffff_cccccc.png"
+                          alt="Imagen de actividad"
+                        />
+                      </a>
+                    </div>
+                    <!-- Card BODY-->
+                    <div class="card-body">
+                      <h3 class="card-title title-base">
+                        <a href="#">Gestión del cambio</a>
+                      </h3>
+                      <span class="badge badge-default">eléctricos</span>
+                      <span class="badge badge-default">híbridos</span>
+                      <span class="badge badge-default">consumo</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <!-- Card -->
+                  <div class="card card-stories">
+                    <!-- Card HEADER-->
+                    <div class="card-header">
+                      <div class="card-header--top">
+                        <button
+                          x-data="{ isActive: false }"
+                          :class="{ 'active': isActive }"
+                          x-on:click="isActive = !isActive"
+                          type="button"
+                          id="save-control"
+                          class="btn btn-transparent"
+                        >
+                          <img
+                            src="./assets/images/icon-save--white.svg"
+                            alt="Save item"
+                          />
+                        </button>
+                      </div>
+                      <a href="#" class="card-header--link">
+                        <img
+                          src="./assets/images/dummy_213x378_ffffff_cccccc.png"
+                          alt="Imagen de actividad"
+                        />
+                      </a>
+                    </div>
+                    <!-- Card BODY-->
+                    <div class="card-body">
+                      <h3 class="card-title title-base">
+                        <a href="#">Gestión del cambio</a>
+                      </h3>
+                      <span class="badge badge-default">eléctricos</span>
+                      <span class="badge badge-default">híbridos</span>
+                      <span class="badge badge-default">consumo</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <!-- Card -->
+                  <div class="card card-stories">
+                    <!-- Card HEADER-->
+                    <div class="card-header">
+                      <div class="card-header--top">
+                        <button
+                          x-data="{ isActive: false }"
+                          :class="{ 'active': isActive }"
+                          x-on:click="isActive = !isActive"
+                          type="button"
+                          id="save-control"
+                          class="btn btn-transparent"
+                        >
+                          <img
+                            src="./assets/images/icon-save--white.svg"
+                            alt="Save item"
+                          />
+                        </button>
+                      </div>
+                      <a href="#" class="card-header--link">
+                        <img
+                          src="./assets/images/dummy_213x378_ffffff_cccccc.png"
+                          alt="Imagen de actividad"
+                        />
+                      </a>
+                    </div>
+                    <!-- Card BODY-->
+                    <div class="card-body">
+                      <h3 class="card-title title-base">
+                        <a href="#">Gestión del cambio</a>
+                      </h3>
+                      <span class="badge badge-default">eléctricos</span>
+                      <span class="badge badge-default">híbridos</span>
+                      <span class="badge badge-default">consumo</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <!-- Card -->
+                  <div class="card card-stories">
+                    <!-- Card HEADER-->
+                    <div class="card-header">
+                      <div class="card-header--top">
+                        <button
+                          x-data="{ isActive: false }"
+                          :class="{ 'active': isActive }"
+                          x-on:click="isActive = !isActive"
+                          type="button"
+                          id="save-control"
+                          class="btn btn-transparent"
+                        >
+                          <img
+                            src="./assets/images/icon-save--white.svg"
+                            alt="Save item"
+                          />
+                        </button>
+                      </div>
+                      <a href="#" class="card-header--link">
+                        <img
+                          src="./assets/images/dummy_213x378_ffffff_cccccc.png"
+                          alt="Imagen de actividad"
+                        />
+                      </a>
+                    </div>
+                    <!-- Card BODY-->
+                    <div class="card-body">
+                      <h3 class="card-title title-base">
+                        <a href="#">Gestión del cambio</a>
+                      </h3>
+                      <span class="badge badge-default">eléctricos</span>
+                      <span class="badge badge-default">híbridos</span>
+                      <span class="badge badge-default">consumo</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Grid Documentos -->
+        <section class="panel">
+          <div class="container">
+            <!-- HEADER-->
+            <header class="panel-header">
+              <h2 class="title-med">
+                <img
+                  src="./assets/images/icon-folder.svg"
+                  alt="Actividades pendientes"
+                />
+                Últimos documentos
+              </h2>
+            </header>
+            <div class="panel-body">
+              <!-- GRID -->
+              <div
+                class="grid grid-cols-1 lg:grid-cols-[1fr_1fr] xl:grid-cols-[1fr_1fr_1fr]"
+              >
+                <div class="column">
+                  <div class="box box-light box-compact">
+                    <div class="box-body">
+                      <div class="doc">
+                        <div class="doc-header">
+                          <img
+                            src="./assets/images/icon-doc-img.svg"
+                            alt="pdf"
+                          />
+                        </div>
+                        <div class="doc-title">
+                          <h4 class="title-base">Manual del alumno</h4>
+                          <span class="text-small"
+                            >Creado el 17 / 06 /2024</span
+                          >
+                        </div>
+                        <ul class="doc-buttons">
+                          <li>
+                            <button
+                              x-data="{ isActive: false }"
+                              :class="{ 'active': isActive }"
+                              x-on:click="isActive = !isActive"
+                              type="button"
+                              id="save-control"
+                              class="btn btn-icon btn-icon--small"
+                            >
+                              <img
+                                src="./assets/images/icon-save--white.svg"
+                                alt="Save item"
+                              />
+                            </button>
+                          </li>
+                          <li>
+                            <button class="btn btn-icon btn-icon--small">
+                              <img
+                                src="./assets/images/icon-download.svg"
+                                alt="Descargar"
+                              />
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="box box-light box-compact">
+                    <div class="box-body">
+                      <div class="doc">
+                        <div class="doc-header">
+                          <img
+                            src="./assets/images/icon-doc-pdf.svg"
+                            alt="pdf"
+                          />
+                        </div>
+                        <div class="doc-title">
+                          <h4 class="title-base">Proceso post-venta</h4>
+                          <span class="text-small"
+                            >Creado el 17 / 06 /2024</span
+                          >
+                        </div>
+                        <ul class="doc-buttons">
+                          <li>
+                            <button
+                              x-data="{ isActive: false }"
+                              :class="{ 'active': isActive }"
+                              x-on:click="isActive = !isActive"
+                              type="button"
+                              id="save-control"
+                              class="btn btn-icon btn-icon--small"
+                            >
+                              <img
+                                src="./assets/images/icon-save--white.svg"
+                                alt="Save item"
+                              />
+                            </button>
+                          </li>
+                          <li>
+                            <button class="btn btn-icon btn-icon--small">
+                              <img
+                                src="./assets/images/icon-download.svg"
+                                alt="Descargar"
+                              />
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="box box-light box-compact">
+                    <div class="box-body">
+                      <div class="doc">
+                        <div class="doc-header">
+                          <img
+                            src="./assets/images/icon-doc-video.svg"
+                            alt="pdf"
+                          />
+                        </div>
+                        <div class="doc-title">
+                          <h4 class="title-base">Guía visual de uso</h4>
+                          <span class="text-small"
+                            >Creado el 17 / 06 /2024</span
+                          >
+                        </div>
+                        <ul class="doc-buttons">
+                          <li>
+                            <button
+                              x-data="{ isActive: false }"
+                              :class="{ 'active': isActive }"
+                              x-on:click="isActive = !isActive"
+                              type="button"
+                              id="save-control"
+                              class="btn btn-icon btn-icon--small"
+                            >
+                              <img
+                                src="./assets/images/icon-save--white.svg"
+                                alt="Save item"
+                              />
+                            </button>
+                          </li>
+                          <li>
+                            <!-- Modal -->
+                            <div x-data="modalComponent">
+                              <!-- Trigger -->
+                              <button
+                                class="btn btn-icon btn-icon--small"
+                                @click="openModal = true"
+                              >
+                                <img
+                                  src="./assets/images/icon-play.svg"
+                                  alt="Play"
+                                />
+                              </button>
+
+                              <!-- Modal -->
+                              <div
+                                x-show="openModal"
+                                @keydown.escape.prevent.stop="closeModal()"
+                                role="dialog"
+                                aria-modal="true"
+                                x-id="['modal-title']"
+                                :aria-labelledby="$id('modal-title')"
+                                class="modal"
+                              >
+                                <!-- Overlay -->
+                                <div
+                                  x-show="openModal"
+                                  x-transition.opacity
+                                  class="modal-overlay"
+                                ></div>
+
+                                <!-- Panel -->
+                                <div
+                                  x-show="openModal"
+                                  x-transition
+                                  @click="closeModal()"
+                                  class="modal-panel"
+                                >
+                                  <div
+                                    @click.stop
+                                    x-trap.noscroll.inert="openModal"
+                                    class="modal-panel--box"
+                                  >
+                                    <div class="modal-header">
+                                      <div class="modal-header--title">
+                                        <img
+                                          src="./assets/images/icon-doc-video.svg"
+                                          alt="pdf"
+                                        />
+                                        <!-- Title -->
+                                        <h3
+                                          class="title-small"
+                                          :id="$id('modal-title')"
+                                        >
+                                          Guía visual de uso
+                                        </h3>
+                                      </div>
+
+                                      <!-- Close Button -->
+                                      <button
+                                        @click="closeModal()"
+                                        class="btn btn-icon btn-square"
+                                      >
+                                        <img
+                                          src="./assets/images/icon-close.svg"
+                                          alt="Close"
+                                        />
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    <!-- Video -->
+                                      <iframe
+                                        class="w-full aspect-video"
+                                        src="https://www.youtube.com/embed/TvqpiUlMsB4?enablejsapi=1"
+                                        title="YouTube video player"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen
+                                        x-ref="videoIframe"
+                                      ></iframe>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- END MODAL -->
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="box box-light box-compact">
+                    <div class="box-body">
+                      <div class="doc">
+                        <div class="doc-header">
+                          <img
+                            src="./assets/images/icon-doc-html.svg"
+                            alt="pdf"
+                          />
+                        </div>
+                        <div class="doc-title">
+                          <h4 class="title-base">
+                            Instrucciones de varios perfiles
+                          </h4>
+                          <span class="text-small"
+                            >Creado el 17 / 06 /2024</span
+                          >
+                        </div>
+                        <ul class="doc-buttons">
+                          <li>
+                            <button
+                              x-data="{ isActive: false }"
+                              :class="{ 'active': isActive }"
+                              x-on:click="isActive = !isActive"
+                              type="button"
+                              id="save-control"
+                              class="btn btn-icon btn-icon--small"
+                            >
+                              <img
+                                src="./assets/images/icon-save--white.svg"
+                                alt="Save item"
+                              />
+                            </button>
+                          </li>
+                          <li>
+                            <!-- Modal -->
+                            <div x-data="modalComponent">
+                              <!-- Trigger -->
+                              <button
+                                class="btn btn-icon btn-icon--small"
+                                @click="openModal = true"
+                              >
+                                <img
+                                  src="./assets/images/icon-view.svg"
+                                  alt="Ver"
+                                />
+                              </button>
+
+                              <!-- Modal -->
+                              <div
+                                x-show="openModal"
+                                @keydown.escape.prevent.stop="closeModal()"
+                                role="dialog"
+                                aria-modal="true"
+                                x-id="['modal-title']"
+                                :aria-labelledby="$id('modal-title')"
+                                class="modal"
+                              >
+                                <!-- Overlay -->
+                                <div
+                                  x-show="openModal"
+                                  x-transition.opacity
+                                  class="modal-overlay"
+                                ></div>
+
+                                <!-- Panel -->
+                                <div
+                                  x-show="openModal"
+                                  x-transition
+                                  @click="closeModal()"
+                                  class="modal-panel"
+                                >
+                                  <div
+                                    @click.stop
+                                    x-trap.noscroll.inert="openModal"
+                                    class="modal-panel--box"
+                                  >
+                                    <div class="modal-header">
+                                      <div class="modal-header--title">
+                                        <img
+                                          src="./assets/images/icon-doc-html.svg"
+                                          alt="pdf"
+                                        />
+                                        <!-- Title -->
+                                        <h3
+                                          class="title-small"
+                                          :id="$id('modal-title')"
+                                        >
+                                          Instrucciones de varios perfiles
+                                        </h3>
+                                      </div>
+
+                                      <!-- Close Button -->
+                                      <button
+                                        @click="closeModal()"
+                                        class="btn btn-icon btn-square"
+                                      >
+                                        <img
+                                          src="./assets/images/icon-close.svg"
+                                          alt="Close"
+                                        />
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <article class="grid post post-img-full">
+                                        <div class="column post-header">
+                                          <figure>
+                                            <img
+                                              src="./assets/images/dummy_1024x768_ffffff_cccccc.png"
+                                              alt="Imagen de actividad"
+                                            />
+                                          </figure>
+                                        </div>
+                                        <div class="column post-body">
+                                          <button
+                                            x-data="{ isActive: false }"
+                                            :class="{ 'active': isActive }"
+                                            x-on:click="isActive = !isActive"
+                                            type="button"
+                                            id="save-control"
+                                            class="btn btn-transparent"
+                                          >
+                                            <img
+                                              src="./assets/images/icon-save--white.svg"
+                                              alt="Save item"
+                                            />
+                                          </button>
+                                          <h2 class="title-big">
+                                            Suscríbete a un JAECOO 7 con Astara
+                                            y descubre por qué todo el mundo
+                                            habla de esta nueva marca
+                                          </h2>
+                                          <h4
+                                            class="title-med title-med--accent"
+                                          >
+                                            JAECOO 7 por suscripción desde
+                                            759€/mes
+                                          </h4>
+                                          <span class="subtitle-small date"
+                                            >Publicado hace 29 días</span
+                                          >
+                                          <p>
+                                            La marca promete SUV y todoterrenos
+                                            intrépidos con mucha elegancia y
+                                            cargados de tecnología. Su carta de
+                                            presentación es el JAECOO 7, que
+                                            <a href="#" class="link">
+                                              ya tienes disponible en el
+                                              catálogo de suscripción de Astara
+                                              desde 759 euros al mes</a
+                                            >, como siempre con seguro,
+                                            mantenimiento, asistencia en
+                                            carretera e impuestos incluidos.
+                                          </p>
+                                          <p>
+                                            Más del 80% de la carrocería está
+                                            fabricada con acero de alta
+                                            resistencia. Además, el JAECOO 7
+                                            incorpora más de 18 sistemas de
+                                            ayuda a la conducción, superando con
+                                            creces el nivel 2 de conducción
+                                            autónoma.
+                                          </p>
+                                        </div>
+                                      </article>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- END MODAL -->
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="box box-light box-compact">
+                    <div class="box-body">
+                      <div class="doc">
+                        <div class="doc-header">
+                          <img
+                            src="./assets/images/icon-doc-doc.svg"
+                            alt="pdf"
+                          />
+                        </div>
+                        <div class="doc-title">
+                          <h4 class="title-base">Manual 2 del alumnoo</h4>
+                          <span class="text-small"
+                            >Creado el 17 / 06 /2024</span
+                          >
+                        </div>
+                        <ul class="doc-buttons">
+                          <li>
+                            <button
+                              x-data="{ isActive: false }"
+                              :class="{ 'active': isActive }"
+                              x-on:click="isActive = !isActive"
+                              type="button"
+                              id="save-control"
+                              class="btn btn-icon btn-icon--small"
+                            >
+                              <img
+                                src="./assets/images/icon-save--white.svg"
+                                alt="Save item"
+                              />
+                            </button>
+                          </li>
+                          <li>
+                            <button class="btn btn-icon btn-icon--small">
+                              <img
+                                src="./assets/images/icon-download.svg"
+                                alt="Descargar"
+                              />
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="box box-light box-compact">
+                    <div class="box-body">
+                      <div class="doc">
+                        <div class="doc-header">
+                          <img
+                            src="./assets/images/icon-doc-test.svg"
+                            alt="pdf"
+                          />
+                        </div>
+                        <div class="doc-title">
+                          <h4 class="title-base">Manual 2 del alumnoo</h4>
+                          <span class="text-small"
+                            >Creado el 17 / 06 /2024</span
+                          >
+                        </div>
+                        <ul class="doc-buttons">
+                          <li>
+                            <button
+                              x-data="{ isActive: false }"
+                              :class="{ 'active': isActive }"
+                              x-on:click="isActive = !isActive"
+                              type="button"
+                              id="save-control"
+                              class="btn btn-icon btn-icon--small"
+                            >
+                              <img
+                                src="./assets/images/icon-save--white.svg"
+                                alt="Save item"
+                              />
+                            </button>
+                          </li>
+                          <li>
+                            <button class="btn btn-icon btn-icon--small">
+                              <img
+                                src="./assets/images/icon-download.svg"
+                                alt="Descargar"
+                              />
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Grid Noticias -->
+        <section class="panel">
+          <div class="container">
+            <!-- HEADER-->
+            <header class="panel-header">
+              <h2 class="title-med">
+                <img
+                  src="./assets/images/icon-post.svg"
+                  alt="Actividades pendientes"
+                />
+                Últimas noticias
+              </h2>
+            </header>
+            <div class="panel-body">
+              <div
+                class="grid grid-cols-2 md:grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr]"
+              >
+                <div class="column">
+                  <!-- Card -->
+                  <div class="card card-post--thumb">
+                    <!-- Card HEADER-->
+                    <div class="card-header">
+                      <div class="card-header--top">
+                        <button
+                          x-data="{ isActive: false }"
+                          :class="{ 'active': isActive }"
+                          x-on:click="isActive = !isActive"
+                          type="button"
+                          id="save-control"
+                          class="btn btn-transparent"
+                        >
+                          <img
+                            src="./assets/images/icon-save--white.svg"
+                            alt="Save item"
+                          />
+                        </button>
+                      </div>
+                      <a class="card-header--link" href="#">
+                        <img
+                          src="./assets/images/dummy_330x206_ffffff_cccccc.jpg"
+                          alt="Imagen de actividad"
+                        />
+                      </a>
+                    </div>
+                    <!-- Card BODY-->
+                    <div class="card-body">
+                      <span class="text-small">Publicada el 11/06/2024</span>
+                      <h3 class="title-base">
+                        <a href="#"
+                          >Instrucciones para varios perfiles de ventas</a
+                        >
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <!-- Card -->
+                  <div class="card card-post--thumb">
+                    <!-- Card HEADER-->
+                    <div class="card-header">
+                      <div class="card-header--top">
+                        <button
+                          x-data="{ isActive: false }"
+                          :class="{ 'active': isActive }"
+                          x-on:click="isActive = !isActive"
+                          type="button"
+                          id="save-control"
+                          class="btn btn-transparent"
+                        >
+                          <img
+                            src="./assets/images/icon-save--white.svg"
+                            alt="Save item"
+                          />
+                        </button>
+                      </div>
+                      <a class="card-header--link" href="#">
+                        <img
+                          src="./assets/images/dummy_330x206_ffffff_cccccc.jpg"
+                          alt="Imagen de actividad"
+                        />
+                      </a>
+                    </div>
+                    <!-- Card BODY-->
+                    <div class="card-body">
+                      <span class="text-small">Publicada el 11/06/2024</span>
+                      <h3 class="title-base">
+                        <a href="#"
+                          >Instrucciones para varios perfiles de ventas</a
+                        >
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <!-- Card -->
+                  <div class="card card-post--thumb">
+                    <!-- Card HEADER-->
+                    <div class="card-header">
+                      <div class="card-header--top">
+                        <button
+                          x-data="{ isActive: false }"
+                          :class="{ 'active': isActive }"
+                          x-on:click="isActive = !isActive"
+                          type="button"
+                          id="save-control"
+                          class="btn btn-transparent"
+                        >
+                          <img
+                            src="./assets/images/icon-save--white.svg"
+                            alt="Save item"
+                          />
+                        </button>
+                      </div>
+                      <a class="card-header--link" href="#">
+                        <img
+                          src="./assets/images/dummy_330x206_ffffff_cccccc.jpg"
+                          alt="Imagen de actividad"
+                        />
+                      </a>
+                    </div>
+                    <!-- Card BODY-->
+                    <div class="card-body">
+                      <span class="text-small">Publicada el 11/06/2024</span>
+                      <h3 class="title-base">
+                        <a href="#"
+                          >Instrucciones para varios perfiles de ventas</a
+                        >
+                      </h3>
                     </div>
                   </div>
                 </div>

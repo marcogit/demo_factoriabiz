@@ -13,9 +13,7 @@
   }
 
   .scroll-fix {
-    main {
-      @apply min-h-screen;
-    }
+    @apply flex flex-col min-h-screen;
   }
 
   .app-control {
@@ -48,7 +46,11 @@
   }
 
   .lead {
-    @apply text-lg md:text-custom-xxl;
+    @apply text-lg md:text-custom-xxl align-bottom;
+
+    .title-big {
+      @apply inline-block;
+    }
   }
 
   .title-med {
@@ -95,6 +97,10 @@
     }
   }
 
+  .list-columns {
+    @apply flex flex-col gap-3;
+  }
+
   .link {
     @apply transition-all text-neutral hover:text-accent underline hover:no-underline;
 
@@ -105,6 +111,10 @@
     &.link-ghost {
       @apply text-neutral-light hover:text-neutral;
     }
+  }
+
+  .thumb {
+    @apply rounded-md;
   }
 
   /* grid */
@@ -213,7 +223,7 @@
   }
 
   main {
-    @apply flex-grow pt-14 xl:pt-20 overflow-x-hidden;
+    @apply flex-grow pt-[54px] xl:pt-[72px] overflow-x-hidden;
   }
 
   .main-header {

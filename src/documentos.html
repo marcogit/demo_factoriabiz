@@ -816,17 +816,18 @@
                                         />
                                       </button>
                                     </div>
-
-                                    <!-- Video -->
-                                    <iframe
-                                      class="w-full aspect-video"
-                                      src="https://www.youtube.com/embed/TvqpiUlMsB4?enablejsapi=1"
-                                      title="YouTube video player"
-                                      frameborder="0"
-                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                      allowfullscreen
-                                      x-ref="videoIframe"
-                                    ></iframe>
+                                    <div class="modal-body">
+                                      <!-- Video -->
+                                      <iframe
+                                        class="w-full aspect-video"
+                                        src="https://www.youtube.com/embed/TvqpiUlMsB4?enablejsapi=1"
+                                        title="YouTube video player"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen
+                                        x-ref="videoIframe"
+                                      ></iframe>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -873,12 +874,142 @@
                             </button>
                           </li>
                           <li>
-                            <button class="btn btn-icon btn-icon--small">
-                              <img
-                                src="./assets/images/icon-view.svg"
-                                alt="Descargar"
-                              />
-                            </button>
+                            <!-- Modal -->
+                            <div x-data="modalComponent">
+                              <!-- Trigger -->
+                              <button
+                                class="btn btn-icon btn-icon--small"
+                                @click="openModal = true"
+                              >
+                                <img
+                                  src="./assets/images/icon-view.svg"
+                                  alt="Ver"
+                                />
+                              </button>
+
+                              <!-- Modal -->
+                              <div
+                                x-show="openModal"
+                                @keydown.escape.prevent.stop="closeModal()"
+                                role="dialog"
+                                aria-modal="true"
+                                x-id="['modal-title']"
+                                :aria-labelledby="$id('modal-title')"
+                                class="modal"
+                              >
+                                <!-- Overlay -->
+                                <div
+                                  x-show="openModal"
+                                  x-transition.opacity
+                                  class="modal-overlay"
+                                ></div>
+
+                                <!-- Panel -->
+                                <div
+                                  x-show="openModal"
+                                  x-transition
+                                  @click="closeModal()"
+                                  class="modal-panel"
+                                >
+                                  <div
+                                    @click.stop
+                                    x-trap.noscroll.inert="openModal"
+                                    class="modal-panel--box"
+                                  >
+                                    <div class="modal-header">
+                                      <div class="modal-header--title">
+                                        <img
+                                          src="./assets/images/icon-doc-html.svg"
+                                          alt="pdf"
+                                        />
+                                        <!-- Title -->
+                                        <h3
+                                          class="title-small"
+                                          :id="$id('modal-title')"
+                                        >
+                                          Instrucciones de varios perfiles
+                                        </h3>
+                                      </div>
+
+                                      <!-- Close Button -->
+                                      <button
+                                        @click="closeModal()"
+                                        class="btn btn-icon btn-square"
+                                      >
+                                        <img
+                                          src="./assets/images/icon-close.svg"
+                                          alt="Close"
+                                        />
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <article class="grid post post-img-full">
+                                        <div class="column post-header">
+                                          <figure>
+                                            <img
+                                              src="./assets/images/dummy_1024x768_ffffff_cccccc.png"
+                                              alt="Imagen de actividad"
+                                            />
+                                          </figure>
+                                        </div>
+                                        <div class="column post-body">
+                                          <button
+                                            x-data="{ isActive: false }"
+                                            :class="{ 'active': isActive }"
+                                            x-on:click="isActive = !isActive"
+                                            type="button"
+                                            id="save-control"
+                                            class="btn btn-transparent"
+                                          >
+                                            <img
+                                              src="./assets/images/icon-save--white.svg"
+                                              alt="Save item"
+                                            />
+                                          </button>
+                                          <h2 class="title-big">
+                                            Suscríbete a un JAECOO 7 con Astara
+                                            y descubre por qué todo el mundo
+                                            habla de esta nueva marca
+                                          </h2>
+                                          <h4
+                                            class="title-med title-med--accent"
+                                          >
+                                            JAECOO 7 por suscripción desde
+                                            759€/mes
+                                          </h4>
+                                          <span class="subtitle-small date"
+                                            >Publicado hace 29 días</span
+                                          >
+                                          <p>
+                                            La marca promete SUV y todoterrenos
+                                            intrépidos con mucha elegancia y
+                                            cargados de tecnología. Su carta de
+                                            presentación es el JAECOO 7, que
+                                            <a href="#" class="link">
+                                              ya tienes disponible en el
+                                              catálogo de suscripción de Astara
+                                              desde 759 euros al mes</a
+                                            >, como siempre con seguro,
+                                            mantenimiento, asistencia en
+                                            carretera e impuestos incluidos.
+                                          </p>
+                                          <p>
+                                            Más del 80% de la carrocería está
+                                            fabricada con acero de alta
+                                            resistencia. Además, el JAECOO 7
+                                            incorpora más de 18 sistemas de
+                                            ayuda a la conducción, superando con
+                                            creces el nivel 2 de conducción
+                                            autónoma.
+                                          </p>
+                                        </div>
+                                      </article>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- END MODAL -->
                           </li>
                         </ul>
                       </div>
@@ -1020,7 +1151,10 @@
           <li><a class="link" href="documentos.html">Documentos</a></li>
           <li><a class="link" href="actividades.html">Actividades</a></li>
           <li><a class="link" href="noticias.html">Noticias</a></li>
-          <li><a class="link" href="express-trainings.html">Express Trainings</a></li>
+          <li>
+            <a class="link" href="express-trainings.html">Express Trainings</a>
+          </li>
+          <li><a class="link" href="busqueda.html">Búsqueda</a></li>
           <li><a class="link" href="components.html">Componentes</a></li>
         </ul>
       </div>

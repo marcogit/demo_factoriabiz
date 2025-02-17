@@ -13,6 +13,7 @@ export default defineConfig({
         actividades: "./src/actividades.html",
         noticias: "./src/noticias.html",
         express_trainings: "./src/express-trainings.html",
+        busqueda: "./src/busqueda.html",
         components: "./src/components.html",
       },
     },

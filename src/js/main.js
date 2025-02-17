@@ -125,14 +125,19 @@ document.addEventListener("alpine:init", () => {
     messages: [],
     sendMessage() {
       if (this.newMessage.trim() !== "") {
-        this.messages.push({ text: this.newMessage, sender: "user" });
+        this.messages.push({
+          text: this.newMessage,
+          sender: "user",
+          senderName: "Tú",
+        });
         this.newMessage = "";
 
-        // Esperar un momento y agregar un mensaje simulado de respuesta
+        // Simular un mensaje de respuesta después de 1 segundo
         setTimeout(() => {
           this.messages.push({
             text: "Este es un mensaje de prueba",
             sender: "bot",
+            senderName: "Bot",
           });
         }, 1000);
       }
