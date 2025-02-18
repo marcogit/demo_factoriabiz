@@ -1,4 +1,5 @@
 import Alpine from "alpinejs";
+import focus from "@alpinejs/focus";
 import Splide from "@splidejs/splide";
 import flatpickr from "flatpickr";
 
@@ -21,11 +22,10 @@ document.addEventListener("alpine:init", () => {
 
       console.log("SVGs encontrados:", images.length);
       for (const img of images) {
-        try {
-          const absoluteUrl = new URL(img.src, window.location.href).href;
-          console.log("Cargando SVG:", absoluteUrl);
+        if (img.src.startsWith("data:image/svg+xml")) continue; // Evitar imágenes inlineadas
 
-          const response = await fetch(absoluteUrl);
+        try {
+          const response = await fetch(img.src);
           if (!response.ok)
             throw new Error(`HTTP error! status: ${response.status}`);
 
@@ -41,7 +41,7 @@ document.addEventListener("alpine:init", () => {
           });
 
           img.replaceWith(svgElement);
-          console.log("SVG reemplazado exitosamente:", absoluteUrl);
+          console.log("SVG reemplazado exitosamente:", img.src);
         } catch (error) {
           console.error(`Error al procesar SVG: ${img.src}`, error);
         }
@@ -165,4 +165,5 @@ document.addEventListener("alpine:init", () => {
   }));
 });
 
+Alpine.plugin(focus);
 Alpine.start();

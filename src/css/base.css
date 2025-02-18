@@ -13,7 +13,9 @@
   }
 
   .scroll-fix {
-    @apply flex flex-col min-h-screen;
+    &.scroll-fix--full {
+      @apply flex flex-col min-h-screen;
+    }
   }
 
   .app-control {
@@ -126,6 +128,14 @@
     @apply py-5;
   }
 
+  .scroll-full-vertical {
+    @apply overflow-y-auto h-full;
+
+    .scroll-full-vertical--item {
+      @apply h-full flex items-center justify-center;
+    }
+  }
+
   .grid {
     @apply gap-5;
 
@@ -214,6 +224,9 @@
         }
       }
     }
+    &.bg-dark {
+      @apply bg-brand-dark;
+    }
     &:hover {
       z-index: 5000;
     }
@@ -233,25 +246,74 @@
 
   main {
     @apply flex-grow pt-[54px] xl:pt-[72px] overflow-x-hidden;
+
+    &.bg-light {
+      @apply bg-neutral-bg;
+    }
   }
 
   .main-header {
-    @apply border bg-white border-b-neutral-lighter fixed top-0 w-full;
-    z-index: 4000;
+    @apply border bg-white border-b-neutral-lighter fixed top-0 w-full z-[6000];
 
-    .container {
-      .navbar {
-        @apply flex justify-between items-center items-center py-1.5 xl:py-3;
+    .navbar {
+      @apply flex justify-between items-center items-center py-1.5 xl:py-3;
 
-        .navbar-brand {
-          @apply flex items-center gap-2;
+      .navbar-brand {
+        @apply flex items-center gap-2;
+      }
+
+      .navbar-group {
+        @apply flex gap-10 items-center;
+
+        .mobile-menu--control {
+          @apply hidden xl:block;
         }
+      }
+    }
 
+    &.main-header--dark {
+      @apply bg-brand-dark text-white border-none;
+
+      .mobile-button {
+        svg {
+          rect {
+            @apply fill-white stroke-white;
+          }
+        }
+      }
+
+      .navbar {
         .navbar-group {
-          @apply flex gap-10 items-center;
+          .navbar-nav {
+            .navbar-nav-item {
+              .navbar-nav--link {
+                @apply text-white hover:text-accent;
 
-          .mobile-menu--control {
-            @apply hidden xl:block;
+                &.active {
+                  @apply text-accent;
+                }
+              }
+
+              .btn-icon {
+                svg {
+                  path {
+                    @apply fill-white;
+                  }
+                }
+
+                &:hover {
+                  svg {
+                    path {
+                      @apply fill-accent;
+                    }
+                  }
+                }
+
+                .not {
+                  @apply bg-success border-brand-dark;
+                }
+              }
+            }
           }
         }
       }

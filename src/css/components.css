@@ -48,7 +48,7 @@
       }
 
       .btn-location {
-        @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30;
+        @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20;
       }
 
       .card-status {
@@ -151,6 +151,24 @@
 
           .badge-default {
             @apply bg-white;
+          }
+        }
+      }
+
+      &.card-stories--big {
+        @apply w-full max-w-[50%] lg:max-w-[40%] xl:max-w-[33%];
+
+        .card-header {
+          @apply overflow-visible;
+
+          .card-header--media {
+            @apply w-full h-full overflow-hidden rounded-xl;
+          }
+        }
+
+        .card-body {
+          .card-title {
+            @apply text-white;
           }
         }
       }
@@ -293,7 +311,6 @@
       @apply bg-neutral-lighter rounded-full hover:bg-neutral-light transition-all;
     }
 
-
     .list-themes--item {
       @apply border-b border-neutral-lighter w-full;
 
@@ -336,7 +353,7 @@
       }
       .box-body--scroll {
         @apply absolute left-0 right-0 overflow-y-auto;
-        
+
         &::-webkit-scrollbar {
           @apply w-2;
         }
@@ -613,7 +630,7 @@
   }
   /* alerts */
   .alert {
-    @apply flex flex-col md:flex-row gap-5 rounded-xl p-5 border border-neutral-lighter h-full;
+    @apply flex flex-col md:flex-row gap-5 rounded-xl p-5 border border-neutral-lighter h-full mb-3 lg:mb-5;
 
     .alert-header {
       img {
@@ -641,8 +658,20 @@
       @apply bg-success-bg border-success-bg;
     }
 
+    &.alert-warning {
+      @apply bg-accent-bg border-accent-bg;
+    }
+
+    &.alert-info {
+      @apply bg-brand-bg border-brand-bg;
+    }
+
     &.alert-big {
       @apply md:p-10 md:gap-10;
+    }
+
+    &:last-child {
+      @apply mb-0 lg:mb-0;
     }
   }
   /* progress */
@@ -808,7 +837,7 @@
     }
 
     &.message-you {
-      @apply border border-neutral-lighter justify-start text-start font-normal lg:px-3 ;
+      @apply border border-neutral-lighter justify-start text-start font-normal lg:px-3;
     }
   }
   /* badge */
@@ -824,7 +853,7 @@
     }
 
     &.badge-dark {
-      @apply bg-gray-950 bg-opacity-50 text-white border-transparent;
+      @apply bg-brand text-white border-transparent;
     }
 
     &.badge-brand {
@@ -899,7 +928,7 @@
     @apply relative;
 
     .user-box--button {
-      @apply flex gap-4 items-center cursor-pointer border border-neutral-lighter hover:border-accent-lighter rounded-full pl-0 xl:pl-1 pr-0 xl:pr-4 py-0 xl:py-1 transition-all;
+      @apply flex gap-4 items-center cursor-pointer border border-neutral-lighter hover:border-accent-lighter rounded-full pl-0 xl:pl-1 pr-0 xl:pr-4 py-0 xl:py-1 transition-all bg-white text-neutral-dark;
 
       .user-box--button---img {
         @apply relative;
@@ -923,7 +952,11 @@
     }
 
     .user-box--modal {
-      @apply fixed sm:absolute top-0 sm:top-9 xl:top-12 right-0 h-screen sm:h-auto w-screen sm:w-80 bg-white shadow-lg rounded-lg overflow-hidden p-5 z-10 origin-top-right border border-neutral-lighter;
+      @apply flex flex-col fixed sm:absolute top-0 sm:top-9 xl:top-12 right-0 h-screen sm:h-auto w-screen sm:w-80 bg-white shadow-lg sm:rounded-lg overflow-hidden p-5 origin-top-right border border-neutral-lighter;
+
+      .user-box--modal---scroll {
+        @apply max-h-full overflow-y-auto;
+      }
 
       .user-box--modal---section {
         @apply border-b border-neutral-lighter;
@@ -952,11 +985,11 @@
           @apply flex flex-col gap-0;
 
           .user-box--modal---user---info---name {
-            @apply font-bold text-lg -mb-1;
+            @apply font-bold text-lg -mb-1 text-neutral-dark;
           }
 
           .user-box--modal---user---info---subname {
-            @apply text-sm;
+            @apply text-sm text-neutral-dark;
           }
         }
 
@@ -965,12 +998,18 @@
 
           .btn-close {
             @apply opacity-30 hover:opacity-100;
+
+            svg {
+              path {
+                @apply fill-neutral !important;
+              }
+            }
           }
         }
       }
 
       .user-box--modal---logos {
-        @apply flex flex-wrap gap-3 items-center justify-center pt-3 mb-3;
+        @apply flex flex-wrap gap-3 items-center sm:justify-center pt-3 mb-3;
 
         img {
           @apply w-auto h-10;
@@ -982,7 +1021,7 @@
 
         .navbar-nav-item {
           .navbar-nav--link {
-            @apply py-2 px-2 rounded-md hover:bg-accent-bg hover:text-neutral-dark;
+            @apply py-2 px-2 text-neutral rounded-md hover:bg-accent-bg hover:text-neutral-dark !important;
             &:hover {
               svg {
                 path {
@@ -1194,7 +1233,7 @@
 
       .card {
         &.card-item {
-          @apply hover:shadow-sm;
+          @apply hover:shadow-sm mb-0;
           .card-body {
             @apply relative;
 
@@ -1253,7 +1292,7 @@
     }
   }
   .formcontrol-show {
-    @apply absolute z-20 w-full bg-white border border-neutral-lighter rounded-lg rounded-tl-none rounded-tr-none;
+    @apply absolute z-40 w-full bg-white border border-neutral-lighter rounded-lg rounded-tl-none rounded-tr-none;
 
     li {
       @apply text-neutral-light hover:text-neutral text-sm py-2 px-3 cursor-pointer flex gap-2 items-center;

@@ -15,7 +15,7 @@
   </head>
   <body x-data="svgInliner" x-init="init">
     <!-- MAIN HEADER -->
-    <header class="main-header">
+    <header class="main-header main-header--dark">
       <div class="container">
         <nav class="navbar">
           <!-- Mobile menu button-->
@@ -350,10 +350,10 @@
       </div>
     </header>
     <!-- END MAIN HEADER -->
-    <div class="scroll-fix">
-      <main>
+    <div class="scroll-fix scroll-fix--full">
+      <main class="bg-light">
         <!-- Grid Chat -->
-        <section class="panel panel-full bg-light">
+        <section class="panel panel-full">
           <div class="container">
             <div class="chat-panel" x-data="chatApp()">
               <div class="grid grid-cols-1 lg:grid-cols-[1fr_2fr]">
