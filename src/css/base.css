@@ -9,7 +9,7 @@
     }
   }
   body {
-    @apply font-sans text-neutral-dark text-base h-svh flex flex-col min-h-screen leading-tight;
+    @apply font-sans text-neutral text-base h-svh flex flex-col min-h-screen leading-tight;
   }
 
   .scroll-fix {
@@ -27,32 +27,44 @@
     @apply transition-all;
   }
 
+  p {
+    @apply mb-2;
+  }
+
   .text-small {
     @apply text-xs text-neutral-light;
   }
 
   .text-label {
     @apply text-sm text-neutral mb-2 block;
+
+    &.text-label--v2 {
+      @apply font-medium text-neutral-light;
+    }
   }
 
   svg {
     @apply m-auto;
   }
 
+  .p-small {
+    @apply text-sm text-neutral-light block;
+  }
+
+  .date-small {
+    @apply text-xs text-neutral-light;
+  }
+
   .title-base {
-    @apply text-base font-medium tracking-tight leading-tight;
+    @apply text-base font-bold text-brand tracking-tight leading-tight;
   }
 
   .title-small {
     @apply text-base md:text-lg font-semibold tracking-tight;
   }
 
-  .lead {
-    @apply text-lg md:text-custom-xxl align-bottom;
-
-    .title-big {
-      @apply inline-block;
-    }
+  .title-box {
+    @apply text-custom-xxl font-semibold tracking-tight;
   }
 
   .title-med {
@@ -64,7 +76,15 @@
   }
 
   .title-big {
-    @apply text-xl md:text-2xl font-medium flex align-middle justify-start gap-2 tracking-normal leading-none mb-3;
+    @apply text-custom-xxl sm:text-xl md:text-2xl font-semibold flex align-middle justify-start gap-2 tracking-normal leading-none mb-3;
+  }
+
+  .lead {
+    @apply text-lg md:text-custom-xxl align-bottom;
+
+    .title-big {
+      @apply inline-block;
+    }
   }
 
   .pretitle {
@@ -103,8 +123,12 @@
     @apply flex flex-col gap-3;
   }
 
+  .inline-list {
+    @apply flex gap-3;
+  }
+
   .link {
-    @apply transition-all text-neutral hover:text-accent underline hover:no-underline;
+    @apply transition-all text-brand-lighter hover:text-brand-light underline hover:no-underline;
 
     &.link-small {
       @apply text-sm;
@@ -137,7 +161,7 @@
   }
 
   .grid {
-    @apply gap-5;
+    @apply gap-5 relative;
 
     .column {
       @apply h-full;
@@ -181,7 +205,7 @@
   }
 
   .panel {
-    @apply w-full py-7 relative;
+    @apply w-full py-5 lg:py-7 relative;
 
     .panel-header {
       @apply flex justify-between items-center pb-5;
@@ -241,6 +265,9 @@
           padding-right: 0;
         }
       }
+    }
+    &.panel-user {
+      @apply pt-0 pb-5 lg:py-7 -mt-3 lg:mt-0;
     }
   }
 

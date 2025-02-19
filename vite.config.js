@@ -1,32 +1,32 @@
 import { defineConfig } from "vite";
 import { createHtmlPlugin } from "vite-plugin-html";
-import path from "path"; // Necesario para rutas absolutas
+import svgLoader from 'vite-svg-loader';
 
 export default defineConfig({
   root: "./src", // Define la carpeta "src" como raíz
   build: {
     outDir: "../dist", // Genera el resultado en la carpeta "dist"
     emptyOutDir: true,
+    assetsInlineLimit: 0, // No transformar ningún archivo en URL de datos
     rollupOptions: {
       input: {
-        main: path.resolve(__dirname, "src/index.html"),
-        documentos: path.resolve(__dirname, "src/documentos.html"),
-        actividades: path.resolve(__dirname, "src/actividades.html"),
-        noticias: path.resolve(__dirname, "src/noticias.html"),
-        express_trainings: path.resolve(
-          __dirname,
-          "src/express-trainings.html"
-        ),
-        busqueda: path.resolve(__dirname, "src/busqueda.html"),
-        chat: path.resolve(__dirname, "src/chat.html"),
-        components: path.resolve(__dirname, "src/components.html"),
+        main: "./src/index.html",
+        documentos: "./src/documentos.html",
+        actividades: "./src/actividades.html",
+        noticias: "./src/noticias.html",
+        express_trainings: "./src/express-trainings.html",
+        busqueda: "./src/busqueda.html",
+        chat: "./src/chat.html",
+        user: "./src/user.html",
+        ea: "./src/ea.html",
+        components: "./src/components.html",
       },
       output: {
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name.endsWith(".css")) {
-            return "assets/css/[name][extname]"; // ✅ Ahora los CSS van a "assets/css/"
+          if (assetInfo.name.endsWith(".svg")) {
+            return "assets/[name][extname]";
           }
-          return "assets/images/[name][extname]"; // ✅ Las imágenes se quedan en "assets/images/"
+          return "assets/[name]-[hash][extname]";
         },
       },
     },
@@ -35,7 +35,9 @@ export default defineConfig({
     createHtmlPlugin({
       minify: true,
     }),
+    svgLoader(), // Plugin para manejar SVGs incrustados
   ],
+  assetsInclude: ["**/*.svg"], // Incluir explícitamente los archivos .svg
   css: {
     preprocessorOptions: {
       css: {

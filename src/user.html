@@ -358,8 +358,7 @@
             <h1 class="title-big">Mi perfil</h1>
           </div>
         </header>
-        <!-- Grid Chat -->
-        <section class="panelå">
+        <section class="panel panel-user">
           <div class="container">
             <!-- Tabs -->
             <div
@@ -380,103 +379,592 @@
         }
     }"
               x-id="['tab']"
-              class="mx-auto max-w-3xl"
+              class="tabs-panel"
             >
               <div class="grid grid-cols-1 lg:grid-cols-[1fr_3fr]">
-                <div class="column">d</div>
-                <div class="column">d</div>
-              </div>
-              <!-- Tab List -->
-              <ul
-                x-ref="tablist"
-                @keydown.right.prevent.stop="$focus.wrap().next()"
-                @keydown.home.prevent.stop="$focus.first()"
-                @keydown.page-up.prevent.stop="$focus.first()"
-                @keydown.left.prevent.stop="$focus.wrap().prev()"
-                @keydown.end.prevent.stop="$focus.last()"
-                @keydown.page-down.prevent.stop="$focus.last()"
-                role="tablist"
-                class="-mb-px flex items-stretch overflow-x-auto"
-              >
-                <!-- Tab -->
-                <li>
-                  <button
-                    :id="$id('tab', whichChild($el.parentElement, $refs.tablist))"
-                    @click="select($el.id)"
-                    @mousedown.prevent
-                    @focus="select($el.id)"
-                    type="button"
-                    :tabindex="isSelected($el.id) ? 0 : -1"
-                    :aria-selected="isSelected($el.id)"
-                    :class="isSelected($el.id) ? 'border-gray-200 bg-white' : 'border-transparent'"
-                    class="inline-flex rounded-t-lg border-t border-l border-r px-5 py-2.5"
-                    role="tab"
+                <div class="column">
+                  <div
+                    x-data="{
+                open: false,
+                toggle() {
+                    if (this.open) {
+                        return this.close()
+                    }
+      
+                    this.$refs.button.focus()
+      
+                    this.open = true
+                },
+                close(focusAfter) {
+                    if (! this.open) return
+      
+                    this.open = false
+      
+                    focusAfter && focusAfter.focus()
+                }
+            }"
+                    x-on:keydown.escape.prevent.stop="close($refs.button)"
+                    x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
+                    x-id="['dropdown-button']"
+                    class="dropdown dropdown--tab"
                   >
-                    Tab 1
-                  </button>
-                </li>
+                    <!-- Button -->
+                    <button
+                      x-ref="button"
+                      x-on:click="toggle()"
+                      :aria-expanded="open"
+                      :aria-controls="$id('dropdown-button')"
+                      type="button"
+                      class="btn btn-icon btn-icon--compact"
+                    >
+                      <img
+                        src="./assets/images/icon-menu-08-student.svg"
+                        alt="Mi Perfil"
+                      />
 
-                <li>
-                  <button
-                    :id="$id('tab', whichChild($el.parentElement, $refs.tablist))"
-                    @click="select($el.id)"
-                    @mousedown.prevent
-                    @focus="select($el.id)"
-                    type="button"
-                    :tabindex="isSelected($el.id) ? 0 : -1"
-                    :aria-selected="isSelected($el.id)"
-                    :class="isSelected($el.id) ? 'border-gray-200 bg-white' : 'border-transparent'"
-                    class="inline-flex rounded-t-lg border-t border-l border-r px-5 py-2.5"
-                    role="tab"
-                  >
-                    Tab 2
-                  </button>
-                </li>
-              </ul>
+                      <!-- Heroicon: micro chevron-down -->
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 16 16"
+                        fill="currentColor"
+                        class="size-4"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </button>
 
-              <!-- Panels -->
-              <div
-                role="tabpanels"
-                class="rounded-b-lg rounded-tr-lg border border-gray-200 bg-white"
-              >
-                <!-- Panel -->
-                <section
-                  x-show="isSelected($id('tab', whichChild($el, $el.parentElement)))"
-                  :aria-labelledby="$id('tab', whichChild($el, $el.parentElement))"
-                  role="tabpanel"
-                  class="p-8"
-                >
-                  <h2 class="text-xl font-bold">Tab 1 Content</h2>
-                  <p class="mt-2 text-gray-500">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio, quo sequi error quibusdam quas temporibus animi
-                    sapiente eligendi! Deleniti minima velit recusandae iure.
-                  </p>
-                  <button
-                    class="mt-5 rounded-lg border border-gray-200 px-4 py-2 text-sm text-gray-800"
-                  >
-                    Something focusable
-                  </button>
-                </section>
+                    <!-- Panel -->
+                    <div
+                      x-ref="panel"
+                      x-show="open"
+                      x-transition.origin.top.left
+                      x-on:click.outside="close($refs.button)"
+                      :id="$id('dropdown-button')"
+                      x-cloak
+                      class=""
+                    >
+                      <!-- Tab List -->
+                      <ul
+                        x-ref="tablist"
+                        @keydown.right.prevent.stop="$focus.wrap().next()"
+                        @keydown.home.prevent.stop="$focus.first()"
+                        @keydown.page-up.prevent.stop="$focus.first()"
+                        @keydown.left.prevent.stop="$focus.wrap().prev()"
+                        @keydown.end.prevent.stop="$focus.last()"
+                        @keydown.page-down.prevent.stop="$focus.last()"
+                        role="tablist"
+                        class="formcontrol-show"
+                      >
+                        <!-- Tab -->
+                        <li class="tab-list--item">
+                          <button
+                            :id="$id('tab', whichChild($el.parentElement, $refs.tablist))"
+                            @click="select($el.id)"
+                            @mousedown.prevent
+                            @focus="select($el.id)"
+                            type="button"
+                            :tabindex="isSelected($el.id) ? 0 : -1"
+                            :aria-selected="isSelected($el.id)"
+                            :class="isSelected($el.id) ? 'active' : ''"
+                            class="tab-list--link"
+                            role="tab"
+                          >
+                            Datos personales
+                          </button>
+                        </li>
 
-                <section
-                  x-show="isSelected($id('tab', whichChild($el, $el.parentElement)))"
-                  :aria-labelledby="$id('tab', whichChild($el, $el.parentElement))"
-                  role="tabpanel"
-                  class="p-8"
-                >
-                  <h2 class="text-xl font-bold">Tab 2 Content</h2>
-                  <p class="mt-2 text-gray-500">
-                    Fugiat odit alias, eaque optio quas nobis minima reiciendis
-                    voluptate dolorem nisi facere debitis ea laboriosam vitae
-                    omnis ut voluptatum eos. Fugiat?
-                  </p>
-                  <button
-                    class="mt-5 rounded-lg border border-gray-200 px-4 py-2 text-sm text-gray-800"
+                        <li class="tab-list--item">
+                          <button
+                            :id="$id('tab', whichChild($el.parentElement, $refs.tablist))"
+                            @click="select($el.id)"
+                            @mousedown.prevent
+                            @focus="select($el.id)"
+                            type="button"
+                            :tabindex="isSelected($el.id) ? 0 : -1"
+                            :aria-selected="isSelected($el.id)"
+                            :class="isSelected($el.id) ? 'active' : ''"
+                            class="tab-list--link"
+                            role="tab"
+                          >
+                            Modificar contraseña
+                          </button>
+                        </li>
+
+                        <li class="tab-list--item">
+                          <button
+                            :id="$id('tab', whichChild($el.parentElement, $refs.tablist))"
+                            @click="select($el.id)"
+                            @mousedown.prevent
+                            @focus="select($el.id)"
+                            type="button"
+                            :tabindex="isSelected($el.id) ? 0 : -1"
+                            :aria-selected="isSelected($el.id)"
+                            :class="isSelected($el.id) ? 'active' : ''"
+                            class="tab-list--link"
+                            role="tab"
+                          >
+                            Imagen de perfil
+                          </button>
+                        </li>
+                        <li class="tab-list--item">
+                          <button
+                            :id="$id('tab', whichChild($el.parentElement, $refs.tablist))"
+                            @click="select($el.id)"
+                            @mousedown.prevent
+                            @focus="select($el.id)"
+                            type="button"
+                            :tabindex="isSelected($el.id) ? 0 : -1"
+                            :aria-selected="isSelected($el.id)"
+                            :class="isSelected($el.id) ? 'active' : ''"
+                            class="tab-list--link"
+                            role="tab"
+                          >
+                            Rol Perfil
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- Tab List -->
+                  <ul
+                    x-ref="tablist"
+                    @keydown.right.prevent.stop="$focus.wrap().next()"
+                    @keydown.home.prevent.stop="$focus.first()"
+                    @keydown.page-up.prevent.stop="$focus.first()"
+                    @keydown.left.prevent.stop="$focus.wrap().prev()"
+                    @keydown.end.prevent.stop="$focus.last()"
+                    @keydown.page-down.prevent.stop="$focus.last()"
+                    role="tablist"
+                    class="tab-list tab-list--vertical tab-display"
                   >
-                    Something else focusable
-                  </button>
-                </section>
+                    <!-- Tab -->
+                    <li class="tab-list--item">
+                      <button
+                        :id="$id('tab', whichChild($el.parentElement, $refs.tablist))"
+                        @click="select($el.id)"
+                        @mousedown.prevent
+                        @focus="select($el.id)"
+                        type="button"
+                        :tabindex="isSelected($el.id) ? 0 : -1"
+                        :aria-selected="isSelected($el.id)"
+                        :class="isSelected($el.id) ? 'active' : ''"
+                        class="tab-list--link"
+                        role="tab"
+                      >
+                        Datos personales
+                      </button>
+                    </li>
+
+                    <li class="tab-list--item">
+                      <button
+                        :id="$id('tab', whichChild($el.parentElement, $refs.tablist))"
+                        @click="select($el.id)"
+                        @mousedown.prevent
+                        @focus="select($el.id)"
+                        type="button"
+                        :tabindex="isSelected($el.id) ? 0 : -1"
+                        :aria-selected="isSelected($el.id)"
+                        :class="isSelected($el.id) ? 'active' : ''"
+                        class="tab-list--link"
+                        role="tab"
+                      >
+                        Modificar contraseña
+                      </button>
+                    </li>
+
+                    <li class="tab-list--item">
+                      <button
+                        :id="$id('tab', whichChild($el.parentElement, $refs.tablist))"
+                        @click="select($el.id)"
+                        @mousedown.prevent
+                        @focus="select($el.id)"
+                        type="button"
+                        :tabindex="isSelected($el.id) ? 0 : -1"
+                        :aria-selected="isSelected($el.id)"
+                        :class="isSelected($el.id) ? 'active' : ''"
+                        class="tab-list--link"
+                        role="tab"
+                      >
+                        Imagen de perfil
+                      </button>
+                    </li>
+                    <li class="tab-list--item">
+                      <button
+                        :id="$id('tab', whichChild($el.parentElement, $refs.tablist))"
+                        @click="select($el.id)"
+                        @mousedown.prevent
+                        @focus="select($el.id)"
+                        type="button"
+                        :tabindex="isSelected($el.id) ? 0 : -1"
+                        :aria-selected="isSelected($el.id)"
+                        :class="isSelected($el.id) ? 'active' : ''"
+                        class="tab-list--link"
+                        role="tab"
+                      >
+                        Rol Perfil
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+                <div class="column">
+                  <!-- Panels -->
+                  <div role="tabpanels" class="tabpanels">
+                    <!-- Panel 01 -->
+                    <div
+                      x-show="isSelected($id('tab', whichChild($el, $el.parentElement)))"
+                      :aria-labelledby="$id('tab', whichChild($el, $el.parentElement))"
+                      role="tabpanel"
+                      class="box box-white tabpanels--item"
+                    >
+                      <div class="box-body--intro">
+                        <h2 class="title-box">Datos personales</h2>
+                        <p>
+                          Lorem ipsum dolor sit amet consectetur adipisicing
+                          elit. Optio, quo sequi error quibusdam quas temporibus
+                          animi sapiente eligendi! Deleniti minima velit
+                          recusandae iure.
+                        </p>
+                        <p>
+                          Lorem ipsum dolor sit amet consectetur adipisicing
+                          elit.
+                        </p>
+                      </div>
+                      <div class="box-body">
+                        <div
+                          class="grid grid-cols-2 mdgrid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr_1fr]"
+                        >
+                          <div class="colum">
+                            <p class="title-base">Nombre:</p>
+                            <span class="p-small">Luis Fernando</span>
+                          </div>
+                          <div class="colum">
+                            <p class="title-base">Apellidos:</p>
+                            <p class="p-small">García Rodríguez</p>
+                          </div>
+                          <div class="colum">
+                            <p class="title-base">NIF:</p>
+                            <p class="p-small">25456789H</p>
+                          </div>
+                          <div class="colum">
+                            <p class="title-base">Nº Seguridad Social:</p>
+                            <p class="p-small">25456789H</p>
+                          </div>
+                          <div class="colum">
+                            <p class="title-base">Teléfono:</p>
+                            <p class="p-small">+34 951345678</p>
+                          </div>
+                          <div class="colum">
+                            <p class="title-base">Móvil:</p>
+                            <p class="p-small">+34 654765678</p>
+                          </div>
+                          <div class="colum">
+                            <p class="title-base">Dirección:</p>
+                            <p class="p-small">C/ Pez Dorado 1. Esc 3. 5ºA</p>
+                          </div>
+                          <div class="colum">
+                            <p class="title-base">Código Postal:</p>
+                            <p class="p-small">29007</p>
+                          </div>
+                          <div class="colum">
+                            <p class="title-base">Ciudad:</p>
+                            <p class="p-small">Torrelodones</p>
+                          </div>
+                          <div class="colum">
+                            <p class="title-base">Provincia:</p>
+                            <p class="p-small">Madrid</p>
+                          </div>
+                          <div class="colum">
+                            <p class="title-base">Email:</p>
+                            <p class="p-small">
+                              <a href="mailto:lfernando@gmail.com" class="link"
+                                >lfernando@gmail.com</a
+                              >
+                            </p>
+                          </div>
+                          <div class="colum">
+                            <p class="title-base">Fecha de nacimiento:</p>
+                            <p class="p-small">30/08/1978</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Panel 02 -->
+                    <div
+                      x-show="isSelected($id('tab', whichChild($el, $el.parentElement)))"
+                      :aria-labelledby="$id('tab', whichChild($el, $el.parentElement))"
+                      role="tabpanel"
+                      class="box box-white tabpanels--item"
+                    >
+                      <div class="grid grid-cols-1 lg:grid-cols-[6fr_4fr]">
+                        <div class="column">
+                          <div class="box-body--intro">
+                            <h2 class="title-box">Modificar contraseña</h2>
+                            <p>
+                              Lorem ipsum dolor sit amet consectetur adipisicing
+                              elit. Optio, quo sequi error quibusdam quas
+                              temporibus animi sapiente eligendi! Deleniti
+                              minima velit recusandae iure.
+                            </p>
+                          </div>
+                        </div>
+                        <div class="column">
+                          <div class="box-body">
+                            <form
+                              class="form-block"
+                              x-data="{ showPassword: false, showConfirmPassword: false }"
+                              @submit.prevent
+                            >
+                              <div class="form-row grid grid-cols-1">
+                                <div class="column">
+                                  <label class="text-label text-label--v2"
+                                    >Cambia tu contraseña aquí:</label
+                                  >
+                                  <div class="form-group mb-0">
+                                    <input
+                                      :type="showPassword ? 'text' : 'password'"
+                                      class="formcontrol formcontrol-feature"
+                                    />
+                                    <button
+                                      type="button"
+                                      @click="showPassword = !showPassword"
+                                      class="btn btn-icon"
+                                    >
+                                      <img
+                                        x-show="!showPassword"
+                                        src="./assets/images/icon-visible-no.svg"
+                                        alt="Ocultar contraseña"
+                                      />
+                                      <img
+                                        x-show="showPassword"
+                                        src="./assets/images/icon-visible-yes.svg"
+                                        alt="Ver contraseña"
+                                      />
+                                    </button>
+                                  </div>
+                                </div>
+                                <div class="column">
+                                  <label class="text-label text-label--v2"
+                                    >Confirmar nueva contraseña:</label
+                                  >
+                                  <div class="form-group mb-0">
+                                    <input
+                                      :type="showConfirmPassword ? 'text' : 'password'"
+                                      class="formcontrol formcontrol-feature"
+                                    />
+                                    <button
+                                      type="button"
+                                      @click="showConfirmPassword = !showConfirmPassword"
+                                      class="btn btn-icon"
+                                    >
+                                      <img
+                                        x-show="!showPassword"
+                                        src="./assets/images/icon-visible-no.svg"
+                                        alt="Ocultar contraseña"
+                                      />
+                                      <img
+                                        x-show="showPassword"
+                                        src="./assets/images/icon-visible-yes.svg"
+                                        alt="Ver contraseña"
+                                      />
+                                    </button>
+                                  </div>
+                                </div>
+                                <div class="column">
+                                  <button
+                                    type="submit"
+                                    class="btn btn-accent btn-full"
+                                  >
+                                    Guardar
+                                  </button>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Panel 03 -->
+                    <div
+                      x-show="isSelected($id('tab', whichChild($el, $el.parentElement)))"
+                      :aria-labelledby="$id('tab', whichChild($el, $el.parentElement))"
+                      role="tabpanel"
+                      class="box box-white tabpanels--item"
+                    >
+                      <div class="box-body--intro">
+                        <h2 class="title-box">Imagen de perfil</h2>
+                        <p>
+                          Lorem ipsum dolor sit amet consectetur adipisicing
+                          elit. Optio, quo sequi error quibusdam quas temporibus
+                          animi sapiente eligendi! Deleniti minima velit
+                          recusandae iure.
+                        </p>
+                      </div>
+                      <div class="box-body">
+                        <p class="title-base">Foto actual:</p>
+                        <div
+                          x-data="{ 
+                          imagePreview: './assets/images/cms-images/avatar-42.jpg', 
+                          removeImage() { this.imagePreview = '' } 
+                      }"
+                          class="box box-light box-inline"
+                        >
+                          <!-- Imagen de perfil -->
+                          <img
+                            :src="imagePreview"
+                            class="w-12 h-12 rounded-full"
+                            x-show="imagePreview"
+                          />
+
+                          <!-- Botón eliminar foto -->
+                          <button
+                            @click="removeImage"
+                            x-show="imagePreview"
+                            class="link"
+                          >
+                            Eliminar foto
+                          </button>
+
+                          <!-- Input para subir imagen -->
+
+                          <label class="form-group mb-0">
+                            <input
+                              type="file"
+                              @change="const file = $event.target.files[0]; 
+                          if (file) { 
+                            const reader = new FileReader(); 
+                            reader.onload = e => imagePreview = e.target.result; 
+                            reader.readAsDataURL(file); 
+                          }"
+                              class="hidden"
+                            />
+
+                            <div class="formcontrol cursor-pointer">
+                              <span class="formcontrol-text"
+                                >Subir nueva foto</span
+                              >
+                            </div>
+                            <span class="btn btn-icon cursor-pointer"
+                              ><img
+                                src="./assets/images/icon-img.svg"
+                                alt="Upload"
+                            /></span>
+                          </label>
+
+                          <!-- Botón guardar -->
+                          <button class="btn btn-accent">Guardar</button>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Panel 04 -->
+                    <div
+                      x-show="isSelected($id('tab', whichChild($el, $el.parentElement)))"
+                      :aria-labelledby="$id('tab', whichChild($el, $el.parentElement))"
+                      role="tabpanel"
+                      class="box box-white tabpanels--item"
+                    >
+                      <div class="box-body--intro">
+                        <h2 class="title-box">Rol Perfil</h2>
+                        <div class="box-text">
+                          <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Optio, quo sequi error quibusdam quas
+                            temporibus animi sapiente eligendi! Deleniti minima
+                            velit recusandae iure.
+                          </p>
+                          <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit.
+                          </p>
+                        </div>
+                      </div>
+                      <div class="box-body">
+                        <div class="box-minisection">
+                          <h3 class="title-small">Datos de empresa</h3>
+                          <div
+                            class="grid grid-cols-2 mdgrid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr_1fr]"
+                          >
+                            <div class="colum">
+                              <p class="title-base">Marca:</p>
+                              <span class="p-small">Subaru</span>
+                            </div>
+                            <div class="colum">
+                              <p class="title-base">Fecha de comienzo:</p>
+                              <p class="p-small">31/03/2022</p>
+                            </div>
+                            <div class="colum">
+                              <p class="title-base">Zona:</p>
+                              <p class="p-small">Zona 1</p>
+                            </div>
+                            <div class="colum">
+                              <p class="title-base">Concesión:</p>
+                              <p class="p-small">Motor Gamboa</p>
+                            </div>
+                            <div class="colum">
+                              <p class="title-base">Instalaciones:</p>
+                              <p class="p-small">Castellana Norte</p>
+                            </div>
+                            <div class="colum">
+                              <p class="title-base">Cargo principal:</p>
+                              <p class="p-small">Gerente de ventas</p>
+                            </div>
+                            <div class="colum">
+                              <p class="title-base">Cargos secundarios</p>
+                              <p class="p-small">Contenido a rellenar</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="box-minisection">
+                          <h3 class="title-small">Otros datos</h3>
+                          <div
+                            class="grid grid-cols-1 mdgrid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr_1fr]"
+                          >
+                            <div class="colum">
+                              <p class="title-base">DNI anverso:</p>
+                              <span class="p-small">DNI - 70923874.pdf</span>
+                              <small class="date-small"
+                                >(27/06/2024 08:35 )</small
+                              >
+                            </div>
+                            <div class="colum">
+                              <p class="title-base">
+                                Cuota entre 11/09 y 24/09:
+                              </p>
+                              <p class="p-small">Dato a rellenar</p>
+                            </div>
+                            <div class="colum">
+                              <p class="title-base">IDealer:</p>
+                              <p class="p-small">No</p>
+                            </div>
+                          </div>
+                          <div class="box-text">
+                            <p>
+                              Lorem ipsum dolor sit amet consectetur adipisicing
+                              elit. Optio, quo sequi error quibusdam quas
+                              temporibus animi sapiente eligendi! Deleniti
+                              minima velit recusandae iure.
+                            </p>
+                          </div>
+                        </div>
+                        <div class="box-minisection">
+                          <h3 class="title-small">Textos legales</h3>
+                          <ul class="inline-list">
+                            <li>
+                              <a href="#" class="link"
+                                >Politica de privacidad</a
+                              >
+                            </li>
+                            <li><a href="#" class="link">Aviso legal</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -527,6 +1015,8 @@
           </li>
           <li><a class="link" href="busqueda.html">Búsqueda</a></li>
           <li><a class="link" href="chat.html">Chat</a></li>
+          <li><a class="link" href="user.html">Mi perfil</a></li>
+          <li><a class="link" href="ea.html">Expediente académico</a></li>
           <li><a class="link" href="components.html">Componentes</a></li>
         </ul>
       </div>
