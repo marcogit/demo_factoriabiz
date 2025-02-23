@@ -68,7 +68,7 @@
   }
 
   .title-med {
-    @apply text-custom-xxl md:text-xl font-medium flex align-middle justify-start gap-2 tracking-tight leading-none;
+    @apply text-custom-xxl md:text-xl font-medium flex align-middle justify-start gap-2 tracking-tight leading-tight;
 
     &.title-med--accent {
       @apply text-accent-dark font-normal;
@@ -123,10 +123,6 @@
     @apply flex flex-col gap-3;
   }
 
-  .inline-list {
-    @apply flex gap-3;
-  }
-
   .link {
     @apply transition-all text-brand-lighter hover:text-brand-light underline hover:no-underline;
 
@@ -136,6 +132,22 @@
 
     &.link-ghost {
       @apply text-neutral-light hover:text-neutral;
+    }
+
+    &.link-dark {
+      @apply text-neutral;
+    }
+
+    &.active {
+      @apply text-accent;
+    }
+  }
+
+  .inline-list {
+    @apply flex gap-3;
+
+    &.inline-list--small {
+      @apply gap-1;
     }
   }
 
@@ -152,16 +164,8 @@
     @apply py-5;
   }
 
-  .scroll-full-vertical {
-    @apply overflow-y-auto h-full;
-
-    .scroll-full-vertical--item {
-      @apply h-full flex items-center justify-center;
-    }
-  }
-
   .grid {
-    @apply gap-5 relative;
+    @apply gap-3 lg:gap-5;
 
     .column {
       @apply h-full;
@@ -202,10 +206,14 @@
         @apply mb-0;
       }
     }
+
+    &.grid-fluid {
+      @apply transition-all relative;
+    }
   }
 
   .panel {
-    @apply w-full py-5 lg:py-7 relative;
+    @apply w-full py-5 md:py-7 lg:py-12 relative;
 
     .panel-header {
       @apply flex justify-between items-center pb-5;
@@ -225,8 +233,13 @@
         }
       }
     }
-    &.bg {
-      @apply pt-10;
+
+    &.panel-bg {
+      @apply lg:py-16;
+
+      .panel-header {
+        @apply lg:pb-10;
+      }
     }
     &.bg-light {
       @apply bg-neutral-bg;
@@ -249,21 +262,168 @@
       }
     }
     &.bg-dark {
+      @apply bg-brand;
+
+      .panel-header {
+        @apply text-white;
+
+        .title-med {
+          svg {
+            path {
+              @apply fill-white;
+            }
+          }
+        }
+      }
+      .splide {
+        &::before {
+          @apply bg-gradient-to-r from-brand to-transparent;
+        }
+        &::after {
+          @apply bg-gradient-to-l from-brand to-transparent;
+        }
+        .splide__track {
+          &::after,
+          &::before {
+            @apply bg-brand;
+          }
+        }
+
+        .splide__arrows {
+          .splide__arrow {
+            @apply bg-accent hover:bg-white;
+
+            svg {
+              path {
+                @apply fill-brand;
+              }
+            }
+
+            &:hover {
+              svg {
+                path {
+                  @apply fill-accent;
+                }
+              }
+            }
+          }
+        }
+      }
+      .card {
+        &.card-stories {
+          .card-body {
+            .card-title {
+              @apply text-white;
+            }
+
+            .badge-default {
+              @apply border-transparent text-white bg-neutral-dark;
+            }
+          }
+        }
+      }
+    }
+    &.bg-darken {
       @apply bg-brand-dark;
+
+      .panel-header {
+        @apply text-white;
+
+        .title-med {
+          svg {
+            path {
+              @apply fill-white;
+            }
+          }
+        }
+      }
+      .splide {
+        &::before {
+          @apply bg-gradient-to-r from-brand-dark to-transparent;
+        }
+        &::after {
+          @apply bg-gradient-to-l from-brand-dark to-transparent;
+        }
+        .splide__track {
+          &::after,
+          &::before {
+            @apply bg-brand-dark;
+          }
+        }
+
+        .splide__arrows {
+          .splide__arrow {
+            @apply bg-accent hover:bg-white;
+
+            svg {
+              path {
+                @apply fill-brand-dark;
+              }
+            }
+
+            &:hover {
+              svg {
+                path {
+                  @apply fill-accent;
+                }
+              }
+            }
+          }
+        }
+      }
+      .card {
+        &.card-stories {
+          .card-body {
+            .card-title {
+              @apply text-white;
+            }
+
+            .badge-default {
+              @apply border-transparent text-white bg-neutral-dark;
+            }
+          }
+        }
+      }
     }
     &:hover {
       z-index: 5000;
     }
     &.panel-full {
-      @apply pt-0 md:pt-7 pb-0 h-full;
+      @apply pt-0 pb-0 h-full z-[7000] md:z-10;
 
       .container {
-        @apply h-full;
+        @apply h-full relative;
         @media (max-width: 768px) {
           max-width: inherit;
           padding-left: 0;
           padding-right: 0;
         }
+
+        .panel-full--header {
+            @apply fixed top-0 left-0 right-0 z-[9000] flex justify-between bg-gradient-to-b from-black/75 to-transparent pb-5;
+
+          .btn-panel-full--back {
+            svg {
+              path {
+                @apply fill-white;
+              }
+            }
+          }
+
+          .navbar-brand {
+            @apply flex  items-center gap-2 pr-5;
+
+            img {
+              @apply max-h-3 w-auto;
+            }
+
+            span {
+              @apply text-accent text-sm border-l border-accent pl-2;
+            }
+          }
+        }
+
+        
       }
     }
     &.panel-user {
@@ -277,6 +437,18 @@
     &.bg-light {
       @apply bg-neutral-bg;
     }
+
+    &.bg-light--desktop {
+      @apply lg:bg-neutral-bg;
+    }
+  }
+
+  .chat-panel--overlay {
+    @apply absolute right-0 bottom-0 md:bottom-24 top-0 md:top-7 w-full md:w-1/4 bg-black/80 p-5 pt-14 md:pt-0 md:p-0 z-30;
+
+    .box-chat--stories {
+      @apply h-full;
+    }
   }
 
   .main-header {
@@ -287,19 +459,27 @@
 
       .navbar-brand {
         @apply flex items-center gap-2;
+
+        span {
+          @apply text-accent text-custom-xxl border-l border-accent pl-2;
+        }
       }
 
       .navbar-group {
-        @apply flex gap-10 items-center;
+        @apply flex gap-5 items-center;
 
         .mobile-menu--control {
           @apply hidden xl:block;
+
+          .navbar-nav {
+            @apply gap-7;
+          }
         }
       }
     }
 
     &.main-header--dark {
-      @apply bg-brand-dark text-white border-none;
+      @apply bg-brand text-white border-none;
 
       .mobile-button {
         svg {
@@ -311,17 +491,68 @@
 
       .navbar {
         .navbar-group {
-          .navbar-nav {
-            .navbar-nav-item {
-              .navbar-nav--link {
-                @apply text-white hover:text-accent;
+          .mobile-menu--control {
+            .navbar-nav {
+              .navbar-nav-item {
+                .navbar-nav--link {
+                  @apply text-white hover:text-accent;
 
-                &.active {
-                  @apply text-accent;
+                  &.active {
+                    @apply text-accent;
+                  }
+                }
+
+                .btn-icon {
+                  svg {
+                    path {
+                      @apply fill-white;
+                    }
+                  }
+
+                  &:hover {
+                    svg {
+                      path {
+                        @apply fill-accent;
+                      }
+                    }
+                  }
+
+                  .not {
+                    @apply bg-success border-brand-dark;
+                  }
                 }
               }
+            }
+          }
 
-              .btn-icon {
+          .navbar-nav--right {
+            .navbar-nav-item {
+              & > div {
+                & > .btn-icon {
+                  @apply px-3 w-auto;
+
+                  svg {
+                    path {
+                      @apply fill-white;
+                    }
+                  }
+
+                  &:hover {
+                    svg {
+                      path {
+                        @apply fill-accent;
+                      }
+                    }
+                  }
+
+                  .not {
+                    @apply bg-success border-brand-dark;
+                  }
+                }
+              }
+              & > .btn-icon {
+                @apply px-3 w-auto;
+
                 svg {
                   path {
                     @apply fill-white;
@@ -348,7 +579,7 @@
   }
 
   .main-header--page {
-    @apply w-full pt-5 pb-0 xl:pb-5 xl:pt-7;
+    @apply w-full pt-5 pb-3 xl:pb-5 xl:pt-7;
 
     .form-block {
       @apply pb-0;
@@ -368,6 +599,17 @@
           @apply opacity-55;
         }
       }
+    }
+
+    .title-big {
+      @apply items-center mb-0;
+      svg {
+        @apply mx-0;
+      }
+    }
+
+    .lead {
+      @apply pt-2;
     }
   }
 

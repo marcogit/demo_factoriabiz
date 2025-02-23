@@ -2,6 +2,7 @@ import Alpine from "alpinejs";
 import focus from "@alpinejs/focus";
 import Splide from "@splidejs/splide";
 import flatpickr from "flatpickr";
+import collapse from "@alpinejs/collapse";
 
 window.Alpine = Alpine;
 window.Splide = Splide;
@@ -17,12 +18,18 @@ document.addEventListener("alpine:init", () => {
 
   Alpine.data("svgInliner", () => ({
     async init() {
-      console.log("Iniciando SVG Inliner");
-      const images = document.querySelectorAll('img[src$=".svg"]');
+      console.log("Esperando a que Alpine renderice los elementos...");
 
+      // Esperar a que x-for renderice
+      await this.$nextTick();
+
+      console.log("Iniciando SVG Inliner");
+
+      const images = document.querySelectorAll('img[src$=".svg"]');
       console.log("SVGs encontrados:", images.length);
+
       for (const img of images) {
-        if (img.src.startsWith("data:image/svg+xml")) continue; // Evitar imágenes inlineadas
+        if (img.src.startsWith("data:image/svg+xml")) continue; // Evitar imágenes ya inlineadas
 
         try {
           const response = await fetch(img.src);
@@ -144,6 +151,33 @@ document.addEventListener("alpine:init", () => {
     },
   }));
 
+  Alpine.data("timeline", () => ({
+    tooltipIndex: null,
+    users: [
+      {
+        name: "Ana López",
+        company: "AutoMadrid S.L.",
+        points: 400,
+        avatar: "https://i.pravatar.cc/60?img=38",
+        highlight: false,
+      },
+      {
+        name: "Carlos Pérez",
+        company: "AutoBarna",
+        points: 225,
+        avatar: "https://i.pravatar.cc/60?img=11",
+        highlight: true,
+      },
+      {
+        name: "Laura García",
+        company: "Concesionarios Sur",
+        points: 130,
+        avatar: "https://i.pravatar.cc/60?img=21",
+        highlight: false,
+      },
+    ],
+  }));
+
   // Inicializar Splide
   Alpine.data("splideCarousel", () => ({
     init() {
@@ -166,4 +200,5 @@ document.addEventListener("alpine:init", () => {
 });
 
 Alpine.plugin(focus);
+Alpine.plugin(collapse);
 Alpine.start();

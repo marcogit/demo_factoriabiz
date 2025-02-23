@@ -133,12 +133,117 @@
             </div>
             <ul class="navbar-nav navbar-nav--right">
               <li class="navbar-nav-item navbar-nav-item--responsive">
-                <a href="#" class="btn btn-icon">
-                  <img
-                    src="./assets/images/icon-main-search.svg"
-                    alt="Search"
-                  />
-                </a>
+                <!-- Modal SEARCH -->
+                <div x-data="modalComponent">
+                  <button class="btn btn-icon" @click="openModal = true">
+                    <img
+                      src="./assets/images/icon-main-search.svg"
+                      alt="Search"
+                    />
+                  </button>
+                  <!-- Modal -->
+                  <div
+                    x-show="openModal"
+                    @keydown.escape.prevent.stop="closeModal()"
+                    role="dialog"
+                    aria-modal="true"
+                    x-id="['modal-title']"
+                    :aria-labelledby="$id('modal-title')"
+                    class="modal modal-form modal-accent modal-full"
+                  >
+                    <!-- Overlay -->
+                    <div
+                      x-show="openModal"
+                      x-transition.opacity
+                      class="modal-overlay"
+                    ></div>
+
+                    <!-- Panel -->
+                    <div
+                      x-show="openModal"
+                      x-transition
+                      @click="closeModal()"
+                      class="modal-panel"
+                    >
+                      <div
+                        @click.stop
+                        x-trap.noscroll.inert="openModal"
+                        class="modal-panel--box"
+                      >
+                        <div class="modal-header">
+                          <!-- Close Button -->
+                          <button
+                            @click="closeModal()"
+                            class="btn btn-icon btn-square"
+                          >
+                            <img
+                              src="./assets/images/icon-close.svg"
+                              alt="Close"
+                            />
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div
+                            class="form-row grid grid-cols-1 lg:grid-cols-[auto_1fr]"
+                          >
+                            <div
+                              class="column"
+                              x-data="dropdown('Itinerarios Formativos', ['Docs', 'Imágenes', 'Videos'])"
+                            >
+                              <div class="dropdown dropdown-accent">
+                                <button
+                                  @click="open = !open"
+                                  class="formcontrol formcontrol-select"
+                                >
+                                  <span x-text="selected"></span>
+                                  <img
+                                    class="formcontrol-icon"
+                                    src="./assets/images/icon-dropdown.svg"
+                                    alt="Arrow"
+                                  />
+                                </button>
+                                <ul
+                                  x-show="open"
+                                  @click.away="open = false"
+                                  class="formcontrol-show formcontrol-show--accent"
+                                >
+                                  <template
+                                    x-for="option in options"
+                                    :key="option"
+                                  >
+                                    <li
+                                      @click="selected = option; open = false"
+                                      x-text="option"
+                                    ></li>
+                                  </template>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="column">
+                              <div
+                                class="form-group formcontrol-group--transparent"
+                              >
+                                <input
+                                  type="text"
+                                  placeholder="Realiza tu búsqueda..."
+                                  class="formcontrol formcontrol-big"
+                                />
+                                <button class="btn btn-accent btn-icon">
+                                  <img
+                                    src="./assets/images/icon-main-search.svg"
+                                    alt="Search"
+                                  />
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- END Modal -->
+                </div>
+                <!-- END Modal SEARCH -->
               </li>
               <li class="navbar-nav-item navbar-nav-item--responsive">
                 <a href="#" class="btn btn-icon">
@@ -446,7 +551,7 @@
                       </div>
                       <!-- Botón Buscar -->
                       <div class="column">
-                        <button type="submit" class="btn btn-accent">
+                        <button type="submit" class="btn btn-accent btn-full">
                           Buscar
                         </button>
                       </div>
@@ -472,7 +577,7 @@
                 Aulas
               </h2>
             </header>
-            <!-- BODY-->
+            <!-- BODY Desktop-->
             <div class="panel-body">
               <!-- FILTRO -->
               <div class="panel-body--filter">
@@ -610,8 +715,9 @@
                 </div>
                 <!-- END DESPLEGABLE -->
               </div>
+              <!-- CARDS DESKTOP -->
               <div
-                class="grid grid-cards grid-cols-1 md:grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr_1fr] xl:grid-cols-[1fr_1fr_1fr_1fr]"
+                class="hidden lg:grid grid-cards grid-cols-1 md:grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr_1fr] xl:grid-cols-[1fr_1fr_1fr_1fr]"
               >
                 <div class="column">
                   <!-- Card -->
@@ -1005,6 +1111,447 @@
                   </div>
                 </div>
               </div>
+              <!-- CARDS MOBILE-->
+              <div
+                class="lg:hidden"
+                x-data="{
+        init() {
+            new Splide(this.$refs.splide, {
+                perPage: 4,
+                pagination: false,
+                autoWidth: true,
+                breakpoints: {
+                  975: {
+                    perPage: 3,
+                  }, 
+                  767: {
+                    perPage: 2,
+                  },  
+                500: {
+                        perPage: 1,
+                    },
+                },
+            }).mount()
+        },
+    }"
+              >
+                <div
+                  x-ref="splide"
+                  class="splide splide-absolute"
+                  aria-label="Splide/Alpine.js Carousel Example"
+                >
+                  <div class="splide__track">
+                    <ul class="splide__list">
+                      <li class="splide__slide">
+                        <!-- Card -->
+                        <div class="card card-item">
+                          <!-- Card HEADER-->
+                          <div class="card-header">
+                            <div class="card-header--top">
+                              <span class="badge badge-dark">Obligatorio </span>
+
+                              <button
+                                x-data="{ isActive: false }"
+                                :class="{ 'active': isActive }"
+                                x-on:click="isActive = !isActive"
+                                type="button"
+                                id="save-control"
+                                class="btn btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-save--white.svg"
+                                  alt="Save item"
+                                />
+                              </button>
+                            </div>
+                            <button
+                              type="button"
+                              class="btn btn-accent btn-location"
+                            >
+                              Acceder
+                            </button>
+                            <div class="card-header--bottom">
+                              <div class="progress progress-green">
+                                <div
+                                  class="progress-bar"
+                                  style="width: 50%"
+                                ></div>
+                              </div>
+                            </div>
+                            <img
+                              src="./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg"
+                              alt="Imagen de actividad"
+                              class="card-img-thumb"
+                            />
+                          </div>
+                          <!-- Card BODY-->
+                          <div class="card-body">
+                            <span class="badge badge-transparent"
+                              ><img
+                                src="./assets/images/icon-aulav.svg"
+                                alt="Aula Virtual"
+                              />
+                              Aula virtual</span
+                            >
+                            <h3 class="title-small">Gestión del cambio</h3>
+                            <p class="subtitle-small subtitle-small--accent">
+                              GRUPO SIETE NOVENTA
+                            </p>
+                            <div class="card-body--display">
+                              <div class="card-body--display---box">
+                                <p>
+                                  Bienvenidos al sistema de gestión de
+                                  aprendizaje. Te recordamos que debes cumplir
+                                  con las normas del curso y estar atento a los
+                                  plazos de entrega, ya que no se aceptarán
+                                  tareas después de la fecha límite.
+                                </p>
+                                <div
+                                  class="card-body--display---buttons"
+                                  role="group"
+                                >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    ><img
+                                      src="./assets/images/icon-diploma.svg"
+                                      alt="Descarga tu diploma"
+                                    />Descarga tu diploma</a
+                                  >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    ><img
+                                      src="./assets/images/icon-form.svg"
+                                      alt="Encuesta de satisfacción"
+                                    />Encuesta de satisfacción</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="splide__slide">
+                        <!-- Card -->
+                        <div class="card card-item disabled">
+                          <!-- Card HEADER-->
+                          <div class="card-header">
+                            <div class="card-header--top">
+                              <span class="badge badge-dark">Obligatorio </span>
+
+                              <button
+                                x-data="{ isActive: false }"
+                                :class="{ 'active': isActive }"
+                                x-on:click="isActive = !isActive"
+                                type="button"
+                                id="save-control"
+                                class="btn btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-save--white.svg"
+                                  alt="Save item"
+                                />
+                              </button>
+                            </div>
+                            <button
+                              type="button"
+                              class="btn btn-accent btn-location"
+                            >
+                              Acceder
+                            </button>
+                            <div class="card-header--bottom">
+                              <div class="progress progress-green">
+                                <div
+                                  class="progress-bar"
+                                  style="width: 50%"
+                                ></div>
+                              </div>
+                            </div>
+                            <img
+                              src="./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg"
+                              alt="Imagen de actividad"
+                              class="card-img-thumb"
+                            />
+                          </div>
+                          <!-- Card BODY-->
+                          <div class="card-body">
+                            <span class="badge badge-transparent"
+                              ><img
+                                src="./assets/images/icon-aulao.svg"
+                                alt="Aula Online"
+                              />
+                              Aula online</span
+                            >
+                            <h3 class="title-small">Gestión del cambio</h3>
+                            <p class="subtitle-small subtitle-small--accent">
+                              GRUPO SIETE NOVENTA
+                            </p>
+                            <div class="card-body--display">
+                              <div class="card-body--display---box">
+                                <p>
+                                  Bienvenidos al sistema de gestión de
+                                  aprendizaje. Te recordamos que debes cumplir
+                                  con las normas del curso y estar atento a los
+                                  plazos de entrega, ya que no se aceptarán
+                                  tareas después de la fecha límite.
+                                </p>
+                                <div
+                                  class="card-body--display---buttons"
+                                  role="group"
+                                >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="splide__slide">
+                        <!-- Card -->
+                        <div class="card card-item">
+                          <!-- Card HEADER-->
+                          <div class="card-header">
+                            <div class="card-header--top">
+                              <span class="badge badge-dark">Obligatorio </span>
+
+                              <button
+                                x-data="{ isActive: false }"
+                                :class="{ 'active': isActive }"
+                                x-on:click="isActive = !isActive"
+                                type="button"
+                                id="save-control"
+                                class="btn btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-save--white.svg"
+                                  alt="Save item"
+                                />
+                              </button>
+                            </div>
+                            <button
+                              type="button"
+                              class="btn btn-accent btn-location"
+                            >
+                              Acceder
+                            </button>
+                            <div class="card-header--bottom">
+                              <div class="progress progress-green">
+                                <div
+                                  class="progress-bar"
+                                  style="width: 50%"
+                                ></div>
+                              </div>
+                            </div>
+                            <img
+                              src="./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg"
+                              alt="Imagen de actividad"
+                              class="card-img-thumb"
+                            />
+                          </div>
+                          <!-- Card BODY-->
+                          <div class="card-body">
+                            <span class="badge badge-transparent"
+                              ><img
+                                src="./assets/images/icon-evaulacion.svg"
+                                alt="Evaulación"
+                              />
+                              Evaulación</span
+                            >
+                            <h3 class="title-small">Gestión del cambio</h3>
+                            <p class="subtitle-small subtitle-small--accent">
+                              GRUPO SIETE NOVENTA
+                            </p>
+                            <div class="card-body--display">
+                              <div class="card-body--display---box">
+                                <p>
+                                  Bienvenidos al sistema de gestión de
+                                  aprendizaje. Te recordamos que debes cumplir
+                                  con las normas del curso y estar atento a los
+                                  plazos de entrega, ya que no se aceptarán
+                                  tareas después de la fecha límite.
+                                </p>
+                                <div
+                                  class="card-body--display---buttons"
+                                  role="group"
+                                >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="splide__slide">
+                        <!-- Card -->
+                        <div class="card card-item">
+                          <!-- Card HEADER-->
+                          <div class="card-header">
+                            <div class="card-header--top">
+                              <span class="badge badge-dark">Obligatorio </span>
+
+                              <button
+                                x-data="{ isActive: false }"
+                                :class="{ 'active': isActive }"
+                                x-on:click="isActive = !isActive"
+                                type="button"
+                                id="save-control"
+                                class="btn btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-save--white.svg"
+                                  alt="Save item"
+                                />
+                              </button>
+                            </div>
+                            <button
+                              type="button"
+                              class="btn btn-accent btn-location"
+                            >
+                              Acceder
+                            </button>
+                            <div class="card-header--bottom">
+                              <div class="progress progress-green">
+                                <div
+                                  class="progress-bar"
+                                  style="width: 50%"
+                                ></div>
+                              </div>
+                            </div>
+                            <img
+                              src="./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg"
+                              alt="Imagen de actividad"
+                              class="card-img-thumb"
+                            />
+                          </div>
+                          <!-- Card BODY-->
+                          <div class="card-body">
+                            <span class="badge badge-transparent"
+                              ><img
+                                src="./assets/images/icon-evaulacion.svg"
+                                alt="Evaulación"
+                              />
+                              Evaulación</span
+                            >
+                            <h3 class="title-small">Gestión del cambio</h3>
+                            <p class="subtitle-small subtitle-small--accent">
+                              GRUPO SIETE NOVENTA
+                            </p>
+                            <div class="card-body--display">
+                              <div class="card-body--display---box">
+                                <p>
+                                  Bienvenidos al sistema de gestión de
+                                  aprendizaje. Te recordamos que debes cumplir
+                                  con las normas del curso y estar atento a los
+                                  plazos de entrega, ya que no se aceptarán
+                                  tareas después de la fecha límite.
+                                </p>
+                                <div
+                                  class="card-body--display---buttons"
+                                  role="group"
+                                >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="splide__slide">
+                        <!-- Card -->
+                        <div class="card card-item">
+                          <!-- Card HEADER-->
+                          <div class="card-header">
+                            <div class="card-header--top">
+                              <span class="badge badge-dark">Obligatorio </span>
+
+                              <button
+                                x-data="{ isActive: false }"
+                                :class="{ 'active': isActive }"
+                                x-on:click="isActive = !isActive"
+                                type="button"
+                                id="save-control"
+                                class="btn btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-save--white.svg"
+                                  alt="Save item"
+                                />
+                              </button>
+                            </div>
+                            <button
+                              type="button"
+                              class="btn btn-accent btn-location"
+                            >
+                              Acceder
+                            </button>
+                            <div class="card-header--bottom">
+                              <div class="progress progress-green">
+                                <div
+                                  class="progress-bar"
+                                  style="width: 50%"
+                                ></div>
+                              </div>
+                            </div>
+                            <img
+                              src="./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg"
+                              alt="Imagen de actividad"
+                              class="card-img-thumb"
+                            />
+                          </div>
+                          <!-- Card BODY-->
+                          <div class="card-body">
+                            <span class="badge badge-transparent"
+                              ><img
+                                src="./assets/images/icon-evaulacion.svg"
+                                alt="Evaulación"
+                              />
+                              Evaulación</span
+                            >
+                            <h3 class="title-small">Gestión del cambio</h3>
+                            <p class="subtitle-small subtitle-small--accent">
+                              GRUPO SIETE NOVENTA
+                            </p>
+                            <div class="card-body--display">
+                              <div class="card-body--display---box">
+                                <p>
+                                  Bienvenidos al sistema de gestión de
+                                  aprendizaje. Te recordamos que debes cumplir
+                                  con las normas del curso y estar atento a los
+                                  plazos de entrega, ya que no se aceptarán
+                                  tareas después de la fecha límite.
+                                </p>
+                                <div
+                                  class="card-body--display---buttons"
+                                  role="group"
+                                >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -1020,7 +1567,7 @@
                 Evaluaciones
               </h2>
             </header>
-            <!-- BODY-->
+            <!-- BODY -->
             <div class="panel-body">
               <div class="panel-body--filter">
                 <!-- DESPLEGABLE -->
@@ -1123,7 +1670,7 @@
                 <!-- END DESPLEGABLE -->
               </div>
               <div
-                class="grid grid-cards grid-cols-1 md:grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr_1fr] xl:grid-cols-[1fr_1fr_1fr_1fr]"
+                class="hidden lg:grid grid-cards grid-cols-1 md:grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr_1fr] xl:grid-cols-[1fr_1fr_1fr_1fr]"
               >
                 <div class="column">
                   <!-- Card -->
@@ -1438,6 +1985,367 @@
                   </div>
                 </div>
               </div>
+              <!-- CARDS MOBILE-->
+              <div
+                class="lg:hidden"
+                x-data="{
+        init() {
+            new Splide(this.$refs.splide, {
+                perPage: 4,
+                pagination: false,
+                autoWidth: true,
+                breakpoints: {
+                  975: {
+                    perPage: 3,
+                  }, 
+                  767: {
+                    perPage: 2,
+                  },  
+                500: {
+                        perPage: 1,
+                    },
+                },
+            }).mount()
+        },
+    }"
+              >
+                <div
+                  x-ref="splide"
+                  class="splide splide-absolute"
+                  aria-label="Splide/Alpine.js Carousel Example"
+                >
+                  <div class="splide__track">
+                    <ul class="splide__list">
+                      <li class="splide__slide">
+                        <!-- Card -->
+                        <div class="card card-item">
+                          <!-- Card HEADER-->
+                          <div class="card-header">
+                            <div class="card-header--top">
+                              <span class="badge badge-dark">Obligatorio </span>
+
+                              <button
+                                x-data="{ isActive: false }"
+                                :class="{ 'active': isActive }"
+                                x-on:click="isActive = !isActive"
+                                type="button"
+                                id="save-control"
+                                class="btn btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-save--white.svg"
+                                  alt="Save item"
+                                />
+                              </button>
+                            </div>
+                            <button
+                              type="button"
+                              class="btn btn-accent btn-location"
+                            >
+                              Acceder
+                            </button>
+                            <div class="card-header--bottom">
+                              <div class="progress progress-green">
+                                <div
+                                  class="progress-bar"
+                                  style="width: 50%"
+                                ></div>
+                              </div>
+                            </div>
+                            <img
+                              src="./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg"
+                              alt="Imagen de actividad"
+                              class="card-img-thumb"
+                            />
+                          </div>
+                          <!-- Card BODY-->
+                          <div class="card-body">
+                            <span class="badge badge-transparent"
+                              ><img
+                                src="./assets/images/icon-aulav.svg"
+                                alt="Aula Virtual"
+                              />
+                              Aula virtual</span
+                            >
+                            <h3 class="title-small">Gestión del cambio</h3>
+                            <p class="subtitle-small subtitle-small--accent">
+                              GRUPO SIETE NOVENTA
+                            </p>
+                            <div class="card-body--display">
+                              <div class="card-body--display---box">
+                                <p>
+                                  Bienvenidos al sistema de gestión de
+                                  aprendizaje. Te recordamos que debes cumplir
+                                  con las normas del curso y estar atento a los
+                                  plazos de entrega, ya que no se aceptarán
+                                  tareas después de la fecha límite.
+                                </p>
+                                <div
+                                  class="card-body--display---buttons"
+                                  role="group"
+                                >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    ><img
+                                      src="./assets/images/icon-diploma.svg"
+                                      alt="Descarga tu diploma"
+                                    />Descarga tu diploma</a
+                                  >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    ><img
+                                      src="./assets/images/icon-form.svg"
+                                      alt="Encuesta de satisfacción"
+                                    />Encuesta de satisfacción</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="splide__slide">
+                        <!-- Card -->
+                        <div class="card card-item disabled">
+                          <!-- Card HEADER-->
+                          <div class="card-header">
+                            <div class="card-header--top">
+                              <span class="badge badge-dark">Obligatorio </span>
+
+                              <button
+                                x-data="{ isActive: false }"
+                                :class="{ 'active': isActive }"
+                                x-on:click="isActive = !isActive"
+                                type="button"
+                                id="save-control"
+                                class="btn btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-save--white.svg"
+                                  alt="Save item"
+                                />
+                              </button>
+                            </div>
+                            <button
+                              type="button"
+                              class="btn btn-accent btn-location"
+                            >
+                              Acceder
+                            </button>
+                            <div class="card-header--bottom">
+                              <div class="progress progress-green">
+                                <div
+                                  class="progress-bar"
+                                  style="width: 50%"
+                                ></div>
+                              </div>
+                            </div>
+                            <img
+                              src="./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg"
+                              alt="Imagen de actividad"
+                              class="card-img-thumb"
+                            />
+                          </div>
+                          <!-- Card BODY-->
+                          <div class="card-body">
+                            <span class="badge badge-transparent"
+                              ><img
+                                src="./assets/images/icon-aulao.svg"
+                                alt="Aula Online"
+                              />
+                              Aula online</span
+                            >
+                            <h3 class="title-small">Gestión del cambio</h3>
+                            <p class="subtitle-small subtitle-small--accent">
+                              GRUPO SIETE NOVENTA
+                            </p>
+                            <div class="card-body--display">
+                              <div class="card-body--display---box">
+                                <p>
+                                  Bienvenidos al sistema de gestión de
+                                  aprendizaje. Te recordamos que debes cumplir
+                                  con las normas del curso y estar atento a los
+                                  plazos de entrega, ya que no se aceptarán
+                                  tareas después de la fecha límite.
+                                </p>
+                                <div
+                                  class="card-body--display---buttons"
+                                  role="group"
+                                >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="splide__slide">
+                        <!-- Card -->
+                        <div class="card card-item">
+                          <!-- Card HEADER-->
+                          <div class="card-header">
+                            <div class="card-header--top">
+                              <span class="badge badge-dark">Obligatorio </span>
+
+                              <button
+                                x-data="{ isActive: false }"
+                                :class="{ 'active': isActive }"
+                                x-on:click="isActive = !isActive"
+                                type="button"
+                                id="save-control"
+                                class="btn btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-save--white.svg"
+                                  alt="Save item"
+                                />
+                              </button>
+                            </div>
+                            <button
+                              type="button"
+                              class="btn btn-accent btn-location"
+                            >
+                              Acceder
+                            </button>
+                            <div class="card-header--bottom">
+                              <div class="progress progress-green">
+                                <div
+                                  class="progress-bar"
+                                  style="width: 50%"
+                                ></div>
+                              </div>
+                            </div>
+                            <img
+                              src="./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg"
+                              alt="Imagen de actividad"
+                              class="card-img-thumb"
+                            />
+                          </div>
+                          <!-- Card BODY-->
+                          <div class="card-body">
+                            <span class="badge badge-transparent"
+                              ><img
+                                src="./assets/images/icon-evaulacion.svg"
+                                alt="Evaulación"
+                              />
+                              Evaulación</span
+                            >
+                            <h3 class="title-small">Gestión del cambio</h3>
+                            <p class="subtitle-small subtitle-small--accent">
+                              GRUPO SIETE NOVENTA
+                            </p>
+                            <div class="card-body--display">
+                              <div class="card-body--display---box">
+                                <p>
+                                  Bienvenidos al sistema de gestión de
+                                  aprendizaje. Te recordamos que debes cumplir
+                                  con las normas del curso y estar atento a los
+                                  plazos de entrega, ya que no se aceptarán
+                                  tareas después de la fecha límite.
+                                </p>
+                                <div
+                                  class="card-body--display---buttons"
+                                  role="group"
+                                >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="splide__slide">
+                        <!-- Card -->
+                        <div class="card card-item">
+                          <!-- Card HEADER-->
+                          <div class="card-header">
+                            <div class="card-header--top">
+                              <span class="badge badge-dark">Obligatorio </span>
+
+                              <button
+                                x-data="{ isActive: false }"
+                                :class="{ 'active': isActive }"
+                                x-on:click="isActive = !isActive"
+                                type="button"
+                                id="save-control"
+                                class="btn btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-save--white.svg"
+                                  alt="Save item"
+                                />
+                              </button>
+                            </div>
+                            <button
+                              type="button"
+                              class="btn btn-accent btn-location"
+                            >
+                              Acceder
+                            </button>
+                            <div class="card-header--bottom">
+                              <div class="progress progress-green">
+                                <div
+                                  class="progress-bar"
+                                  style="width: 50%"
+                                ></div>
+                              </div>
+                            </div>
+                            <img
+                              src="./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg"
+                              alt="Imagen de actividad"
+                              class="card-img-thumb"
+                            />
+                          </div>
+                          <!-- Card BODY-->
+                          <div class="card-body">
+                            <span class="badge badge-transparent"
+                              ><img
+                                src="./assets/images/icon-evaulacion.svg"
+                                alt="Evaulación"
+                              />
+                              Evaulación</span
+                            >
+                            <h3 class="title-small">Gestión del cambio</h3>
+                            <p class="subtitle-small subtitle-small--accent">
+                              GRUPO SIETE NOVENTA
+                            </p>
+                            <div class="card-body--display">
+                              <div class="card-body--display---box">
+                                <p>
+                                  Bienvenidos al sistema de gestión de
+                                  aprendizaje. Te recordamos que debes cumplir
+                                  con las normas del curso y estar atento a los
+                                  plazos de entrega, ya que no se aceptarán
+                                  tareas después de la fecha límite.
+                                </p>
+                                <div
+                                  class="card-body--display---buttons"
+                                  role="group"
+                                >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -1453,7 +2361,7 @@
                 Encuestas
               </h2>
             </header>
-            <!-- BODY-->
+            <!-- BODY -->
             <div class="panel-body">
               <div class="panel-body--filter">
                 <!-- DESPLEGABLE -->
@@ -1520,8 +2428,9 @@
                 </div>
                 <!-- END DESPLEGABLE -->
               </div>
+              <!-- CARDS DESKTOP -->
               <div
-                class="grid grid-cards grid-cols-1 md:grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr_1fr] xl:grid-cols-[1fr_1fr_1fr_1fr]"
+                class="hidden lg:grid grid-cards grid-cols-1 md:grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr_1fr] xl:grid-cols-[1fr_1fr_1fr_1fr]"
               >
                 <div class="column">
                   <!-- Card -->
@@ -1682,6 +2591,207 @@
                   </div>
                 </div>
               </div>
+              <!-- CARDS MOBILE-->
+              <div
+                class="lg:hidden"
+                x-data="{
+        init() {
+            new Splide(this.$refs.splide, {
+                perPage: 4,
+                pagination: false,
+                autoWidth: true,
+                breakpoints: {
+                  975: {
+                    perPage: 3,
+                  }, 
+                  767: {
+                    perPage: 2,
+                  },  
+                500: {
+                        perPage: 1,
+                    },
+                },
+            }).mount()
+        },
+    }"
+              >
+                <div
+                  x-ref="splide"
+                  class="splide splide-absolute"
+                  aria-label="Splide/Alpine.js Carousel Example"
+                >
+                  <div class="splide__track">
+                    <ul class="splide__list">
+                      <li class="splide__slide">
+                        <!-- Card -->
+                        <div class="card card-item">
+                          <!-- Card HEADER-->
+                          <div class="card-header">
+                            <div class="card-header--top">
+                              <span class="badge badge-dark">Obligatorio </span>
+
+                              <button
+                                x-data="{ isActive: false }"
+                                :class="{ 'active': isActive }"
+                                x-on:click="isActive = !isActive"
+                                type="button"
+                                id="save-control"
+                                class="btn btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-save--white.svg"
+                                  alt="Save item"
+                                />
+                              </button>
+                            </div>
+                            <button
+                              type="button"
+                              class="btn btn-accent btn-location"
+                            >
+                              Acceder
+                            </button>
+                            <div class="card-header--bottom">
+                              <div class="progress progress-green">
+                                <div
+                                  class="progress-bar"
+                                  style="width: 50%"
+                                ></div>
+                              </div>
+                            </div>
+                            <img
+                              src="./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg"
+                              alt="Imagen de actividad"
+                              class="card-img-thumb"
+                            />
+                          </div>
+                          <!-- Card BODY-->
+                          <div class="card-body">
+                            <span class="badge badge-transparent"
+                              ><img
+                                src="./assets/images/icon-aulav.svg"
+                                alt="Aula Virtual"
+                              />
+                              Aula virtual</span
+                            >
+                            <h3 class="title-small">Gestión del cambio</h3>
+                            <p class="subtitle-small subtitle-small--accent">
+                              GRUPO SIETE NOVENTA
+                            </p>
+                            <div class="card-body--display">
+                              <div class="card-body--display---box">
+                                <p>
+                                  Bienvenidos al sistema de gestión de
+                                  aprendizaje. Te recordamos que debes cumplir
+                                  con las normas del curso y estar atento a los
+                                  plazos de entrega, ya que no se aceptarán
+                                  tareas después de la fecha límite.
+                                </p>
+                                <div
+                                  class="card-body--display---buttons"
+                                  role="group"
+                                >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    ><img
+                                      src="./assets/images/icon-diploma.svg"
+                                      alt="Descarga tu diploma"
+                                    />Descarga tu diploma</a
+                                  >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    ><img
+                                      src="./assets/images/icon-form.svg"
+                                      alt="Encuesta de satisfacción"
+                                    />Encuesta de satisfacción</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="splide__slide">
+                        <!-- Card -->
+                        <div class="card card-item disabled">
+                          <!-- Card HEADER-->
+                          <div class="card-header">
+                            <div class="card-header--top">
+                              <span class="badge badge-dark">Obligatorio </span>
+
+                              <button
+                                x-data="{ isActive: false }"
+                                :class="{ 'active': isActive }"
+                                x-on:click="isActive = !isActive"
+                                type="button"
+                                id="save-control"
+                                class="btn btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-save--white.svg"
+                                  alt="Save item"
+                                />
+                              </button>
+                            </div>
+                            <button
+                              type="button"
+                              class="btn btn-accent btn-location"
+                            >
+                              Acceder
+                            </button>
+                            <div class="card-header--bottom">
+                              <div class="progress progress-green">
+                                <div
+                                  class="progress-bar"
+                                  style="width: 50%"
+                                ></div>
+                              </div>
+                            </div>
+                            <img
+                              src="./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg"
+                              alt="Imagen de actividad"
+                              class="card-img-thumb"
+                            />
+                          </div>
+                          <!-- Card BODY-->
+                          <div class="card-body">
+                            <span class="badge badge-transparent"
+                              ><img
+                                src="./assets/images/icon-aulao.svg"
+                                alt="Aula Online"
+                              />
+                              Aula online</span
+                            >
+                            <h3 class="title-small">Gestión del cambio</h3>
+                            <p class="subtitle-small subtitle-small--accent">
+                              GRUPO SIETE NOVENTA
+                            </p>
+                            <div class="card-body--display">
+                              <div class="card-body--display---box">
+                                <p>
+                                  Bienvenidos al sistema de gestión de
+                                  aprendizaje. Te recordamos que debes cumplir
+                                  con las normas del curso y estar atento a los
+                                  plazos de entrega, ya que no se aceptarán
+                                  tareas después de la fecha límite.
+                                </p>
+                                <div
+                                  class="card-body--display---buttons"
+                                  role="group"
+                                >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -1722,18 +2832,22 @@
         class="box box-white btn-menu-auxiliar--panel"
       >
         <ul>
-          <li><a class="link" href="index.html">Inicio</a></li>
-          <li><a class="link" href="documentos.html">Documentos</a></li>
-          <li><a class="link" href="actividades.html">Actividades</a></li>
-          <li><a class="link" href="noticias.html">Noticias</a></li>
+          <li><a class="link" href="components.html">0. Componentes</a></li>
+          <li><a class="link" href="index.html">1. Inicio</a></li>
+          <li><a class="link" href="documentos.html">2. Documentos</a></li>
+          <li><a class="link" href="actividades.html">3. Actividades</a></li>
+          <li><a class="link" href="itinerarios.html">4. itinerarios</a></li>
+          <li><a class="link" href="noticias.html">5. Noticias</a></li>
           <li>
-            <a class="link" href="express-trainings.html">Express Trainings</a>
+            <a class="link" href="express-trainings.html"
+              >6. Express Trainings</a
+            >
           </li>
-          <li><a class="link" href="busqueda.html">Búsqueda</a></li>
-          <li><a class="link" href="chat.html">Chat</a></li>
-          <li><a class="link" href="user.html">Mi perfil</a></li>
-          <li><a class="link" href="ea.html">Expediente académico</a></li>
-          <li><a class="link" href="components.html">Componentes</a></li>
+          <li><a class="link" href="busqueda.html">7. Búsqueda</a></li>
+          <li><a class="link" href="chat.html">8. Chat</a></li>
+          <li><a class="link" href="user.html">9. Mi perfil</a></li>
+          <li><a class="link" href="ea.html">10. Expediente académico</a></li>
+          <li><a class="link" href="stories.html">11. Stories</a></li>
         </ul>
       </div>
     </div>

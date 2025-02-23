@@ -133,12 +133,117 @@
             </div>
             <ul class="navbar-nav navbar-nav--right">
               <li class="navbar-nav-item navbar-nav-item--responsive">
-                <a href="#" class="btn btn-icon">
-                  <img
-                    src="./assets/images/icon-main-search.svg"
-                    alt="Search"
-                  />
-                </a>
+                <!-- Modal SEARCH -->
+                <div x-data="modalComponent">
+                  <button class="btn btn-icon" @click="openModal = true">
+                    <img
+                      src="./assets/images/icon-main-search.svg"
+                      alt="Search"
+                    />
+                  </button>
+                  <!-- Modal -->
+                  <div
+                    x-show="openModal"
+                    @keydown.escape.prevent.stop="closeModal()"
+                    role="dialog"
+                    aria-modal="true"
+                    x-id="['modal-title']"
+                    :aria-labelledby="$id('modal-title')"
+                    class="modal modal-form modal-accent modal-full"
+                  >
+                    <!-- Overlay -->
+                    <div
+                      x-show="openModal"
+                      x-transition.opacity
+                      class="modal-overlay"
+                    ></div>
+
+                    <!-- Panel -->
+                    <div
+                      x-show="openModal"
+                      x-transition
+                      @click="closeModal()"
+                      class="modal-panel"
+                    >
+                      <div
+                        @click.stop
+                        x-trap.noscroll.inert="openModal"
+                        class="modal-panel--box"
+                      >
+                        <div class="modal-header">
+                          <!-- Close Button -->
+                          <button
+                            @click="closeModal()"
+                            class="btn btn-icon btn-square"
+                          >
+                            <img
+                              src="./assets/images/icon-close.svg"
+                              alt="Close"
+                            />
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div
+                            class="form-row grid grid-cols-1 lg:grid-cols-[auto_1fr]"
+                          >
+                            <div
+                              class="column"
+                              x-data="dropdown('Itinerarios Formativos', ['Docs', 'Imágenes', 'Videos'])"
+                            >
+                              <div class="dropdown dropdown-accent">
+                                <button
+                                  @click="open = !open"
+                                  class="formcontrol formcontrol-select"
+                                >
+                                  <span x-text="selected"></span>
+                                  <img
+                                    class="formcontrol-icon"
+                                    src="./assets/images/icon-dropdown.svg"
+                                    alt="Arrow"
+                                  />
+                                </button>
+                                <ul
+                                  x-show="open"
+                                  @click.away="open = false"
+                                  class="formcontrol-show formcontrol-show--accent"
+                                >
+                                  <template
+                                    x-for="option in options"
+                                    :key="option"
+                                  >
+                                    <li
+                                      @click="selected = option; open = false"
+                                      x-text="option"
+                                    ></li>
+                                  </template>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="column">
+                              <div
+                                class="form-group formcontrol-group--transparent"
+                              >
+                                <input
+                                  type="text"
+                                  placeholder="Realiza tu búsqueda..."
+                                  class="formcontrol formcontrol-big"
+                                />
+                                <button class="btn btn-accent btn-icon">
+                                  <img
+                                    src="./assets/images/icon-main-search.svg"
+                                    alt="Search"
+                                  />
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- END Modal -->
+                </div>
+                <!-- END Modal SEARCH -->
               </li>
               <li class="navbar-nav-item navbar-nav-item--responsive">
                 <a href="#" class="btn btn-icon">
@@ -351,7 +456,7 @@
     </header>
     <!-- END MAIN HEADER -->
     <div class="scroll-fix scroll-fix--full">
-      <main class="bg-light">
+      <main class="bg-light--desktop">
         <!-- PAGE HEADER -->
         <header class="main-header--page">
           <div class="container">
@@ -419,10 +524,7 @@
                       type="button"
                       class="btn btn-icon btn-icon--compact"
                     >
-                      <img
-                        src="./assets/images/icon-menu-08-student.svg"
-                        alt="Mi Perfil"
-                      />
+                      <img src="./assets/images/icon-ea.svg" alt="Mi Perfil" />
 
                       <!-- Heroicon: micro chevron-down -->
                       <svg
@@ -1021,18 +1123,22 @@
         class="box box-white btn-menu-auxiliar--panel"
       >
         <ul>
-          <li><a class="link" href="index.html">Inicio</a></li>
-          <li><a class="link" href="documentos.html">Documentos</a></li>
-          <li><a class="link" href="actividades.html">Actividades</a></li>
-          <li><a class="link" href="noticias.html">Noticias</a></li>
+          <li><a class="link" href="components.html">0. Componentes</a></li>
+          <li><a class="link" href="index.html">1. Inicio</a></li>
+          <li><a class="link" href="documentos.html">2. Documentos</a></li>
+          <li><a class="link" href="actividades.html">3. Actividades</a></li>
+          <li><a class="link" href="itinerarios.html">4. itinerarios</a></li>
+          <li><a class="link" href="noticias.html">5. Noticias</a></li>
           <li>
-            <a class="link" href="express-trainings.html">Express Trainings</a>
+            <a class="link" href="express-trainings.html"
+              >6. Express Trainings</a
+            >
           </li>
-          <li><a class="link" href="busqueda.html">Búsqueda</a></li>
-          <li><a class="link" href="chat.html">Chat</a></li>
-          <li><a class="link" href="user.html">Mi perfil</a></li>
-          <li><a class="link" href="ea.html">Expediente académico</a></li>
-          <li><a class="link" href="components.html">Componentes</a></li>
+          <li><a class="link" href="busqueda.html">7. Búsqueda</a></li>
+          <li><a class="link" href="chat.html">8. Chat</a></li>
+          <li><a class="link" href="user.html">9. Mi perfil</a></li>
+          <li><a class="link" href="ea.html">10. Expediente académico</a></li>
+          <li><a class="link" href="stories.html">11. Stories</a></li>
         </ul>
       </div>
     </div>

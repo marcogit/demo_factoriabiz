@@ -55,7 +55,7 @@ module.exports = {
         'sm': '0.875rem', //14px Small
         'base': '1rem', //16px Base
         'lg': '1.125rem', //18px Large
-        'custom-xl': '1.286rem', //19px Custom XL
+        'custom-xl': '1.188rem', //19px Custom XL
         'custom-xxl': '1.25rem', //20px Custom XXL
         'xl': '1.714rem', //24px Heading 04
         '2xl': '2.286rem', //32px Heading 03

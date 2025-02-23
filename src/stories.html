@@ -108,37 +108,127 @@
               alt="Factoriabiz"
               class="navbar-brand--logo"
             />
+            <span>Express Trainings</span>
           </a>
           <div class="navbar-group">
-            <div class="mobile-menu--control" id="mobile-menu">
-              <ul class="navbar-nav">
-                <li class="navbar-nav-item">
-                  <a href="#" class="navbar-nav--link">Inicio</a>
-                </li>
-                <li class="navbar-nav-item">
-                  <a href="#" class="navbar-nav--link"
-                    >Itinerarios formativos</a
-                  >
-                </li>
-                <li class="navbar-nav-item">
-                  <a href="#" class="navbar-nav--link active">Actividades</a>
-                </li>
-                <li class="navbar-nav-item">
-                  <a href="#" class="navbar-nav--link">Express training</a>
-                </li>
-                <li class="navbar-nav-item">
-                  <a href="#" class="navbar-nav--link">Documentos</a>
-                </li>
-              </ul>
-            </div>
             <ul class="navbar-nav navbar-nav--right">
               <li class="navbar-nav-item navbar-nav-item--responsive">
                 <a href="#" class="btn btn-icon">
-                  <img
-                    src="./assets/images/icon-main-search.svg"
-                    alt="Search"
-                  />
+                  <img src="./assets/images/icon-home.svg" alt="Save" />
                 </a>
+              </li>
+              <li class="navbar-nav-item navbar-nav-item--responsive">
+                <!-- Modal SEARCH -->
+                <div x-data="modalComponent">
+                  <button class="btn btn-icon" @click="openModal = true">
+                    <img
+                      src="./assets/images/icon-main-search.svg"
+                      alt="Search"
+                    />
+                  </button>
+                  <!-- Modal -->
+                  <div
+                    x-show="openModal"
+                    @keydown.escape.prevent.stop="closeModal()"
+                    role="dialog"
+                    aria-modal="true"
+                    x-id="['modal-title']"
+                    :aria-labelledby="$id('modal-title')"
+                    class="modal modal-form modal-accent modal-full"
+                  >
+                    <!-- Overlay -->
+                    <div
+                      x-show="openModal"
+                      x-transition.opacity
+                      class="modal-overlay"
+                    ></div>
+
+                    <!-- Panel -->
+                    <div
+                      x-show="openModal"
+                      x-transition
+                      @click="closeModal()"
+                      class="modal-panel"
+                    >
+                      <div
+                        @click.stop
+                        x-trap.noscroll.inert="openModal"
+                        class="modal-panel--box"
+                      >
+                        <div class="modal-header">
+                          <!-- Close Button -->
+                          <button
+                            @click="closeModal()"
+                            class="btn btn-icon btn-square"
+                          >
+                            <img
+                              src="./assets/images/icon-close.svg"
+                              alt="Close"
+                            />
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div
+                            class="form-row grid grid-cols-1 lg:grid-cols-[auto_1fr]"
+                          >
+                            <div
+                              class="column"
+                              x-data="dropdown('Itinerarios Formativos', ['Docs', 'Imágenes', 'Videos'])"
+                            >
+                              <div class="dropdown dropdown-accent">
+                                <button
+                                  @click="open = !open"
+                                  class="formcontrol formcontrol-select"
+                                >
+                                  <span x-text="selected"></span>
+                                  <img
+                                    class="formcontrol-icon"
+                                    src="./assets/images/icon-dropdown.svg"
+                                    alt="Arrow"
+                                  />
+                                </button>
+                                <ul
+                                  x-show="open"
+                                  @click.away="open = false"
+                                  class="formcontrol-show formcontrol-show--accent"
+                                >
+                                  <template
+                                    x-for="option in options"
+                                    :key="option"
+                                  >
+                                    <li
+                                      @click="selected = option; open = false"
+                                      x-text="option"
+                                    ></li>
+                                  </template>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="column">
+                              <div
+                                class="form-group formcontrol-group--transparent"
+                              >
+                                <input
+                                  type="text"
+                                  placeholder="Realiza tu búsqueda..."
+                                  class="formcontrol formcontrol-big"
+                                />
+                                <button class="btn btn-accent btn-icon">
+                                  <img
+                                    src="./assets/images/icon-main-search.svg"
+                                    alt="Search"
+                                  />
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- END Modal -->
+                </div>
+                <!-- END Modal SEARCH -->
               </li>
               <li class="navbar-nav-item navbar-nav-item--responsive">
                 <a href="#" class="btn btn-icon">
@@ -353,49 +443,224 @@
     <div class="scroll-fix scroll-fix--full">
       <main>
         <!-- Grid Chat -->
-        <section class="panel panel-full bg-dark">
+        <section class="panel panel-full bg-darken">
           <div class="container">
-            <div class="scroll-full-vertical">
-              <div class="scroll-full-vertical--item">
-                <!-- Card -->
-                <div class="card card-stories card-stories--big">
-                  <!-- Card HEADER-->
-                  <div class="card-header">
-                    <div class="card-header--top">
-                      <button
-                        x-data="{ isActive: false }"
-                        :class="{ 'active': isActive }"
-                        x-on:click="isActive = !isActive"
-                        type="button"
-                        id="save-control"
-                        class="btn btn-transparent"
+            <div class="panel-full--header">
+              <button
+                type="button"
+                class="btn btn-icon btn-transparent btn-panel-full--back"
+              >
+                <img src="./assets/images/icon-back.svg" alt="back" />
+              </button>
+              <a href="#" class="navbar-brand">
+                <img
+                  src="./assets/images/brand-images/brand-logo.png"
+                  alt="Factoriabiz"
+                  class="navbar-brand--logo"
+                />
+                <span>Express Trainings</span>
+              </a>
+            </div>
+            <div
+              id="stories-slider"
+              class="splide splide-full"
+              aria-label="Stories Slider"
+              x-data="{
+              stories: [
+                { title: 'Gestión del cambio', likes: 76, comments: 5, badges: ['eléctricos', 'híbridos', 'consumo'] },
+                { title: 'Gestión del cambio', likes: 76, comments: 5, badges: ['eléctricos', 'híbridos', 'consumo'] },
+                { title: 'Gestión del cambio', likes: 76, comments: 5, badges: ['eléctricos', 'híbridos', 'consumo'] },
+              ]
+            }"
+            >
+              <div class="splide__track">
+                <ul class="splide__list">
+                  <template x-for="(story, index) in stories" :key="index">
+                    <li class="splide__slide" x-data="{ showComments: false }">
+                      <!-- Card -->
+                      <div class="card card-stories card-stories--big">
+                        <!-- Card HEADER-->
+                        <div class="card-header">
+                          <div class="card-header--top">
+                            <ul class="card-header--controls">
+                              <li>
+                                <button
+                                  type="button"
+                                  class="btn btn-icon btn-dark is--accent"
+                                >
+                                  <img
+                                    src="./assets/images/icon-like.svg"
+                                    alt="Like item"
+                                  />
+                                </button>
+                                <small x-text="story.likes"></small>
+                              </li>
+                              <li>
+                                <button
+                                  type="button"
+                                  class="btn btn-icon btn-dark is--accent"
+                                  id="btn-control-comment-panel"
+                                  @click="showComments = !showComments"
+                                >
+                                  <img
+                                    src="./assets/images/icon-message.svg"
+                                    alt="Comment item"
+                                  />
+                                </button>
+                                <small x-text="story.comments"></small>
+                              </li>
+                              <li>
+                                <button
+                                  x-data="{ isActive: false }"
+                                  :class="{ 'active': isActive }"
+                                  x-on:click="isActive = !isActive"
+                                  type="button"
+                                  id="save-control"
+                                  class="btn btn-icon btn-dark"
+                                >
+                                  <img
+                                    src="./assets/images/icon-save--white.svg"
+                                    alt="Save item"
+                                  />
+                                </button>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="card-header--media">
+                            <video
+                              src="./assets/videos/demo-video.mp4"
+                              class="card-header--img"
+                              autoplay
+                              loop
+                              muted
+                            ></video>
+                          </div>
+                        </div>
+                        <!-- Card BODY-->
+                        <div class="card-body">
+                          <h3
+                            class="card-title title-base"
+                            x-text="story.title"
+                          ></h3>
+                          <ul class="inline-list inline-list--small">
+                            <template
+                              x-for="badge in story.badges"
+                              :key="badge"
+                            >
+                              <li>
+                                <span
+                                  class="badge badge-dark"
+                                  x-text="badge"
+                                ></span>
+                              </li>
+                            </template>
+                          </ul>
+                        </div>
+                      </div>
+                      <!-- CHAT-->
+                      <div
+                        class="chat-panel--overlay"
+                        x-show="showComments"
+                        x-transition:enter="transition ease-out duration-300"
+                        x-transition:enter-start="opacity-0 transform translate-x-10"
+                        x-transition:enter-end="opacity-100 transform translate-x-0"
+                        x-transition:leave="transition ease-in duration-300"
+                        x-transition:leave-start="opacity-100 transform translate-x-0"
+                        x-transition:leave-end="opacity-0 transform translate-x-10"
                       >
-                        <img
-                          src="./assets/images/icon-save--white.svg"
-                          alt="Save item"
-                        />
-                      </button>
-                    </div>
-                    <div class="card-header--media">
-                      <img
-                        src="./assets/images/cms-images/dummy_213x378_ffffff_cccccc.png"
-                        alt="Imagen de actividad"
-                        class="card-header--img"
-                      />
-                    </div>
-                  </div>
-                  <!-- Card BODY-->
-                  <div class="card-body">
-                    <h3 class="card-title title-base">
-                      Gestión del cambio
-                    </h3>
-                    <span class="badge badge-dark">eléctricos</span>
-                    <span class="badge badge-dark">híbridos</span>
-                    <span class="badge badge-dark">consumo</span>
-                  </div>
-                </div>
+                        <div
+                          class="box box-chat box-chat--stories"
+                          x-data="chatApp()"
+                        >
+                          <div class="box-header">
+                            <span class="title-small">Comentarios</span>
+                            <button
+                              class="btn btn-square btn-dark"
+                              @click="showComments = !showComments"
+                            >
+                              <img
+                                src="./assets/images/icon-close.svg"
+                                alt="Close"
+                              />
+                            </button>
+                          </div>
+                          <!-- Mensajes -->
+                          <div class="box-body" id="chat-messages">
+                            <div class="box-body--scroll">
+                              <!-- Renderizar mensajes con Alpine -->
+                              <template
+                                x-for="message in messages"
+                                :key="message.text"
+                              >
+                                <div
+                                  :class="message.sender === 'user' ? 'message-in message-in--me' : 'message-in message-in--you'"
+                                >
+                                  <template x-if="message.sender !== 'user'">
+                                    <div class="flex items-center gap-2">
+                                      <img
+                                        src="./assets/images/cms-images/avatar-34.jpg"
+                                        class="avatar"
+                                      />
+                                      <span
+                                        class="message-in--name"
+                                        x-text="message.senderName"
+                                      ></span>
+                                    </div>
+                                  </template>
+                                  <div
+                                    :class="message.sender === 'user' ? 'message message-me' : 'message message-you'"
+                                  >
+                                    <span x-text="message.text"></span>
+                                  </div>
+                                </div>
+                              </template>
+                            </div>
+                          </div>
+                          <!-- Input de mensajes -->
+                          <div class="box-chat--input">
+                            <div class="form-group form-group--dark">
+                              <input
+                                x-model="newMessage"
+                                type="text"
+                                placeholder="Escribe tu mensaje"
+                                class="formcontrol"
+                              />
+                              <button
+                                @click="sendMessage"
+                                class="btn btn-icon btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-send.svg"
+                                  alt="Send"
+                                />
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </template>
+                </ul>
               </div>
             </div>
+
+            <script>
+              document.addEventListener("DOMContentLoaded", function () {
+                new Splide("#stories-slider", {
+                  direction: "ttb",
+                  height: "77vh",
+                  wheel: true,
+                  wheelSleep: 1000, // Tiempo de espera entre desplazamientos
+                  pagination: false,
+                  arrows: false,
+                  breakpoints: {
+                    975: {
+                      height: "100vh",
+                    },
+                  },
+                }).mount();
+              });
+            </script>
           </div>
         </section>
       </main>
@@ -435,18 +700,22 @@
         class="box box-white btn-menu-auxiliar--panel"
       >
         <ul>
-          <li><a class="link" href="index.html">Inicio</a></li>
-          <li><a class="link" href="documentos.html">Documentos</a></li>
-          <li><a class="link" href="actividades.html">Actividades</a></li>
-          <li><a class="link" href="noticias.html">Noticias</a></li>
+          <li><a class="link" href="components.html">0. Componentes</a></li>
+          <li><a class="link" href="index.html">1. Inicio</a></li>
+          <li><a class="link" href="documentos.html">2. Documentos</a></li>
+          <li><a class="link" href="actividades.html">3. Actividades</a></li>
+          <li><a class="link" href="itinerarios.html">4. itinerarios</a></li>
+          <li><a class="link" href="noticias.html">5. Noticias</a></li>
           <li>
-            <a class="link" href="express-trainings.html">Express Trainings</a>
+            <a class="link" href="express-trainings.html"
+              >6. Express Trainings</a
+            >
           </li>
-          <li><a class="link" href="busqueda.html">Búsqueda</a></li>
-          <li><a class="link" href="chat.html">Chat</a></li>
-          <li><a class="link" href="user.html">Mi perfil</a></li>
-          <li><a class="link" href="ea.html">Expediente académico</a></li>
-          <li><a class="link" href="components.html">Componentes</a></li>
+          <li><a class="link" href="busqueda.html">7. Búsqueda</a></li>
+          <li><a class="link" href="chat.html">8. Chat</a></li>
+          <li><a class="link" href="user.html">9. Mi perfil</a></li>
+          <li><a class="link" href="ea.html">10. Expediente académico</a></li>
+          <li><a class="link" href="stories.html">11. Stories</a></li>
         </ul>
       </div>
     </div>
