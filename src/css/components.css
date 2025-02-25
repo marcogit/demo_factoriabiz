@@ -303,6 +303,14 @@
     }
   }
 
+  .aspect-img--superaula {
+    @apply flex justify-center items-center;
+
+    img {
+      @apply max-w-full;
+    }
+  }
+
   .user-info {
     @apply flex gap-5 items-center justify-start;
 
@@ -1274,7 +1282,7 @@
 
     &.btn-brand--line {
       @apply bg-transparent border border-brand-bg text-brand-lighter hover:bg-brand hover:text-white;
-    
+
       &.no-hover {
         @apply bg-transparent border border-brand-bg text-brand-lighter;
       }
@@ -1517,7 +1525,7 @@
     }
 
     &.progress-big {
-      @apply bg-neutral-bg py-1 px-2 rounded-md h-auto mt-3 flex gap-3 items-center;
+      @apply bg-neutral-bg py-1 px-2 rounded-md h-auto mt-3 flex gap-3 items-center min-h-8;
 
       .progress-bar--box {
         @apply bg-white rounded-sm overflow-hidden flex-1;
@@ -2129,6 +2137,80 @@
 
       .splide__slide {
         @apply flex items-start justify-center px-0 py-0 md:py-7;
+      }
+    }
+    &.splide-superaula {
+      @apply w-full h-full relative z-10;
+
+      &::after,
+      &::before {
+        @apply hidden;
+      }
+
+      .splide__track {
+        @apply overflow-hidden;
+
+        &::after,
+        &::before {
+          @apply hidden;
+        }
+
+        .splide__list {
+          .splide__slide {
+            @apply pr-0 pl-0 max-h-[600px];
+
+            .container {
+              @media screen and (max-width: 1600px) {
+                max-width: inherit;
+                width: 100%;
+              }
+            }
+  
+            @media screen and (max-width: 767px) {
+              max-height: 320px;
+            }
+
+            .splide__slide-box {
+              @apply hidden lg:flex w-full h-full mt-5 pt-3 pb-10 pr-5 flex-col items-start justify-start overflow-y-auto;
+
+              .box {
+                @apply w-full;
+              }
+
+              &::-webkit-scrollbar {
+                @apply w-2;
+              }
+    
+              &::-webkit-scrollbar-track {
+                @apply bg-neutral-bg rounded-full;
+              }
+    
+              &::-webkit-scrollbar-thumb {
+                @apply bg-neutral-lighter rounded-full hover:bg-neutral-light transition-all;
+              }
+            }
+          }
+        }
+      }
+
+      .splide__arrows {
+        @apply hidden md:block;
+  
+        .splide__arrow {
+          @apply top-1/2 w-8 h-16 bg-accent hover:bg-brand-dark rounded-full;
+  
+          &.splide__arrow--prev {
+            @apply left-0 rounded-tl-none rounded-bl-none;
+          }
+  
+          &.splide__arrow--next {
+            @apply right-0 rounded-tr-none rounded-br-none;
+          }
+  
+          svg {
+            
+          }
+        }
       }
     }
   }

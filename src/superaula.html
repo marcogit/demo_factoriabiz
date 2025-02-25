@@ -453,16 +453,275 @@
               class="grid-superaula--content---slider"
               :class="sliderOpen ? 'grid-superaula--content---slider---active' : 'grid-superaula--content---slider---disabled'"
             >
-              <div class="container container-superaula--video">
-                <iframe
-                  class="h-full aspect-video aspect-video--superaula"
-                  src="https://www.youtube.com/embed/pB7Cmayu56g?si=pQh8rG0nuDGEhzRl"
-                  title="YouTube video player"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                  x-ref="videoIframe"
-                ></iframe>
+              <div
+              class="grid-superaula--content---slider-data"
+                x-data="{
+                    init() {
+                        new Splide(this.$refs.splide, {
+                            perPage: 1,
+                            pagination: true,
+                            arrows: true,
+                        }).mount()
+                    },
+                }"
+                >
+                <div
+                  x-ref="splide"
+                  class="splide splide-superaula"
+                  aria-label="splide superaula"
+                  >
+                  <div class="splide__track">
+                    <div class="splide__list">
+                      <!-- slide videp-->
+                      <div class="splide__slide bg-neutral-dark">
+                        <div class="container p-0">
+                          <iframe
+                            class="h-full aspect-video aspect-video--superaula"
+                            src="https://www.youtube.com/embed/pB7Cmayu56g?si=pQh8rG0nuDGEhzRl"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                            x-ref="videoIframe"
+                          ></iframe>
+                        </div>
+                      </div>
+                      <!-- slide img-->
+                      <div class="splide__slide bg-neutral-dark">
+                        <div class="container p-0">
+                          <figure class="aspect-img--superaula">
+                            <img src="./assets/images/cms-images/dummy_1024x768_ffffff_cccccc.png" alt="cms" />
+                          </figure>
+                        </div>
+                      </div>
+                      <!-- slide pdf-->
+                      <div class="splide__slide bg-neutral">
+                        <div class="container p-0">
+                        <embed
+                          src="./assets/images/cms-images/dummy.pdf"
+                          type="application/pdf"
+                          width="100%"
+                          height="600px"
+                        />
+                        </div>
+                      </div>
+                      <!-- slide ok-->
+                      <div class="splide__slide">
+                        <div class="container">
+                          <div class="splide__slide-box">
+                            <div class="progress progress-big progress-green mb-5">
+                              <div class="progress-bar--box">
+                                <div class="progress-bar" style="width: 50%"></div>
+                              </div>
+                              <div class="progress-bar--date text-success">50%</div>
+                            </div>
+                            <!-- BOX -->
+                            <div class="box" x-data="{ selected: null }">
+                              <div class="box-body">
+                                <div class="box-minisection">
+                                  <h2 class="title-box">
+                                    <span class="btn btn-square is-small">3</span> ¿Qué opinas
+                                    del nuevo sistema de bloqueo de señales acústicas?
+                                  </h2>
+                                  <p>
+                                    Lorem ipsum dolor sit amet consectetur. In augue ipsum
+                                    tellus ultrices. Ac pharetra ultrices consectetur consequat
+                                    tellus massa. Nec aliquam cras sagittis duis sed euismod
+                                    arcu hac. Ornare amet ligula ornare lacus aliquam aenean. Eu
+                                    lacus imperdiet urna amet congue adipiscing. Faucibus magna
+                                    nisl ullamcorper in facilisis consequat aliquam. amet
+                                    consectetur. In augue ipsum tellus ultrices.
+                                  </p>
+                                  <figure class="cms-image">
+                                    <img
+                                      src="./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg"
+                                      alt="cms"
+                                    />
+                                  </figure>
+                                  <form class="form-block" @submit.prevent="">
+                                    <div class="form-row grid grid-cols-1">
+                                      <div class="column">
+                                        <textarea
+                                          rows="5"
+                                          class="formcontrol"
+                                          placeholder="Escribe aquí tu respuesta..."
+                                        ></textarea>
+                                      </div>
+                                      <div class="column">
+                                        <button
+                                          type="submit"
+                                          class="btn btn-accent btn-full--mobile"
+                                        >
+                                          Responder Pregunta
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- slide ok-->
+                      <div class="splide__slide">
+                        <div class="container">
+                          <div class="splide__slide-box">
+                            <div class="progress progress-big progress-green mb-5">
+                              <div class="progress-bar--box">
+                                <div class="progress-bar" style="width: 50%"></div>
+                              </div>
+                              <div class="progress-bar--date text-success">50%</div>
+                            </div>
+                            <!-- BOX -->
+                            <div class="box" x-data="{ selected: null }">
+                              <div class="box-body">
+                                <div class="box-minisection">
+                                  <h2 class="title-box">
+                                    <span class="btn btn-square is-small">2</span> Rellena el
+                                    hueco con la palabra adecuada
+                                  </h2>
+                                  <p>
+                                    Lorem ipsum dolor sit amet consectetur. In augue ipsum
+                                    tellus ultrices. Ac pharetra ultrices consectetur consequat
+                                    tellus massa. Nec aliquam cras sagittis duis sed euismod
+                                    arcu hac. Ornare amet ligula ornare lacus aliquam aenean. Eu
+                                    lacus imperdiet urna amet congue adipiscing. Faucibus magna
+                                    nisl ullamcorper in facilisis consequat aliquam. amet
+                                    consectetur. In augue ipsum tellus ultrices.
+                                  </p>
+                                  <figure class="cms-image">
+                                    <img
+                                      src="./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg"
+                                      alt="cms"
+                                    />
+                                  </figure>
+                                  <form class="form-block" @submit.prevent="">
+                                    <div class="form-row grid grid-cols-1">
+                                      <div class="column">
+                                        <div x-data="{ respuesta: '' }" class="form-line">
+                                          <span
+                                            >La activación de bloqueo de señales acústicas en la
+                                            ayuda al estacionamiento se encuentra ubicado</span
+                                          >
+
+                                          <input
+                                            type="text"
+                                            x-model="respuesta"
+                                            class="formcontrol formcontrol-small"
+                                            placeholder="completa la frase..."
+                                          />
+
+                                          <span>del vehículo.</span>
+                                        </div>
+                                      </div>
+
+                                      <div class="column">
+                                        <button
+                                          type="submit"
+                                          class="btn btn-accent btn-full--mobile"
+                                        >
+                                          Responder Pregunta
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- slide-->
+                      <div class="splide__slide">
+                        <div class="container">
+                          <div class="splide__slide-box">
+                            <div class="progress progress-big progress-green mb-5">
+                              <div class="progress-bar--box">
+                                <div class="progress-bar" style="width: 50%"></div>
+                              </div>
+                              <div class="progress-bar--date text-success">50%</div>
+                            </div>
+                            <!-- BOX -->
+                            <div class="box" x-data="{ selected: null }">
+                              <div class="box-body">
+                                <div class="box-minisection">
+                                  <h2 class="title-box">
+                                    <span class="btn btn-square is-small">4</span> Selecciona el
+                                    único SUV de la lista
+                                  </h2>
+                                  <p>
+                                    Ornare amet ligula ornare lacus aliquam aenean. Eu lacus
+                                    imperdiet urna amet congue adipiscing. Faucibus magna nisl
+                                    ullamcorper in facilisis
+                                  </p>
+                                  <form class="form-block" @submit.prevent="">
+                                    <div x-data="{ selected: 'ioniq' }" class="form-list">
+                                      <template
+                                        x-for="car in [
+                                          { id: 'santafe', name: 'Hyundai Santa Fe', image: './assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg' },
+                                          { id: 'ioniq', name: 'Hyundai Ioniq 5', image: './assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg' },
+                                          { id: 'i30', name: 'Hyundai i30', image: './assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg' }
+                                      ]"
+                                        :key="car.id"
+                                      >
+                                        <label class="radio-group radio-group-image">
+                                          <input
+                                            type="radio"
+                                            x-model="selected"
+                                            :value="car.id"
+                                            class="hidden"
+                                          />
+
+                                          <!-- Radio personalizado -->
+                                          <div class="radio-group-group">
+                                            <div
+                                              class="radio-group--option"
+                                              :class="selected === car.id ? 'selected' : ''"
+                                            >
+                                              <div
+                                                class="radio-group--option---selected"
+                                                x-show="selected === car.id"
+                                              ></div>
+                                            </div>
+                                            <span
+                                              class="radio-group--text"
+                                              :class="selected === car.id ? 'text-neutar-dark' : ''"
+                                              x-text="car.name"
+                                            ></span>
+                                          </div>
+
+                                          <!-- Imagen -->
+                                          <img
+                                            :src="car.image"
+                                            class="radio-image--content"
+                                            :class="selected === car.id ? 'selected' : ''"
+                                          />
+                                        </label>
+                                      </template>
+                                    </div>
+
+                                    <div class="form-row grid grid-cols-1">
+                                      <div class="column">
+                                        <button
+                                          type="submit"
+                                          class="btn btn-accent btn-full--mobile"
+                                        >
+                                          Responder Pregunta
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>    
+                          </div>
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
               </div>
             </section>
             <!-- Content -->
@@ -3758,7 +4017,7 @@ Escribe aquí tu mensaje</textarea
                         </div>
                       </div>
                     </div>
-                    <!-- Panel 08 Aulas virtuales -->
+                    <!-- Panel 08 Genérico -->
                     <div
                       x-show="isSelected($id('tab', whichChild($el, $el.parentElement)))"
                       :aria-labelledby="$id('tab', whichChild($el, $el.parentElement))"
