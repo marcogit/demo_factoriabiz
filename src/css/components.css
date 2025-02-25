@@ -693,6 +693,10 @@
           @apply mb-0;
         }
 
+        p {
+          @apply text-sm md:text-base text-neutral-light;
+        }
+
         .form-block {
           &:last-child {
             @apply mb-0 pb-0 lg:pb-5;
@@ -1183,7 +1187,7 @@
   }
   /*buttons*/
   .btn {
-    @apply flex gap-3 font-medium rounded-xl text-base px-3 lg:px-5 py-2 lg:py-3  transition-all text-center items-center justify-center leading-tight relative;
+    @apply flex gap-3 font-medium rounded-xl text-base px-3 lg:px-5 py-2 lg:py-3  transition-all text-center items-center justify-center leading-tight relative cursor-pointer;
 
     .not {
       @apply block w-2 h-2 bg-danger rounded-full absolute top-0 right-0 border border-white;
@@ -1193,7 +1197,7 @@
     }
 
     svg {
-      @apply transition-all;
+      @apply transition-all m-0;
 
       path {
         @apply fill-neutral;
@@ -1266,6 +1270,25 @@
 
     &.btn-accent--line {
       @apply bg-transparent border border-accent text-neutral hover:bg-accent hover:text-white;
+    }
+
+    &.btn-brand--line {
+      @apply bg-transparent border border-brand-bg text-brand-lighter hover:bg-brand hover:text-white;
+    
+      &.no-hover {
+        @apply bg-transparent border border-brand-bg text-brand-lighter;
+      }
+
+      svg {
+        path,
+        circle {
+          @apply fill-brand-bg;
+        }
+      }
+
+      &.active {
+        @apply bg-brand text-white;
+      }
     }
 
     &.btn-icon--small {
@@ -1417,6 +1440,10 @@
           transform: rotate(180deg);
         }
       }
+    }
+
+    &.btn-left {
+      @apply justify-start;
     }
   }
   /* badge */
@@ -2148,6 +2175,10 @@
     &.formcontrol-big {
       @apply text-lg;
     }
+
+    &.formcontrol-small {
+      @apply text-sm md:text-base h-auto py-2 min-h-2 border-2 border-brand-bg;
+    }
   }
   .formcontrol-datepicker {
     @apply relative w-full;
@@ -2272,6 +2303,26 @@
         @apply text-neutral-dark;
       }
     }
+
+    &.radio-group-image {
+      @apply flex-col justify-start items-start gap-3 mb-3;
+
+      .radio-group-group {
+        @apply flex gap-2 items-center justify-start;
+
+        .radio-group--option {
+          @apply ml-1;
+        }
+      }
+
+      .radio-image--content {
+        @apply max-w-full rounded-lg object-cover border border-transparent;
+
+        &.selected {
+          @apply border-neutral-dark;
+        }
+      }
+    }
   }
 
   .flatpickr-current-month,
@@ -2318,6 +2369,26 @@
       &::before {
         content: "";
         @apply absolute block top-0 bottom-0 -left-5 -right-5 bg-success-bg -z-10;
+      }
+    }
+  }
+
+  .form-line {
+    @apply flex flex-col md:flex-row gap-2 items-center font-semibold text-brand-lighter text-sm md:text-base text-center md:text-left;
+
+    .formcontrol {
+      @apply w-auto inline-block;
+    }
+  }
+
+  .dragDrop-panel {
+    @apply flex flex-col items-center space-y-5 p-5;
+
+    .dragDrop-panel--row {
+      @apply flex space-x-4;
+
+      .dragDrop-panel--col {
+        @apply flex flex-col space-y-4;
       }
     }
   }

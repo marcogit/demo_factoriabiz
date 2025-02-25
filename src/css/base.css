@@ -204,6 +204,10 @@
     }
   }
 
+  .form-list {
+    @apply flex flex-col md:flex-row gap-5 mb-3;
+  }
+
   .thumb {
     @apply rounded-md;
   }
@@ -228,7 +232,7 @@
       }
 
       iframe {
-        height: 100%; 
+        height: 100%;
       }
     }
   }
@@ -315,23 +319,51 @@
         }
 
         .grid-superaula--content---tabs {
-          @apply h-auto
+          @apply h-auto;
         }
       }
 
       .grid-superaula--sidebar {
-        @apply transition-all duration-300 ease-in-out bg-neutral-bg overflow-y-auto hidden lg:block;
+        @apply transition-all duration-300 ease-in-out bg-neutral-bg overflow-y-auto;
 
         .btn-sidebar-control {
           @apply fixed right-0 mt-4 mr-3;
         }
 
-        &.grid-superaula--sidebar---active {
-          @apply w-96;
+        &.grid-superaula--desktop {
+          @apply hidden lg:block;
+
+          &.grid-superaula--sidebar---active {
+            @apply w-96;
+          }
+
+          &.grid-superaula--sidebar---disabled {
+            @apply w-0 overflow-hidden;
+          }
+        }
+
+        &.grid-superaula--mobile {
+          @apply block lg:hidden relative;
+
+          &.grid-superaula--sidebar---active {
+            @apply h-auto;
+          }
+
+          &.grid-superaula--sidebar---disabled {
+            @apply h-14 overflow-hidden;
+          }
+
+          .btn-sidebar-control {
+            @apply absolute top-0 mt-3;
+          }
         }
 
         &.grid-superaula--sidebar---disabled {
-          @apply w-0 overflow-hidden;
+          .btn-sidebar-control {
+            svg {
+              transform: rotate(45deg);
+            }
+          }
         }
 
         .grid-superaula--sidebar---content {

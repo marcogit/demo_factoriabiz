@@ -9,6 +9,57 @@ window.Splide = Splide;
 window.flatpickr = flatpickr;
 
 document.addEventListener("alpine:init", () => {
+  Alpine.data("dragDrop", () => ({
+    initialBrands: [
+      { name: "Hyundai", models: [] },
+      { name: "Kia", models: [] },
+      { name: "Mercedes", models: [] },
+      { name: "Audi", models: [] },
+    ],
+    initialModels: [
+      { id: 1, name: "Sportage" },
+      { id: 2, name: "Clase A" },
+      { id: 3, name: "Q3 Sportback" },
+      { id: 4, name: "Ioniq 5" },
+    ],
+    brands: [],
+    models: [],
+    init() {
+      this.reset();
+    },
+    drag(model, event) {
+      event.dataTransfer.setData("modelId", model.id);
+    },
+    drop(brand, event) {
+      const modelId = event.dataTransfer.getData("modelId");
+      const model = this.models.find((m) => m.id == modelId);
+      if (model && !brand.models.includes(model.name)) {
+        brand.models.push(model.name);
+        this.models = this.models.filter((m) => m.id != modelId);
+      }
+    },
+    hasRelations() {
+      return this.brands.some((brand) => brand.models.length > 0);
+    },
+    reset() {
+      this.brands = JSON.parse(JSON.stringify(this.initialBrands));
+      this.models = JSON.parse(JSON.stringify(this.initialModels));
+
+      // 🔹 Esperar actualización del DOM y ejecutar `svgInliner()`
+      this.$nextTick(() => {
+        console.log("Ejecutando svgInliner después de reset...");
+        setTimeout(() => {
+          if (typeof window.svgInliner === "function") {
+            window.svgInliner();
+            console.log("svgInliner ejecutado correctamente.");
+          } else {
+            console.log("svgInliner no está definido.");
+          }
+        }, 50); // Ajusta el tiempo si es necesario
+      });
+    },
+  }));
+
   Alpine.data("toggleActive", () => ({
     isActive: false,
     toggle() {
@@ -79,6 +130,13 @@ document.addEventListener("alpine:init", () => {
       }
     },
   }));
+
+  // Exponer la función en `window`
+  document.addEventListener("alpine:init", () => {
+    window.svgInliner = () => {
+      Alpine.store("svgInliner").init();
+    };
+  });
 
   Alpine.data("dropdown", (label, options) => ({
     open: false,
@@ -202,13 +260,13 @@ document.addEventListener("alpine:init", () => {
     ],
   }));
 
-    // Definir la función radioGroup
-    Alpine.data("radioGroup", (initialState) => ({
-      selected: initialState.model,
-      init() {
-        this.selected = initialState.model;
-      },
-    }));
+  // Definir la función radioGroup
+  Alpine.data("radioGroup", (initialState) => ({
+    selected: initialState.model,
+    init() {
+      this.selected = initialState.model;
+    },
+  }));
 
   // Inicializar Splide
   Alpine.data("splideCarousel", () => ({

@@ -467,6 +467,282 @@
             </section>
             <!-- Content -->
             <section class="grid-superaula--content---tabs">
+              <!--MOBIlE-->
+              <aside
+              class="grid-superaula--sidebar grid-superaula--mobile"
+              :class="sidebarOpen ? 'grid-superaula--sidebar---active' : 'grid-superaula--sidebar---disabled'"
+            >
+              <!-- Botón para colapsar -->
+              <button
+                @click="sidebarOpen = !sidebarOpen"
+                class="btn btn-square is-small btn-dark btn-sidebar-control"
+              >
+                <img src="./assets/images/icon-close.svg" alt="Close" />
+              </button>
+
+              <div class="grid-superaula--sidebar---content">
+                <div class="grid-superaula--sidebar---header">
+                  <h2 class="title-base">Índice del Curso</h2>
+                </div>
+                <div x-show="sidebarOpen">
+<!-- Accordion -->
+<div
+x-data="{ open: false }"
+class="grid-superaula--sidebar---accordion"
+>
+<div
+  @click="open = !open"
+  class="grid-superaula--sidebar---accordion-header"
+>
+  <div class="grid-superaula--sidebar---accordion-header-title">
+    <strong>Sección 1: Introducción</strong>
+    <span>11/11</span>
+  </div>
+  <span class="btn btn-transparent">
+    <img
+      :class="{ 'rotate-180': open }"
+      src="./assets/images/icon-arrow-down.svg"
+      alt="Arrow"
+    />
+  </span>
+</div>
+<div
+  x-show="open"
+  x-collapse
+  class="grid-superaula--sidebar---accordion-body"
+>
+  <ul>
+    <li>
+      <button class="superaula-i-link active">
+        <span class="check">
+          <img
+            src="./assets/images/icon-minicheck.svg"
+            alt="Check"
+          />
+        </span>
+        <div class="superaula-i-link--icon">
+          <img
+            src="./assets/images/icon-indice-01-video.svg"
+            alt="pdf"
+          />
+        </div>
+        <div class="superaula-i-link--text">
+          1. Introducción a la sección
+        </div>
+      </button>
+    </li>
+    <li>
+      <button class="superaula-i-link active">
+        <span class="check">
+          <img
+            src="./assets/images/icon-minicheck.svg"
+            alt="Check"
+          />
+        </span>
+        <div class="superaula-i-link--icon">
+          <img
+            src="./assets/images/icon-indice-02-pdf.svg"
+            alt="pdf"
+          />
+        </div>
+        <div class="superaula-i-link--text">
+          2. Respuesta del acelerador
+        </div>
+      </button>
+    </li>
+    <li>
+      <button class="superaula-i-link">
+        <span class="check">
+          <img
+            src="./assets/images/icon-minicheck.svg"
+            alt="Check"
+          />
+        </span>
+        <div class="superaula-i-link--icon">
+          <img
+            src="./assets/images/icon-indice-03-img.svg"
+            alt="pdf"
+          />
+        </div>
+        <div class="superaula-i-link--text">
+          3. Galería de imágenes de introducción
+        </div>
+      </button>
+    </li>
+    <li>
+      <button class="superaula-i-link">
+        <span class="check">
+          <img
+            src="./assets/images/icon-minicheck.svg"
+            alt="Check"
+          />
+        </span>
+        <div class="superaula-i-link--icon">
+          <img
+            src="./assets/images/icon-indice-04-doc.svg"
+            alt="pdf"
+          />
+        </div>
+        <div class="superaula-i-link--text">
+          4. Texto descriptivo de introducción
+        </div>
+      </button>
+    </li>
+    <li>
+      <button class="superaula-i-link">
+        <span class="check">
+          <img
+            src="./assets/images/icon-minicheck.svg"
+            alt="Check"
+          />
+        </span>
+        <div class="superaula-i-link--icon">
+          <img
+            src="./assets/images/icon-indice-05-test.svg"
+            alt="pdf"
+          />
+        </div>
+        <div class="superaula-i-link--text">
+          Test de la sección
+        </div>
+      </button>
+    </li>
+  </ul>
+</div>
+</div>
+<!-- END Accordion -->
+<!-- Accordion -->
+<div
+x-data="{ open: false }"
+class="grid-superaula--sidebar---accordion"
+>
+<div
+  @click="open = !open"
+  class="grid-superaula--sidebar---accordion-header"
+>
+  <div class="grid-superaula--sidebar---accordion-header-title">
+    <strong>Sección 1: Introducción</strong>
+    <span>11/11</span>
+  </div>
+  <span class="btn btn-transparent">
+    <img
+      :class="{ 'rotate-180': open }"
+      src="./assets/images/icon-arrow-down.svg"
+      alt="Arrow"
+    />
+  </span>
+</div>
+<div
+  x-show="open"
+  x-collapse
+  class="grid-superaula--sidebar---accordion-body"
+>
+  <ul>
+    <li>
+      <button class="superaula-i-link active">
+        <span class="check">
+          <img
+            src="./assets/images/icon-minicheck.svg"
+            alt="Check"
+          />
+        </span>
+        <div class="superaula-i-link--icon">
+          <img
+            src="./assets/images/icon-indice-01-video.svg"
+            alt="pdf"
+          />
+        </div>
+        <div class="superaula-i-link--text">
+          1. Introducción a la sección
+        </div>
+      </button>
+    </li>
+    <li>
+      <button class="superaula-i-link active">
+        <span class="check">
+          <img
+            src="./assets/images/icon-minicheck.svg"
+            alt="Check"
+          />
+        </span>
+        <div class="superaula-i-link--icon">
+          <img
+            src="./assets/images/icon-indice-02-pdf.svg"
+            alt="pdf"
+          />
+        </div>
+        <div class="superaula-i-link--text">
+          2. Respuesta del acelerador
+        </div>
+      </button>
+    </li>
+    <li>
+      <button class="superaula-i-link">
+        <span class="check">
+          <img
+            src="./assets/images/icon-minicheck.svg"
+            alt="Check"
+          />
+        </span>
+        <div class="superaula-i-link--icon">
+          <img
+            src="./assets/images/icon-indice-03-img.svg"
+            alt="pdf"
+          />
+        </div>
+        <div class="superaula-i-link--text">
+          3. Galería de imágenes de introducción
+        </div>
+      </button>
+    </li>
+    <li>
+      <button class="superaula-i-link">
+        <span class="check">
+          <img
+            src="./assets/images/icon-minicheck.svg"
+            alt="Check"
+          />
+        </span>
+        <div class="superaula-i-link--icon">
+          <img
+            src="./assets/images/icon-indice-04-doc.svg"
+            alt="pdf"
+          />
+        </div>
+        <div class="superaula-i-link--text">
+          4. Texto descriptivo de introducción
+        </div>
+      </button>
+    </li>
+    <li>
+      <button class="superaula-i-link">
+        <span class="check">
+          <img
+            src="./assets/images/icon-minicheck.svg"
+            alt="Check"
+          />
+        </span>
+        <div class="superaula-i-link--icon">
+          <img
+            src="./assets/images/icon-indice-05-test.svg"
+            alt="pdf"
+          />
+        </div>
+        <div class="superaula-i-link--text">
+          Test de la sección
+        </div>
+      </button>
+    </li>
+  </ul>
+</div>
+</div>
+<!-- END Accordion -->
+                </div>
+
+                
+              </div>
+            </aside>
+            <!--END MOBIlE-->
               <div class="container container-superaula">
                 <!-- Tabs -->
                 <div
@@ -3534,7 +3810,7 @@ Escribe aquí tu mensaje</textarea
           </div>
           <!-- Sidebar -->
           <aside
-            class="grid-superaula--sidebar"
+            class="grid-superaula--sidebar grid-superaula--desktop"
             :class="sidebarOpen ? 'grid-superaula--sidebar---active' : 'grid-superaula--sidebar---disabled'"
           >
             <!-- Botón para colapsar -->
