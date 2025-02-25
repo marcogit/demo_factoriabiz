@@ -31,6 +31,21 @@
     @apply mb-2;
   }
 
+  .mini-info {
+    @apply inline-flex gap-2 items-start justify-start;
+
+    svg,
+    img {
+      @apply min-w-7;
+    }
+  }
+
+  .cms-image {
+    img {
+      @apply max-w-full object-cover rounded-lg;
+    }
+  }
+
   .text-small {
     @apply text-xs text-neutral-light;
   }
@@ -253,7 +268,7 @@
       }
 
       &.column-center {
-        @apply justify-center;
+        @apply flex flex-wrap justify-center;
       }
     }
 

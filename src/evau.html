@@ -457,6 +457,7 @@
         <section class="panel panel-small">
           <div class="container">
             <p><strong>Área de conocimiento:</strong> SUV/Crossover</p>
+            <!-- BOX -->
             <div class="box" x-data="{ selected: null }">
               <div class="box-body">
                 <div class="box-minisection">
@@ -496,7 +497,10 @@
                         </div>
                       </template>
                       <div class="column">
-                        <button type="submit" class="btn btn-accent btn-full--mobile">
+                        <button
+                          type="submit"
+                          class="btn btn-accent btn-full--mobile"
+                        >
                           Responder Pregunta
                         </button>
                       </div>
@@ -505,6 +509,74 @@
                 </div>
               </div>
             </div>
+            <!-- BOX -->
+            <div class="box" x-data="{ selected: null }">
+              <div class="box-body">
+                <div class="box-minisection">
+                  <h2 class="title-box">
+                    <span class="btn btn-square is-small">2</span> Rellena el
+                    hueco con la palabra adecuada
+                  </h2>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur. In augue ipsum
+                    tellus ultrices. Ac pharetra ultrices consectetur consequat
+                    tellus massa. Nec aliquam cras sagittis duis sed euismod
+                    arcu hac. Ornare amet ligula ornare lacus aliquam aenean. Eu
+                    lacus imperdiet urna amet congue adipiscing. Faucibus magna
+                    nisl ullamcorper in facilisis consequat aliquam. amet
+                    consectetur. In augue ipsum tellus ultrices.
+                  </p>
+                  <figure class="cms-image">
+                    <img
+                      src="./assets/images/cms-images/dummy_1024x768_ffffff_cccccc.png"
+                      alt="cms"
+                    />
+                  </figure>
+                  <form
+                    class="form-block"
+                    @submit.prevent=""
+                    x-data="{ options: ['KONA', 'TUCSON', 'SANTA FE'] }"
+                  >
+                    <div
+                      class="form-row grid grid-cols-1"
+                      role="radiogroup"
+                      x-data="radioGroup({ model: 'selected' })"
+                    >
+                      <template x-for="option in options" :key="option">
+                        <div class="column">
+                          <label
+                            x-radio-group-option="option"
+                            class="radio-group"
+                            :class="option === selected ? 'active' : ''"
+                            @click="selected = option"
+                          >
+                            <span class="radio-group--option">
+                              <span
+                                x-show="option === selected"
+                                class="radio-group--option---selected"
+                              ></span>
+                            </span>
+                            <span
+                              class="radio-group--text"
+                              x-text="option"
+                            ></span>
+                          </label>
+                        </div>
+                      </template>
+                      <div class="column">
+                        <button
+                          type="submit"
+                          class="btn btn-accent btn-full--mobile"
+                        >
+                          Responder Pregunta
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!-- ALERT-->
             <div class="alert alert-big alert-danger">
               <div class="alert-body">
                 <div
@@ -533,6 +605,84 @@
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+            <!-- ALERT-->
+            <div class="alert alert-big alert-danger">
+              <div class="alert-body">
+                <div
+                  class="grid grid-cols-1 lg:grid-cols-[1fr_auto] items-center"
+                >
+                  <div class="column">
+                    <div class="alert-link">
+                      <a href="#" class="link link-danger"
+                        >¿Deseas pausar la prueba?</a
+                      >
+                    </div>
+                  </div>
+                  <div class="column">
+                    <div class="alert-ui">
+                      <p>Finalización del test:</p>
+                      <div x-data="countdownTimer" x-init="startCountdown()">
+                        <span
+                          id="countdown"
+                          class="badge badge-square badge-danger"
+                        >
+                          <span x-text="hours"></span>:<span
+                            x-text="minutes"
+                          ></span
+                          >:<span x-text="seconds"></span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="alert-info">
+                  <p class="mini-info">
+                    <img
+                    src="./assets/images/icon-avise.svg"
+                    alt="Avise"
+                  /> Pulsa el siguiente botón para pausar la prueba. Te quedan 2
+                    pausas disponibles para la realización del test
+                  </p>
+                  <button class="btn btn-danger btn-full--mobile">Pausar la prueba</button>
+                </div>
+              </div>
+            </div>
+            <!-- ALERT-->
+            <div class="alert alert-big alert-warning--light">
+              <div class="alert-body">
+                <div
+                  class="grid grid-cols-1 items-center"
+                >
+
+                  <div class="column column-center">
+                    <div class="alert-ui">
+                      <p>Finalización del test:</p>
+                      <div x-data="countdownTimer" x-init="startCountdown()">
+                        <span
+                          id="countdown"
+                          class="badge badge-square badge-accent"
+                        >
+                          <span x-text="hours"></span>:<span
+                            x-text="minutes"
+                          ></span
+                          >:<span x-text="seconds"></span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="alert-info">
+                  <p class="mini-info"><img
+                    src="./assets/images/icon-avise.svg"
+                    alt="Avise"
+                  />
+                    Pulsa el siguiente botón para pausar la prueba. Te quedan 2
+                    pausas disponibles para la realización del test
+                  </p>
+                  <button class="btn btn-accent is--bg btn-full--mobile">Pausar la prueba</button>
                 </div>
               </div>
             </div>

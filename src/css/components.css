@@ -1071,14 +1071,34 @@
       .alert-link {
         @apply flex items-center h-full;
       }
+
+      .alert-info {
+        @apply flex flex-col items-center justify-center gap-5 pt-5;
+      }
     }
 
     &.alert-success {
       @apply bg-success-bg border-success-bg;
+
+      .mini-info {
+        svg {
+          path {
+            @apply fill-success;
+          }
+        }
+      }
     }
 
     &.alert-warning {
       @apply bg-accent-bg border-accent-bg;
+
+      .mini-info {
+        svg {
+          path {
+            @apply fill-accent;
+          }
+        }
+      }
     }
 
     &.alert-info {
@@ -1093,16 +1113,40 @@
       }
     }
 
+    &.alert-warning--light {
+      @apply bg-accent-bg/75 border-accent-bg/50 text-accent;
+
+      p {
+        @apply text-accent mb-0 text-sm;
+      }
+
+      .mini-info {
+        svg {
+          path {
+            @apply fill-accent-dark;
+          }
+        }
+      }
+    }
+
     &.alert-danger {
       @apply bg-danger-bg/50 border-danger-bg/10 text-danger-dark;
 
       p {
         @apply text-danger-dark mb-0 text-sm;
       }
+
+      .mini-info {
+        svg {
+          path {
+            @apply fill-danger-dark;
+          }
+        }
+      }
     }
 
     &.alert-big {
-      @apply md:p-10 md:gap-10;
+      @apply md:py-5 md:px-10 md:gap-10;
     }
 
     &:last-child {
@@ -1199,6 +1243,10 @@
         @apply bg-accent-lighter hover:bg-neutral-dark;
       }
 
+      &.is--bg {
+        @apply text-white bg-accent-light hover:bg-neutral-dark;
+      }
+
       svg {
         path {
           @apply fill-neutral-dark;
@@ -1260,6 +1308,10 @@
 
     &.btn-light {
       @apply text-neutral-light border border-solid border-neutral-lighter hover:border-neutral-light;
+    }
+
+    &.btn-danger {
+      @apply bg-danger text-white hover:bg-danger-dark;
     }
 
     &.btn-control {
