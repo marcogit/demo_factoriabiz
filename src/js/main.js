@@ -16,6 +16,30 @@ document.addEventListener("alpine:init", () => {
     },
   }));
 
+  Alpine.data("countdownTimer", () => ({
+    duration: 30 * 60 * 60, // 30 hours in seconds
+    timer: null,
+    hours: "00",
+    minutes: "00",
+    seconds: "00",
+    startCountdown() {
+      this.timer = this.duration;
+      setInterval(() => {
+        let hours = parseInt(this.timer / 3600, 10);
+        let minutes = parseInt((this.timer % 3600) / 60, 10);
+        let seconds = parseInt(this.timer % 60, 10);
+
+        this.hours = hours < 10 ? "0" + hours : hours;
+        this.minutes = minutes < 10 ? "0" + minutes : minutes;
+        this.seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        if (--this.timer < 0) {
+          this.timer = this.duration;
+        }
+      }, 1000);
+    },
+  }));
+
   Alpine.data("svgInliner", () => ({
     async init() {
       console.log("Esperando a que Alpine renderice los elementos...");
@@ -178,9 +202,18 @@ document.addEventListener("alpine:init", () => {
     ],
   }));
 
+    // Definir la función radioGroup
+    Alpine.data("radioGroup", (initialState) => ({
+      selected: initialState.model,
+      init() {
+        this.selected = initialState.model;
+      },
+    }));
+
   // Inicializar Splide
   Alpine.data("splideCarousel", () => ({
     init() {
+      // Inicializar el primer slider con el selector .splide
       new Splide(".splide", {
         perPage: 4,
         breakpoints: {

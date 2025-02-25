@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Noticias - Factoriabiz</title>
+    <title>Evaulación - Factoriabiz</title>
     <script type="module" src="./js/main.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,7 +15,7 @@
   </head>
   <body x-data="svgInliner" x-init="init">
     <!-- MAIN HEADER -->
-    <header class="main-header main-header--dark">
+    <header class="main-header main-header--dark main-header--small">
       <div class="container">
         <nav class="navbar">
           <!-- Mobile menu button-->
@@ -108,30 +108,15 @@
               alt="Factoriabiz"
               class="navbar-brand--logo"
             />
+            <span>Evaluación de conocimientos</span>
           </a>
           <div class="navbar-group">
-            <div class="mobile-menu--control" id="mobile-menu">
-              <ul class="navbar-nav">
-                <li class="navbar-nav-item">
-                  <a href="#" class="navbar-nav--link">Inicio</a>
-                </li>
-                <li class="navbar-nav-item">
-                  <a href="#" class="navbar-nav--link"
-                    >Itinerarios formativos</a
-                  >
-                </li>
-                <li class="navbar-nav-item">
-                  <a href="#" class="navbar-nav--link active">Actividades</a>
-                </li>
-                <li class="navbar-nav-item">
-                  <a href="#" class="navbar-nav--link">Express training</a>
-                </li>
-                <li class="navbar-nav-item">
-                  <a href="#" class="navbar-nav--link">Documentos</a>
-                </li>
-              </ul>
-            </div>
             <ul class="navbar-nav navbar-nav--right">
+              <li class="navbar-nav-item navbar-nav-item--responsive">
+                <a href="#" class="btn btn-icon">
+                  <img src="./assets/images/icon-home.svg" alt="Save" />
+                </a>
+              </li>
               <li class="navbar-nav-item navbar-nav-item--responsive">
                 <!-- Modal SEARCH -->
                 <div x-data="modalComponent">
@@ -455,255 +440,102 @@
       </div>
     </header>
     <!-- END MAIN HEADER -->
-    <div class="scroll-fix">
-      <main>
-        <!-- PAGE HEADER -->
+    <div class="scroll-fix scroll-fix--full">
+      <main class="main-aula">
         <header class="main-header--page">
           <div class="container">
-            <h1 class="title-big">Noticias</h1>
-            <!-- DESPLEGABLE -->
-            <div x-data="accordion_filter()" class="filter---display">
-              <div
-                x-data="{
-                  id: 1
-            }"
-                class="filter---display----panel"
-                role="region"
-              >
-                <button
-                  type="button"
-                  x-on:click="expanded = !expanded"
-                  :aria-expanded="expanded"
-                  class="btn btn-icon btn-filter"
-                >
-                  <img src="./assets/images/icon-filter.svg" alt="Filter" />
-                </button>
-                <div class="control-expanded" x-show="expanded" x-collapse>
-                  <!-- LOGOS -->
-                  <div class="main-header--page---logos">
-                    <button class="btn btn-accent--line">Todas</button>
-                    <a href="#" class="main-header--page---logos----item"
-                      ><img
-                        src="./assets/images/cms-images/logo-user-01.png"
-                        alt="Logo Subaru"
-                    /></a>
-                    <a href="#" class="main-header--page---logos----item"
-                      ><img
-                        src="./assets/images/cms-images/logo-user-02.png"
-                        alt="Logo SsangYong"
-                    /></a>
-                    <a href="#" class="main-header--page---logos----item"
-                      ><img
-                        src="./assets/images/cms-images/logo-user-03.png"
-                        alt="Logo Aiways"
-                    /></a>
-                    <a href="#" class="main-header--page---logos----item"
-                      ><img
-                        src="./assets/images/cms-images/logo-user-04.png"
-                        alt="Logo Maxus"
-                    /></a>
-                  </div>
-                  <!-- END LOGOS -->
-                  <!-- FORM -->
-                  <form class="form-block" @submit.prevent>
+            <h1 class="title-big">Test 360º</h1>
+            <div class="progress progress-big progress-green">
+              <div class="progress-bar--box">
+                <div class="progress-bar" style="width: 50%"></div>
+              </div>
+              <div class="progress-bar--date text-success">50%</div>
+            </div>
+          </div>
+        </header>
+        <!-- Pane -->
+        <section class="panel panel-small">
+          <div class="container">
+            <p><strong>Área de conocimiento:</strong> SUV/Crossover</p>
+            <div class="box" x-data="{ selected: null }">
+              <div class="box-body">
+                <div class="box-minisection">
+                  <h2 class="title-box">
+                    <span class="btn btn-square is-small">1</span> ¿Qué modelos
+                    SUV de Hyundai existen?
+                  </h2>
+                  <form
+                    class="form-block"
+                    @submit.prevent=""
+                    x-data="{ options: ['KONA', 'TUCSON', 'SANTA FE'] }"
+                  >
                     <div
-                      class="form-row grid grid-cols-1 lg:grid-cols-[2fr_1fr_auto] items-end"
+                      class="form-row grid grid-cols-1"
+                      role="radiogroup"
+                      x-data="radioGroup({ model: 'selected' })"
                     >
-                      <div class="column">
-                        <input
-                          type="text"
-                          placeholder="Realiza tu búsqueda..."
-                          class="formcontrol"
-                        />
-                      </div>
-
-                      <!-- Select "Fecha de carga" -->
-                      <div
-                        class="column"
-                        x-data="datePicker()"
-                        x-init="initFlatpickr()"
-                      >
-                        <label class="text-label">Fecha de carga</label>
-                        <div class="formcontrol-datepicker">
-                          <img
-                            class="formcontrol-icon"
-                            src="./assets/images/icon-calendar.svg"
-                            alt="Calendar"
-                          />
-                          <input
-                            type="text"
-                            x-ref="datepicker"
-                            class="formcontrol"
-                            placeholder="Desde  - Hasta"
-                          />
+                      <template x-for="option in options" :key="option">
+                        <div class="column">
+                          <label
+                            x-radio-group-option="option"
+                            class="radio-group"
+                            :class="option === selected ? 'active' : ''"
+                            @click="selected = option"
+                          >
+                            <span class="radio-group--option">
+                              <span
+                                x-show="option === selected"
+                                class="radio-group--option---selected"
+                              ></span>
+                            </span>
+                            <span
+                              class="radio-group--text"
+                              x-text="option"
+                            ></span>
+                          </label>
                         </div>
-                      </div>
-                      <!-- Botón Buscar -->
+                      </template>
                       <div class="column">
-                        <button type="submit" class="btn btn-accent">
-                          Buscar
+                        <button type="submit" class="btn btn-accent btn-full--mobile">
+                          Responder Pregunta
                         </button>
                       </div>
                     </div>
                   </form>
-                  <!-- END FORM -->
                 </div>
               </div>
             </div>
-            <!-- END DESPLEGABLE -->
-          </div>
-        </header>
-        <!-- END PAGE HEADER -->
-        <!-- Grid Post -->
-        <section class="panel">
-          <div class="container">
-            <article class="grid post post-img-left">
-              <div class="column post-header">
-                <figure>
-                  <img
-                    src="./assets/images/cms-images/dummy_1024x768_ffffff_cccccc.png"
-                    alt="Imagen de actividad"
-                  />
-                </figure>
-              </div>
-              <div class="column post-body">
-                <button
-                  x-data="{ isActive: false }"
-                  :class="{ 'active': isActive }"
-                  x-on:click="isActive = !isActive"
-                  type="button"
-                  id="save-control"
-                  class="btn btn-transparent"
+            <div class="alert alert-big alert-danger">
+              <div class="alert-body">
+                <div
+                  class="grid grid-cols-1 lg:grid-cols-[1fr_auto] items-center"
                 >
-                  <img
-                    src="./assets/images/icon-save--white.svg"
-                    alt="Save item"
-                  />
-                </button>
-                <h2 class="title-big">
-                  Suscríbete a un JAECOO 7 con Astara y descubre por qué todo el
-                  mundo habla de esta nueva marca
-                </h2>
-                <h4 class="title-med title-med--accent">
-                  JAECOO 7 por suscripción desde 759€/mes
-                </h4>
-                <span class="subtitle-small date">Publicado hace 29 días</span>
-                <p>
-                  La marca promete SUV y todoterrenos intrépidos con mucha
-                  elegancia y cargados de tecnología. Su carta de presentación
-                  es el JAECOO 7, que
-                  <a href="#" class="link">
-                    ya tienes disponible en el catálogo de suscripción de Astara
-                    desde 759 euros al mes</a
-                  >, como siempre con seguro, mantenimiento, asistencia en
-                  carretera e impuestos incluidos.
-                </p>
-                <p>
-                  Más del 80% de la carrocería está fabricada con acero de alta
-                  resistencia. Además, el JAECOO 7 incorpora más de 18 sistemas
-                  de ayuda a la conducción, superando con creces el nivel 2 de
-                  conducción autónoma.
-                </p>
+                  <div class="column">
+                    <div class="alert-link">
+                      <a href="#" class="link link-danger"
+                        >¿Deseas pausar la prueba?</a
+                      >
+                    </div>
+                  </div>
+                  <div class="column">
+                    <div class="alert-ui">
+                      <p>Finalización del test:</p>
+                      <div x-data="countdownTimer" x-init="startCountdown()">
+                        <span
+                          id="countdown"
+                          class="badge badge-square badge-danger"
+                        >
+                          <span x-text="hours"></span>:<span
+                            x-text="minutes"
+                          ></span
+                          >:<span x-text="seconds"></span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </article>
-            <article class="grid post post-img-right">
-              <div class="column post-header">
-                <figure>
-                  <img
-                    src="./assets/images/cms-images/dummy_1024x768_ffffff_cccccc.png"
-                    alt="Imagen de actividad"
-                  />
-                </figure>
-              </div>
-              <div class="column post-body">
-                <button
-                  x-data="{ isActive: false }"
-                  :class="{ 'active': isActive }"
-                  x-on:click="isActive = !isActive"
-                  type="button"
-                  id="save-control"
-                  class="btn btn-transparent"
-                >
-                  <img
-                    src="./assets/images/icon-save--white.svg"
-                    alt="Save item"
-                  />
-                </button>
-                <h2 class="title-big">
-                  Suscríbete a un JAECOO 7 con Astara y descubre por qué todo el
-                  mundo habla de esta nueva marca
-                </h2>
-                <h4 class="title-med title-med--accent">
-                  JAECOO 7 por suscripción desde 759€/mes
-                </h4>
-                <span class="subtitle-small date">Publicado hace 29 días</span>
-                <p>
-                  La marca promete SUV y todoterrenos intrépidos con mucha
-                  elegancia y cargados de tecnología. Su carta de presentación
-                  es el JAECOO 7, que
-                  <a href="#" class="link">
-                    ya tienes disponible en el catálogo de suscripción de Astara
-                    desde 759 euros al mes</a
-                  >, como siempre con seguro, mantenimiento, asistencia en
-                  carretera e impuestos incluidos.
-                </p>
-                <p>
-                  Más del 80% de la carrocería está fabricada con acero de alta
-                  resistencia. Además, el JAECOO 7 incorpora más de 18 sistemas
-                  de ayuda a la conducción, superando con creces el nivel 2 de
-                  conducción autónoma.
-                </p>
-              </div>
-            </article>
-            <article class="grid post post-img-full">
-              <div class="column post-header">
-                <figure>
-                  <img
-                    src="./assets/images/cms-images/dummy_1024x768_ffffff_cccccc.png"
-                    alt="Imagen de actividad"
-                  />
-                </figure>
-              </div>
-              <div class="column post-body">
-                <button
-                  x-data="{ isActive: false }"
-                  :class="{ 'active': isActive }"
-                  x-on:click="isActive = !isActive"
-                  type="button"
-                  id="save-control"
-                  class="btn btn-transparent"
-                >
-                  <img
-                    src="./assets/images/icon-save--white.svg"
-                    alt="Save item"
-                  />
-                </button>
-                <h2 class="title-big">
-                  Suscríbete a un JAECOO 7 con Astara y descubre por qué todo el
-                  mundo habla de esta nueva marca
-                </h2>
-                <h4 class="title-med title-med--accent">
-                  JAECOO 7 por suscripción desde 759€/mes
-                </h4>
-                <span class="subtitle-small date">Publicado hace 29 días</span>
-                <p>
-                  La marca promete SUV y todoterrenos intrépidos con mucha
-                  elegancia y cargados de tecnología. Su carta de presentación
-                  es el JAECOO 7, que
-                  <a href="#" class="link">
-                    ya tienes disponible en el catálogo de suscripción de Astara
-                    desde 759 euros al mes</a
-                  >, como siempre con seguro, mantenimiento, asistencia en
-                  carretera e impuestos incluidos.
-                </p>
-                <p>
-                  Más del 80% de la carrocería está fabricada con acero de alta
-                  resistencia. Además, el JAECOO 7 incorpora más de 18 sistemas
-                  de ayuda a la conducción, superando con creces el nivel 2 de
-                  conducción autónoma.
-                </p>
-              </div>
-            </article>
+            </div>
           </div>
         </section>
       </main>

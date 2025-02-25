@@ -21,6 +21,8 @@ export default defineConfig({
         user: "./src/user.html",
         ea: "./src/ea.html",
         stories: "./src/stories.html",
+        evaulacion: "./src/evau.html",
+        superaula: "./src/superaula.html",
         components: "./src/components.html",
       },
       output: {
