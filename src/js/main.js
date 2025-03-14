@@ -320,6 +320,38 @@ document.addEventListener("alpine:init", () => {
       this.height = window.innerHeight;
     },
   }));
+  Alpine.data("multiImageSelector", () => ({
+    items: [
+      { img: `${import.meta.env.BASE_URL}assets/images/cms-images/logo-user-01.png` },
+      { img: `${import.meta.env.BASE_URL}assets/images/cms-images/logo-user-02.png` },
+      { img: `${import.meta.env.BASE_URL}assets/images/cms-images/logo-user-03.png` },
+      { img: `${import.meta.env.BASE_URL}assets/images/cms-images/logo-user-04.png` },
+      { img: `${import.meta.env.BASE_URL}assets/images/cms-images/logo-user-05.png` },
+      { img: `${import.meta.env.BASE_URL}assets/images/cms-images/logo-user-01.png` },
+      { img: `${import.meta.env.BASE_URL}assets/images/cms-images/logo-user-02.png` },
+      { img: `${import.meta.env.BASE_URL}assets/images/cms-images/logo-user-03.png` },
+      { img: `${import.meta.env.BASE_URL}assets/images/cms-images/logo-user-04.png` },
+      { img: `${import.meta.env.BASE_URL}assets/images/cms-images/logo-user-05.png` }
+    ],
+    selected: [],
+    get allSelected() {
+      return this.selected.length === this.items.length;
+    },
+    toggleSelect(index) {
+      if (this.selected.includes(index)) {
+        this.selected = this.selected.filter((i) => i !== index);
+      } else {
+        this.selected.push(index);
+      }
+    },
+    toggleAll() {
+      if (this.allSelected) {
+        this.selected = [];
+      } else {
+        this.selected = this.items.map((_, index) => index);
+      }
+    },
+  }));
 });
 
 Alpine.plugin(focus);

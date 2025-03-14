@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0"
+    />
     <title>Itinerarios - Factoriabiz</title>
     <script type="module" src="./js/main.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -480,30 +483,32 @@
                 </button>
                 <div class="control-expanded" x-show="expanded" x-collapse>
                   <!-- LOGOS -->
-                  <div class="main-header--page---logos">
-                    <button class="btn btn-accent--line">Todas</button>
-                    <a href="#" class="main-header--page---logos----item"
-                      ><img
-                        src="./assets/images/cms-images/logo-user-01.png"
-                        alt="Logo Subaru"
-                    /></a>
-                    <a href="#" class="main-header--page---logos----item"
-                      ><img
-                        src="./assets/images/cms-images/logo-user-02.png"
-                        alt="Logo SsangYong"
-                    /></a>
-                    <a href="#" class="main-header--page---logos----item"
-                      ><img
-                        src="./assets/images/cms-images/logo-user-03.png"
-                        alt="Logo Aiways"
-                    /></a>
-                    <a href="#" class="main-header--page---logos----item"
-                      ><img
-                        src="./assets/images/cms-images/logo-user-04.png"
-                        alt="Logo Maxus"
-                    /></a>
+                  <div
+                    class="main-header--page---logos"
+                    x-data="multiImageSelector"
+                  >
+                    <div class="main-header--page---logos--panel">
+                      <!-- Botón Seleccionar Todo -->
+                      <button class="btn btn-accent--line" @click="toggleAll">
+                        <span x-text="allSelected ? 'Borrar' : 'Todas'"></span>
+                      </button>
+                      <!-- Lista de imágenes seleccionables -->
+                      <template x-for="(item, index) in items" :key="index">
+                        <div
+                          class="main-header--page---logos----item"
+                          @click="toggleSelect(index)"
+                          :class="selected.includes(index) ? 'active' : ''"
+                        >
+                          <img
+                            :src="item.img"
+                            :class="selected.includes(index) ? '' : ''"
+                            alt="Selectable Item"
+                          />
+                        </div>
+                      </template>
+                    </div>
                   </div>
-                  <!-- END LOGOS -->
+                  <!--END LOGOS -->
                   <!-- FORM -->
                   <form class="form-block" @submit.prevent>
                     <div

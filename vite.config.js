@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import { createHtmlPlugin } from "vite-plugin-html";
-import svgLoader from 'vite-svg-loader';
+import { viteStaticCopy } from "vite-plugin-static-copy";
+import svgLoader from "vite-svg-loader";
 
 export default defineConfig({
   root: "./src", // Define la carpeta "src" como raíz
@@ -28,9 +29,11 @@ export default defineConfig({
       },
       output: {
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name.endsWith(".svg")) {
-            return "assets/[name][extname]";
+          // Coloca las imágenes en "assets/images/"
+          if (/\.(png|jpe?g|gif|svg|webp|avif)$/.test(assetInfo.name)) {
+            return "assets/images/[name]-[hash][extname]";
           }
+          // Coloca otros assets en "assets/"
           return "assets/[name]-[hash][extname]";
         },
       },
@@ -39,6 +42,14 @@ export default defineConfig({
   plugins: [
     createHtmlPlugin({
       minify: true,
+    }),
+    viteStaticCopy({
+      targets: [
+        {
+          src: "assets/images",
+          dest: "assets",
+        },
+      ],
     }),
     svgLoader(), // Plugin para manejar SVGs incrustados
   ],

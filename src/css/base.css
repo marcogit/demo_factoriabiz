@@ -829,7 +829,7 @@
   }
 
   .main-header--page {
-    @apply w-full pt-5 pb-3 xl:pb-5 xl:pt-7 z-[6000] relative;
+    @apply w-full pt-5 pb-3 xl:pb-5 xl:pt-7 xl:z-[6000] relative;
 
     .filter---display {
 
@@ -842,22 +842,6 @@
     }
     .form-block {
       @apply pb-0;
-    }
-
-    .main-header--page---logos {
-      @apply flex gap-5 items-center justify-start pt-8;
-
-      .main-header--page---logos----item {
-        @apply block;
-
-        img {
-          @apply max-h-10 transition-all;
-        }
-
-        &:hover img {
-          @apply opacity-55;
-        }
-      }
     }
 
     .title-big {

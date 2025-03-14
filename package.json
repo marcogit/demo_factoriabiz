@@ -32,6 +32,7 @@
     "postcss": "^8.5.1",
     "tailwindcss": "^3.4.17",
     "vite-plugin-html": "^3.2.2",
+    "vite-plugin-static-copy": "^2.3.0",
     "vite-svg-loader": "^5.1.0"
   }
 }

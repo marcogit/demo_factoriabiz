@@ -2460,6 +2460,49 @@
     }
   }
   /* Form */
+  .main-header--page---logos {
+    @apply relative -ml-5 -mr-5 pt-3 xl:pt-6;
+
+    &::after,
+    &::before {
+      content: "";
+      @apply absolute block bottom-0 top-0 w-5 z-10;
+    }
+
+    &::before {
+      @apply left-0 bg-gradient-to-l from-transparent to-white;
+    }
+
+    &::after {
+      @apply right-0 bg-gradient-to-l from-white to-transparent;
+    }
+
+    .main-header--page---logos--panel {
+      @apply flex gap-3 items-center justify-start overflow-x-auto py-4 px-5;
+    }
+  
+    .btn {
+      @apply py-[1.15rem] rounded-lg uppercase font-bold text-xs;
+    }
+  
+    .main-header--page---logos----item {
+      @apply block rounded-lg cursor-pointer border border-transparent p-2;
+  
+      img {
+        @apply max-h-9 transition-all max-w-none;
+      }
+  
+      &:hover {
+        @apply border-neutral-lighter;
+      }
+  
+      &.active {
+        @apply border-accent scale-110;
+      }
+    }
+  }
+  
+
   .formcontrol {
     @apply relative text-neutral flex w-full items-center px-2 py-3 rounded-lg text-sm mb-0 transition-all text-left leading-tight border border-neutral-lighter focus:outline-none  bg-transparent min-h-12;
 
