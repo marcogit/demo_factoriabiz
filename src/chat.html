@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0"
+    />
     <title>Chat - Factoriabiz</title>
     <script type="module" src="./js/main.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -455,8 +458,12 @@
       </div>
     </header>
     <!-- END MAIN HEADER -->
-    <div class="scroll-fix scroll-fix--full">
-      <main class="bg-light">
+    <div class="scroll-fix">
+      <main
+        class="bg-light"
+        x-data="viewportHeight"
+        :style="{ height: height + 'px' }"
+      >
         <!-- Grid Chat -->
         <section class="panel panel-full">
           <div class="container">
@@ -658,38 +665,145 @@
                                     <div class="box-body" id="chat-messages">
                                       <div class="box-body--scroll">
                                         <!-- Renderizar mensajes con Alpine -->
-                                        <template
-                                          x-for="message in messages"
-                                          :key="message.text"
-                                        >
-                                          <div
-                                            :class="message.sender === 'user' ? 'message-in message-in--me' : 'message-in message-in--you'"
-                                          >
-                                            <template
-                                              x-if="message.sender !== 'user'"
-                                            >
-                                              <div
-                                                class="flex items-center gap-2"
-                                              >
-                                                <img
-                                                  src="./assets/images/cms-images/avatar-34.jpg"
-                                                  class="avatar"
-                                                />
-                                                <span
-                                                  class="message-in--name"
-                                                  x-text="message.senderName"
-                                                ></span>
-                                              </div>
-                                            </template>
-                                            <div
-                                              :class="message.sender === 'user' ? 'btn message-me' : 'btn message-you'"
-                                            >
-                                              <span
-                                                x-text="message.text"
-                                              ></span>
-                                            </div>
+                                        <div class="message-in message-in--me">
+                                          <div class="btn message-me">
+                                            Aún me queda rellenar un formulario
+                                            del itinerario, a ver si me da
+                                            tiempo en esta mañana.
                                           </div>
-                                        </template>
+                                        </div>
+                                        <div class="message-in message-in--you">
+                                          <div class="message-in--user">
+                                            <img
+                                              src="./assets/images/cms-images/avatar-34.jpg"
+                                              class="avatar"
+                                            />
+                                            <span class="message-in--name"
+                                              >Juan Rodríguez</span
+                                            >
+                                          </div>
+                                          <div class="btn message-you">
+                                            Recuerda que debes rellenar el
+                                            formulario para que se quede el
+                                            itinerario cerrado.Mañana te escribo
+                                            y te digo en que capitulo esta la
+                                            referencia que me pides. ¡Un saludo!
+                                          </div>
+                                        </div>
+                                        <div class="message-in message-in--you">
+                                          <div class="message-in--user">
+                                            <img
+                                              src="./assets/images/cms-images/avatar-34.jpg"
+                                              class="avatar"
+                                            />
+                                            <span class="message-in--name"
+                                              >Juan Rodríguez</span
+                                            >
+                                          </div>
+                                          <div class="btn message-you">
+                                            En el capítulo 5 puedes visualizar
+                                            algo parecido a eso. Si no te
+                                            encaja, coméntamelo de nuevo y vemos
+                                            que otra referencia te puedo pasar
+                                          </div>
+                                        </div>
+                                        <div class="message-in message-in--me">
+                                          <div class="btn message-me">
+                                            Cierto! creo que con esta refencia
+                                            me ha quedado claro.
+                                          </div>
+                                        </div>
+                                        <div class="message-in message-in--me">
+                                          <div class="btn message-me">
+                                            Genial! Muchas gracias
+                                          </div>
+                                        </div>
+                                        <div class="message-in message-in--you">
+                                          <div class="message-in--user">
+                                            <img
+                                              src="./assets/images/cms-images/avatar-34.jpg"
+                                              class="avatar"
+                                            />
+                                            <span class="message-in--name"
+                                              >Juan Rodríguez</span
+                                            >
+                                          </div>
+                                          <div class="btn message-you">
+                                            De nada. ¡Un saludo!
+                                          </div>
+                                        </div>
+                                        <div
+                                          class="message-in message-in--date"
+                                        >
+                                          <div class="btn message-me">hoy</div>
+                                        </div>
+                                        <div class="message-in message-in--me">
+                                          <div class="btn message-me">
+                                            Aún me queda rellenar un formulario
+                                            del itinerario, a ver si me da
+                                            tiempo en esta mañana.
+                                          </div>
+                                        </div>
+                                        <div class="message-in message-in--you">
+                                          <div class="message-in--user">
+                                            <img
+                                              src="./assets/images/cms-images/avatar-34.jpg"
+                                              class="avatar"
+                                            />
+                                            <span class="message-in--name"
+                                              >Juan Rodríguez</span
+                                            >
+                                          </div>
+                                          <div class="btn message-you">
+                                            Recuerda que debes rellenar el
+                                            formulario para que se quede el
+                                            itinerario cerrado.Mañana te escribo
+                                            y te digo en que capitulo esta la
+                                            referencia que me pides. ¡Un saludo!
+                                          </div>
+                                        </div>
+                                        <div class="message-in message-in--you">
+                                          <div class="message-in--user">
+                                            <img
+                                              src="./assets/images/cms-images/avatar-34.jpg"
+                                              class="avatar"
+                                            />
+                                            <span class="message-in--name"
+                                              >Juan Rodríguez</span
+                                            >
+                                          </div>
+                                          <div class="btn message-you">
+                                            En el capítulo 5 puedes visualizar
+                                            algo parecido a eso. Si no te
+                                            encaja, coméntamelo de nuevo y vemos
+                                            que otra referencia te puedo pasar
+                                          </div>
+                                        </div>
+                                        <div class="message-in message-in--me">
+                                          <div class="btn message-me">
+                                            Cierto! creo que con esta refencia
+                                            me ha quedado claro.
+                                          </div>
+                                        </div>
+                                        <div class="message-in message-in--me">
+                                          <div class="btn message-me">
+                                            Genial! Muchas gracias
+                                          </div>
+                                        </div>
+                                        <div class="message-in message-in--you">
+                                          <div class="message-in--user">
+                                            <img
+                                              src="./assets/images/cms-images/avatar-34.jpg"
+                                              class="avatar"
+                                            />
+                                            <span class="message-in--name"
+                                              >Juan Rodríguez</span
+                                            >
+                                          </div>
+                                          <div class="btn message-you">
+                                            De nada. ¡Un saludo!
+                                          </div>
+                                        </div>
                                       </div>
                                     </div>
                                     <!-- Input de mensajes -->
@@ -861,32 +975,125 @@
                     <div class="box-body" id="chat-messages">
                       <div class="box-body--scroll">
                         <!-- Renderizar mensajes con Alpine -->
-                        <template
-                          x-for="message in messages"
-                          :key="message.text"
-                        >
-                          <div
-                            :class="message.sender === 'user' ? 'message-in message-in--me' : 'message-in message-in--you'"
-                          >
-                            <template x-if="message.sender !== 'user'">
-                              <div class="flex items-center gap-2">
-                                <img
-                                  src="./assets/images/cms-images/avatar-34.jpg"
-                                  class="avatar"
-                                />
-                                <span
-                                  class="message-in--name"
-                                  x-text="message.senderName"
-                                ></span>
-                              </div>
-                            </template>
-                            <div
-                              :class="message.sender === 'user' ? 'btn message-me' : 'btn message-you'"
-                            >
-                              <span x-text="message.text"></span>
-                            </div>
+                        <div class="message-in message-in--me">
+                          <div class="btn message-me">
+                            Aún me queda rellenar un formulario del itinerario,
+                            a ver si me da tiempo en esta mañana.
                           </div>
-                        </template>
+                        </div>
+                        <div class="message-in message-in--you">
+                          <div class="message-in--user">
+                            <img
+                              src="./assets/images/cms-images/avatar-34.jpg"
+                              class="avatar"
+                            />
+                            <span class="message-in--name">Juan Rodríguez</span>
+                          </div>
+                          <div class="btn message-you">
+                            Recuerda que debes rellenar el formulario para que
+                            se quede el itinerario cerrado.Mañana te escribo y
+                            te digo en que capitulo esta la referencia que me
+                            pides. ¡Un saludo!
+                          </div>
+                        </div>
+                        <div class="message-in message-in--you">
+                          <div class="message-in--user">
+                            <img
+                              src="./assets/images/cms-images/avatar-34.jpg"
+                              class="avatar"
+                            />
+                            <span class="message-in--name">Juan Rodríguez</span>
+                          </div>
+                          <div class="btn message-you">
+                            En el capítulo 5 puedes visualizar algo parecido a
+                            eso. Si no te encaja, coméntamelo de nuevo y vemos
+                            que otra referencia te puedo pasar
+                          </div>
+                        </div>
+                        <div class="message-in message-in--me">
+                          <div class="btn message-me">
+                            Cierto! creo que con esta refencia me ha quedado
+                            claro.
+                          </div>
+                        </div>
+                        <div class="message-in message-in--me">
+                          <div class="btn message-me">
+                            Genial! Muchas gracias
+                          </div>
+                        </div>
+                        <div class="message-in message-in--you">
+                          <div class="message-in--user">
+                            <img
+                              src="./assets/images/cms-images/avatar-34.jpg"
+                              class="avatar"
+                            />
+                            <span class="message-in--name">Juan Rodríguez</span>
+                          </div>
+                          <div class="btn message-you">
+                            De nada. ¡Un saludo!
+                          </div>
+                        </div>
+                        <div class="message-in message-in--date">
+                          <div class="btn message-me">hoy</div>
+                        </div>
+                        <div class="message-in message-in--me">
+                          <div class="btn message-me">
+                            Aún me queda rellenar un formulario del itinerario,
+                            a ver si me da tiempo en esta mañana.
+                          </div>
+                        </div>
+                        <div class="message-in message-in--you">
+                          <div class="message-in--user">
+                            <img
+                              src="./assets/images/cms-images/avatar-34.jpg"
+                              class="avatar"
+                            />
+                            <span class="message-in--name">Juan Rodríguez</span>
+                          </div>
+                          <div class="btn message-you">
+                            Recuerda que debes rellenar el formulario para que
+                            se quede el itinerario cerrado.Mañana te escribo y
+                            te digo en que capitulo esta la referencia que me
+                            pides. ¡Un saludo!
+                          </div>
+                        </div>
+                        <div class="message-in message-in--you">
+                          <div class="message-in--user">
+                            <img
+                              src="./assets/images/cms-images/avatar-34.jpg"
+                              class="avatar"
+                            />
+                            <span class="message-in--name">Juan Rodríguez</span>
+                          </div>
+                          <div class="btn message-you">
+                            En el capítulo 5 puedes visualizar algo parecido a
+                            eso. Si no te encaja, coméntamelo de nuevo y vemos
+                            que otra referencia te puedo pasar
+                          </div>
+                        </div>
+                        <div class="message-in message-in--me">
+                          <div class="btn message-me">
+                            Cierto! creo que con esta refencia me ha quedado
+                            claro.
+                          </div>
+                        </div>
+                        <div class="message-in message-in--me">
+                          <div class="btn message-me">
+                            Genial! Muchas gracias
+                          </div>
+                        </div>
+                        <div class="message-in message-in--you">
+                          <div class="message-in--user">
+                            <img
+                              src="./assets/images/cms-images/avatar-34.jpg"
+                              class="avatar"
+                            />
+                            <span class="message-in--name">Juan Rodríguez</span>
+                          </div>
+                          <div class="btn message-you">
+                            De nada. ¡Un saludo!
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <!-- Input de mensajes -->
@@ -963,6 +1170,7 @@
           <li><a class="link" href="stories.html">11. Stories</a></li>
           <li><a class="link" href="evau.html">12. Evaluación</a></li>
           <li><a class="link" href="superaula.html">13. Superaula</a></li>
+          <li><a class="link" href="streaming.html">14. Streaming</a></li>
         </ul>
       </div>
     </div>

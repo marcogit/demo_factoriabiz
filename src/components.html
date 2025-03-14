@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0"
+    />
     <title>Componentes - Factoriabiz</title>
     <script type="module" src="./js/main.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -349,6 +352,437 @@
           </div>
         </div>
       </section>
+      <!-- Cards -->
+      <section class="panel">
+        <div class="container">
+          <!-- HEADER-->
+          <header class="panel-header">
+            <h2 class="title-med">Evaulación</h2>
+          </header>
+          <div class="panel-body">
+            <!-- BOX -->
+            <div class="box" x-data="{ selected: null }">
+              <div class="box-body">
+                <div class="box-minisection">
+                  <h2 class="title-box">
+                    <span class="btn btn-square is-small">1</span> ¿Qué modelos
+                    SUV de Hyundai existen?
+                  </h2>
+                  <form
+                    class="form-block"
+                    @submit.prevent=""
+                    x-data="{ options: ['KONA', 'TUCSON', 'SANTA FE'] }"
+                  >
+                    <div
+                      class="form-row grid grid-cols-1"
+                      role="radiogroup"
+                      x-data="radioGroup({ model: 'selected' })"
+                    >
+                      <template x-for="option in options" :key="option">
+                        <div class="column">
+                          <label
+                            x-radio-group-option="option"
+                            class="radio-group"
+                            :class="option === selected ? 'active' : ''"
+                            @click="selected = option"
+                          >
+                            <span class="radio-group--option">
+                              <span
+                                x-show="option === selected"
+                                class="radio-group--option---selected"
+                              ></span>
+                            </span>
+                            <span
+                              class="radio-group--text"
+                              x-text="option"
+                            ></span>
+                          </label>
+                        </div>
+                      </template>
+                      <div class="column">
+                        <button
+                          type="submit"
+                          class="btn btn-accent btn-full--mobile"
+                        >
+                          Responder Pregunta
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!-- BOX -->
+            <div class="box" x-data="{ selected: null }">
+              <div class="box-body">
+                <div class="box-minisection">
+                  <h2 class="title-box">
+                    <span class="btn btn-square is-small">2</span> Rellena el
+                    hueco con la palabra adecuada
+                  </h2>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur. In augue ipsum
+                    tellus ultrices. Ac pharetra ultrices consectetur consequat
+                    tellus massa. Nec aliquam cras sagittis duis sed euismod
+                    arcu hac. Ornare amet ligula ornare lacus aliquam aenean. Eu
+                    lacus imperdiet urna amet congue adipiscing. Faucibus magna
+                    nisl ullamcorper in facilisis consequat aliquam. amet
+                    consectetur. In augue ipsum tellus ultrices.
+                  </p>
+                  <figure class="cms-image">
+                    <img
+                      src="./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg"
+                      alt="cms"
+                    />
+                  </figure>
+                  <form class="form-block" @submit.prevent="">
+                    <div class="form-row grid grid-cols-1">
+                      <div class="column">
+                        <div x-data="{ respuesta: '' }" class="form-line">
+                          <span
+                            >La activación de bloqueo de señales acústicas en la
+                            ayuda al estacionamiento se encuentra ubicado</span
+                          >
+
+                          <input
+                            type="text"
+                            x-model="respuesta"
+                            class="formcontrol formcontrol-small"
+                            placeholder="completa la frase..."
+                          />
+
+                          <span>del vehículo.</span>
+                        </div>
+                      </div>
+
+                      <div class="column">
+                        <button
+                          type="submit"
+                          class="btn btn-accent btn-full--mobile"
+                        >
+                          Responder Pregunta
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!-- BOX -->
+            <div class="box" x-data="{ selected: null }">
+              <div class="box-body">
+                <div class="box-minisection">
+                  <h2 class="title-box">
+                    <span class="btn btn-square is-small">3</span> ¿Qué opinas
+                    del nuevo sistema de bloqueo de señales acústicas?
+                  </h2>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur. In augue ipsum
+                    tellus ultrices. Ac pharetra ultrices consectetur consequat
+                    tellus massa. Nec aliquam cras sagittis duis sed euismod
+                    arcu hac. Ornare amet ligula ornare lacus aliquam aenean. Eu
+                    lacus imperdiet urna amet congue adipiscing. Faucibus magna
+                    nisl ullamcorper in facilisis consequat aliquam. amet
+                    consectetur. In augue ipsum tellus ultrices.
+                  </p>
+                  <figure class="cms-image">
+                    <img
+                      src="./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg"
+                      alt="cms"
+                    />
+                  </figure>
+                  <form class="form-block" @submit.prevent="">
+                    <div class="form-row grid grid-cols-1">
+                      <div class="column">
+                        <textarea
+                          rows="5"
+                          class="formcontrol"
+                          placeholder="Escribe aquí tu respuesta..."
+                        ></textarea>
+                      </div>
+                      <div class="column">
+                        <button
+                          type="submit"
+                          class="btn btn-accent btn-full--mobile"
+                        >
+                          Responder Pregunta
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!-- BOX -->
+            <div class="box" x-data="{ selected: null }">
+              <div class="box-body">
+                <div class="box-minisection">
+                  <h2 class="title-box">
+                    <span class="btn btn-square is-small">4</span> Selecciona el
+                    único SUV de la lista
+                  </h2>
+                  <p>
+                    Ornare amet ligula ornare lacus aliquam aenean. Eu lacus
+                    imperdiet urna amet congue adipiscing. Faucibus magna nisl
+                    ullamcorper in facilisis
+                  </p>
+                  <form class="form-block" @submit.prevent="">
+                    <div x-data="{ selected: 'ioniq' }" class="form-list">
+                      <template
+                        x-for="car in [
+                          { id: 'santafe', name: 'Hyundai Santa Fe', image: './assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg' },
+                          { id: 'ioniq', name: 'Hyundai Ioniq 5', image: './assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg' },
+                          { id: 'i30', name: 'Hyundai i30', image: './assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg' }
+                      ]"
+                        :key="car.id"
+                      >
+                        <label class="radio-group radio-group-image">
+                          <input
+                            type="radio"
+                            x-model="selected"
+                            :value="car.id"
+                            class="hidden"
+                          />
+
+                          <!-- Radio personalizado -->
+                          <div class="radio-group-group">
+                            <div
+                              class="radio-group--option"
+                              :class="selected === car.id ? 'selected' : ''"
+                            >
+                              <div
+                                class="radio-group--option---selected"
+                                x-show="selected === car.id"
+                              ></div>
+                            </div>
+                            <span
+                              class="radio-group--text"
+                              :class="selected === car.id ? 'text-neutar-dark' : ''"
+                              x-text="car.name"
+                            ></span>
+                          </div>
+
+                          <!-- Imagen -->
+                          <img
+                            :src="car.image"
+                            class="radio-image--content"
+                            :class="selected === car.id ? 'selected' : ''"
+                          />
+                        </label>
+                      </template>
+                    </div>
+
+                    <div class="form-row grid grid-cols-1">
+                      <div class="column">
+                        <button
+                          type="submit"
+                          class="btn btn-accent btn-full--mobile"
+                        >
+                          Responder Pregunta
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!-- BOX -->
+            <div class="box" x-data="{ selected: null }">
+              <div class="box-body">
+                <div class="box-minisection">
+                  <h2 class="title-box">
+                    <span class="btn btn-square is-small">5</span> Relaciona las
+                    marcas con su modelo
+                  </h2>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur. In augue ipsum
+                    tellus ultrices. Ac pharetra ultrices consectetur consequat
+                    tellus massa. Nec aliquam cras sagittis duis sed euismod
+                    arcu hac. Ornare amet ligula ornare lacus aliquam aenean. Eu
+                    lacus imperdiet urna amet congue adipiscing. Faucibus magna
+                    nisl ullamcorper in facilisis consequat aliquam. amet
+                    consectetur. In augue ipsum tellus ultrices.
+                  </p>
+                  <figure class="cms-image">
+                    <img
+                      src="./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg"
+                      alt="cms"
+                    />
+                  </figure>
+                  <form class="form-block" @submit.prevent="">
+                    <div class="form-row grid grid-cols-1">
+                      <div class="column column-center">
+                        <div x-data="dragDrop()" class="dragDrop-panel">
+                          <div class="dragDrop-panel--row">
+                            <!-- Marcas de autos (Zona de Drop) -->
+                            <div class="dragDrop-panel--col">
+                              <template
+                                x-for="brand in brands"
+                                :key="brand.name"
+                              >
+                                <div
+                                  class="btn btn-brand--line btn-left"
+                                  :class="brand.models.length ? 'active' : ''"
+                                  @dragover.prevent
+                                  @drop="drop(brand, $event)"
+                                >
+                                  <span
+                                    x-text="brand.name + (brand.models.length ? ' + ' + brand.models.join(' + ') : '')"
+                                  ></span>
+                                </div>
+                              </template>
+                            </div>
+
+                            <!-- Modelos de autos (Zona Draggable) -->
+                            <div class="flex flex-col space-y-4">
+                              <template x-for="model in models" :key="model.id">
+                                <div
+                                  class="btn btn-brand--line btn-left"
+                                  draggable="true"
+                                  @dragstart="drag(model, $event)"
+                                >
+                                  <img
+                                    src="./assets/images/icon-move.svg"
+                                    alt="move"
+                                  />
+                                  <span x-text="model.name"></span>
+                                </div>
+                              </template>
+                              <!-- Botón de Reset (Aparece si hay relaciones) -->
+                              <button
+                                x-show="hasRelations()"
+                                @click="reset()"
+                                class="btn btn-danger"
+                              >
+                                Reset
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="column">
+                        <button
+                          type="submit"
+                          class="btn btn-accent btn-full--mobile"
+                        >
+                          Responder Pregunta
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!-- ALERT-->
+            <div class="alert alert-big alert-danger">
+              <div class="alert-body">
+                <div
+                  class="grid grid-cols-1 lg:grid-cols-[1fr_auto] items-center"
+                >
+                  <div class="column">
+                    <div class="alert-link">
+                      <a href="#" class="link link-danger"
+                        >¿Deseas pausar la prueba?</a
+                      >
+                    </div>
+                  </div>
+                  <div class="column">
+                    <div class="alert-ui">
+                      <p>Finalización del test:</p>
+                      <div x-data="countdownTimer" x-init="startCountdown()">
+                        <span
+                          id="countdown"
+                          class="badge badge-square badge-danger"
+                        >
+                          <span x-text="hours"></span>:<span
+                            x-text="minutes"
+                          ></span
+                          >:<span x-text="seconds"></span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- ALERT-->
+            <div class="alert alert-big alert-danger">
+              <div class="alert-body">
+                <div
+                  class="grid grid-cols-1 lg:grid-cols-[1fr_auto] items-center"
+                >
+                  <div class="column">
+                    <div class="alert-link">
+                      <a href="#" class="link link-danger"
+                        >¿Deseas pausar la prueba?</a
+                      >
+                    </div>
+                  </div>
+                  <div class="column">
+                    <div class="alert-ui">
+                      <p>Finalización del test:</p>
+                      <div x-data="countdownTimer" x-init="startCountdown()">
+                        <span
+                          id="countdown"
+                          class="badge badge-square badge-danger"
+                        >
+                          <span x-text="hours"></span>:<span
+                            x-text="minutes"
+                          ></span
+                          >:<span x-text="seconds"></span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="alert-info">
+                  <p class="mini-info">
+                    <img src="./assets/images/icon-avise.svg" alt="Avise" />
+                    Pulsa el siguiente botón para pausar la prueba. Te quedan 2
+                    pausas disponibles para la realización del test
+                  </p>
+                  <button class="btn btn-danger btn-full--mobile">
+                    Pausar la prueba
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- ALERT-->
+            <div class="alert alert-big alert-warning--light">
+              <div class="alert-body">
+                <div class="grid grid-cols-1 items-center">
+                  <div class="column column-center">
+                    <div class="alert-ui">
+                      <p>Finalización del test:</p>
+                      <div x-data="countdownTimer" x-init="startCountdown()">
+                        <span
+                          id="countdown"
+                          class="badge badge-square badge-accent"
+                        >
+                          <span x-text="hours"></span>:<span
+                            x-text="minutes"
+                          ></span
+                          >:<span x-text="seconds"></span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="alert-info">
+                  <p class="mini-info">
+                    <img src="./assets/images/icon-avise.svg" alt="Avise" />
+                    Pulsa el siguiente botón para pausar la prueba. Te quedan 2
+                    pausas disponibles para la realización del test
+                  </p>
+                  <button class="btn btn-accent is--bg btn-full--mobile">
+                    Pausar la prueba
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
     <!-- Botón entre páginas (BORRAR) -->
     <div x-data="{ openMenu: false }" class="btn-menu-auxiliar">
@@ -379,6 +813,7 @@
           <li><a class="link" href="stories.html">11. Stories</a></li>
           <li><a class="link" href="evau.html">12. Evaluación</a></li>
           <li><a class="link" href="superaula.html">13. Superaula</a></li>
+          <li><a class="link" href="streaming.html">14. Streaming</a></li>
         </ul>
       </div>
     </div>

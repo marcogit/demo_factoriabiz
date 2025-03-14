@@ -23,6 +23,7 @@ export default defineConfig({
         stories: "./src/stories.html",
         evaulacion: "./src/evau.html",
         superaula: "./src/superaula.html",
+        streaming: "./src/streaming.html",
         components: "./src/components.html",
       },
       output: {

@@ -2,8 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Evaulación - Factoriabiz</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0"
+    />
+    <title>Superaula - Factoriabiz</title>
     <script type="module" src="./js/main.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -440,7 +443,7 @@
       </div>
     </header>
     <!-- END MAIN HEADER -->
-    <div class="scroll-fix scroll-fix--full">
+    <div class="scroll-fix">
       <main class="main-aula" x-data="{ sidebarOpen: true, sliderOpen: true }">
         <div
           x-data="{ sidebarOpen: true }"
@@ -454,26 +457,64 @@
               :class="sliderOpen ? 'grid-superaula--content---slider---active' : 'grid-superaula--content---slider---disabled'"
             >
               <div
-              class="grid-superaula--content---slider-data"
+                class="grid-superaula--content---slider-data"
                 x-data="{
-                    init() {
-                        new Splide(this.$refs.splide, {
-                            perPage: 1,
-                            pagination: true,
-                            arrows: true,
-                        }).mount()
-                    },
-                }"
-                >
+              currentSlide: 1,
+              totalSlides: 0,
+              init() {
+                const splide = new Splide(this.$refs.splide, {
+                  perPage: 1,
+                  pagination: false,
+                  arrows: true,
+                  drag: window.innerWidth < 976, // Solo permite drag en móvil
+                  swipe: window.innerWidth < 976, // Deshabilita swipe en escritorio
+                });
+        
+                splide.on('mounted move', () => {
+                  this.currentSlide = splide.index + 1;
+                  this.totalSlides = splide.length;
+        
+                  // Actualizar el paginador numérico
+                  this.$refs.currentPage.textContent = this.currentSlide;
+                  this.$refs.totalPages.textContent = this.totalSlides;
+        
+                  // Obtener botones de navegación
+                  const prevArrow = splide.Components.Arrows.arrows.prev;
+                  const nextArrow = splide.Components.Arrows.arrows.next;
+        
+                  // Asignar tooltips con los títulos de los slides
+                  prevArrow.setAttribute('title', splide.Components.Slides.getAt(splide.index - 1)?.slide.dataset.title || 'Inicio');
+                  nextArrow.setAttribute('title', splide.Components.Slides.getAt(splide.index + 1)?.slide.dataset.title || 'Fin');
+                });
+        
+                splide.mount();
+              }
+            }"
+              >
                 <div
                   x-ref="splide"
                   class="splide splide-superaula"
                   aria-label="splide superaula"
-                  >
+                >
+                  <!-- Paginación numérica -->
+                  <span class="list-badge splide-pagination">
+                    <span
+                      class="badge badge-slide badge-number"
+                      x-ref="currentPage"
+                      >1</span
+                    >
+                    /
+                    <span class="badge badge-slide badge-number"
+                      ><strong x-ref="totalPages">5</strong></span
+                    >
+                  </span>
                   <div class="splide__track">
                     <div class="splide__list">
-                      <!-- slide videp-->
-                      <div class="splide__slide bg-neutral-dark">
+                      <!-- slide video-->
+                      <div
+                        class="splide__slide bg-neutral-dark"
+                        data-title="1. Vídeo"
+                      >
                         <div class="container p-0">
                           <iframe
                             class="h-full aspect-video aspect-video--superaula"
@@ -486,51 +527,155 @@
                           ></iframe>
                         </div>
                       </div>
+                      <!-- slide pdf-->
+                      <div class="splide__slide bg-neutral" data-title="2. Pdf">
+                        <div class="container p-0">
+                          <embed
+                            src="./assets/images/cms-images/dummy.pdf"
+                            type="application/pdf"
+                            width="100%"
+                            height="600px"
+                          />
+                        </div>
+                      </div>
                       <!-- slide img-->
-                      <div class="splide__slide bg-neutral-dark">
+                      <div
+                        class="splide__slide bg-neutral-dark"
+                        data-title="3. Imagen"
+                      >
                         <div class="container p-0">
                           <figure class="aspect-img--superaula">
-                            <img src="./assets/images/cms-images/dummy_1024x768_ffffff_cccccc.png" alt="cms" />
+                            <img
+                              src="./assets/images/cms-images/dummy_1024x768_ffffff_cccccc.png"
+                              alt="cms"
+                            />
                           </figure>
                         </div>
                       </div>
-                      <!-- slide pdf-->
-                      <div class="splide__slide bg-neutral">
-                        <div class="container p-0">
-                        <embed
-                          src="./assets/images/cms-images/dummy.pdf"
-                          type="application/pdf"
-                          width="100%"
-                          height="600px"
-                        />
-                        </div>
-                      </div>
-                      <!-- slide ok-->
-                      <div class="splide__slide">
+                      <!-- slide ok
+                      <div class="splide__slide" data-title="4. artículo">
                         <div class="container">
                           <div class="splide__slide-box">
-                            <div class="progress progress-big progress-green mb-5">
-                              <div class="progress-bar--box">
-                                <div class="progress-bar" style="width: 50%"></div>
+                            <article class="grid post post-general">
+                              <div class="column post-body">
+                                <h2 class="title-big">
+                                  Suscríbete a un JAECOO 7 con Astara y descubre
+                                  por qué todo el mundo habla de esta nueva
+                                  marca
+                                </h2>
+                                <h4 class="title-med title-med--accent">
+                                  JAECOO 7 por suscripción desde 759€/mes
+                                </h4>
+                                <span class="subtitle-small date"
+                                  >Publicado hace 29 días</span
+                                >
+                                <p>
+                                  La marca promete SUV y todoterrenos intrépidos
+                                  con mucha elegancia y cargados de tecnología.
+                                  Su carta de presentación es el JAECOO 7, que
+                                  <a href="#" class="link">
+                                    ya tienes disponible en el catálogo de
+                                    suscripción de Astara desde 759 euros al
+                                    mes</a
+                                  >, como siempre con seguro, mantenimiento,
+                                  asistencia en carretera e impuestos incluidos.
+                                </p>
+                                <figure class="image">
+                                  <img
+                                    src="./assets/images/cms-images/dummy_1024x768_ffffff_cccccc.png"
+                                    alt="Imagen de actividad"
+                                  />
+                                </figure>
+                                <p>
+                                  Más del 80% de la carrocería está fabricada
+                                  con acero de alta resistencia. Además, el
+                                  JAECOO 7 incorpora más de 18 sistemas de ayuda
+                                  a la conducción, superando con creces el nivel
+                                  2 de conducción autónoma.
+                                </p>
+                                <ul>
+                                  <li>
+                                    Lorem ipsum dolor sit amet consectetur. In
+                                    augue ipsum tellus ultrices.
+                                  </li>
+                                  <li>
+                                    Ac pharetra ultrices consectetur consequat
+                                    tellus massa.
+                                  </li>
+                                  <li>
+                                    Nec aliquam cras sagittis duis sed euismod
+                                    arcu hac.
+                                  </li>
+                                  <li>
+                                    Ornare amet ligula ornare lacus aliquam
+                                    aenean.
+                                  </li>
+                                </ul>
+                                <ol>
+                                  <li>
+                                    Lorem ipsum dolor sit amet consectetur. In
+                                    augue ipsum tellus ultrices.
+                                  </li>
+                                  <li>
+                                    Ac pharetra ultrices consectetur consequat
+                                    tellus massa.
+                                  </li>
+                                  <li>
+                                    Nec aliquam cras sagittis duis sed euismod
+                                    arcu hac.
+                                  </li>
+                                  <li>
+                                    Ornare amet ligula ornare lacus aliquam
+                                    aenean.
+                                  </li>
+                                </ol>
                               </div>
-                              <div class="progress-bar--date text-success">50%</div>
+                            </article>
+                          </div>
+                        </div>
+                      </div>
+                       slide ok-->
+                      <div
+                        class="splide__slide"
+                        data-title="4. ¿Qué opinas del nuevo sistema de bloqueo de señales acústicas?"
+                      >
+                        <div class="container">
+                          <div class="splide__slide-box splide__slide-box--display">
+                            <div
+                              class="progress progress-big progress-green mb-5"
+                            >
+                              <div class="progress-bar--box">
+                                <div
+                                  class="progress-bar"
+                                  style="width: 50%"
+                                ></div>
+                              </div>
+                              <div class="progress-bar--date text-success">
+                                50%
+                              </div>
                             </div>
                             <!-- BOX -->
                             <div class="box" x-data="{ selected: null }">
                               <div class="box-body">
                                 <div class="box-minisection">
                                   <h2 class="title-box">
-                                    <span class="btn btn-square is-small">3</span> ¿Qué opinas
-                                    del nuevo sistema de bloqueo de señales acústicas?
+                                    <span class="btn btn-square is-small"
+                                      >3</span
+                                    >
+                                    ¿Qué opinas del nuevo sistema de bloqueo de
+                                    señales acústicas?
                                   </h2>
                                   <p>
-                                    Lorem ipsum dolor sit amet consectetur. In augue ipsum
-                                    tellus ultrices. Ac pharetra ultrices consectetur consequat
-                                    tellus massa. Nec aliquam cras sagittis duis sed euismod
-                                    arcu hac. Ornare amet ligula ornare lacus aliquam aenean. Eu
-                                    lacus imperdiet urna amet congue adipiscing. Faucibus magna
-                                    nisl ullamcorper in facilisis consequat aliquam. amet
-                                    consectetur. In augue ipsum tellus ultrices.
+                                    Lorem ipsum dolor sit amet consectetur. In
+                                    augue ipsum tellus ultrices. Ac pharetra
+                                    ultrices consectetur consequat tellus massa.
+                                    Nec aliquam cras sagittis duis sed euismod
+                                    arcu hac. Ornare amet ligula ornare lacus
+                                    aliquam aenean. Eu lacus imperdiet urna amet
+                                    congue adipiscing. Faucibus magna nisl
+                                    ullamcorper in facilisis consequat aliquam.
+                                    amet consectetur. In augue ipsum tellus
+                                    ultrices.
                                   </p>
                                   <figure class="cms-image">
                                     <img
@@ -561,34 +706,66 @@
                               </div>
                             </div>
                           </div>
+                          <div
+                            class="splide__slide-modal"
+                            style="
+                              background-image: url(./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg);
+                            "
+                            >
+                            <div class="splide__slide-modal--content">
+                              3.5 Test de modelos SUV Hyundai
+                              <!-- Modal Trigger -->
+                              <button
+                                class="btn btn-accent"
+                                @click="openModal = true"
+                              >
+                                Realizar test
+                              </button>
+                            </div>
+                          </div>
                         </div>
                       </div>
                       <!-- slide ok-->
-                      <div class="splide__slide">
+                      <div
+                        class="splide__slide"
+                        data-title="5. Rellena el hueco con la palabra adecuada?"
+                      >
                         <div class="container">
-                          <div class="splide__slide-box">
-                            <div class="progress progress-big progress-green mb-5">
+                          <div class="splide__slide-box splide__slide-box--display">
+                            <div
+                              class="progress progress-big progress-green mb-5"
+                            >
                               <div class="progress-bar--box">
-                                <div class="progress-bar" style="width: 50%"></div>
+                                <div
+                                  class="progress-bar"
+                                  style="width: 50%"
+                                ></div>
                               </div>
-                              <div class="progress-bar--date text-success">50%</div>
+                              <div class="progress-bar--date text-success">
+                                50%
+                              </div>
                             </div>
                             <!-- BOX -->
                             <div class="box" x-data="{ selected: null }">
                               <div class="box-body">
                                 <div class="box-minisection">
                                   <h2 class="title-box">
-                                    <span class="btn btn-square is-small">2</span> Rellena el
-                                    hueco con la palabra adecuada
+                                    <span class="btn btn-square is-small"
+                                      >2</span
+                                    >
+                                    Rellena el hueco con la palabra adecuada
                                   </h2>
                                   <p>
-                                    Lorem ipsum dolor sit amet consectetur. In augue ipsum
-                                    tellus ultrices. Ac pharetra ultrices consectetur consequat
-                                    tellus massa. Nec aliquam cras sagittis duis sed euismod
-                                    arcu hac. Ornare amet ligula ornare lacus aliquam aenean. Eu
-                                    lacus imperdiet urna amet congue adipiscing. Faucibus magna
-                                    nisl ullamcorper in facilisis consequat aliquam. amet
-                                    consectetur. In augue ipsum tellus ultrices.
+                                    Lorem ipsum dolor sit amet consectetur. In
+                                    augue ipsum tellus ultrices. Ac pharetra
+                                    ultrices consectetur consequat tellus massa.
+                                    Nec aliquam cras sagittis duis sed euismod
+                                    arcu hac. Ornare amet ligula ornare lacus
+                                    aliquam aenean. Eu lacus imperdiet urna amet
+                                    congue adipiscing. Faucibus magna nisl
+                                    ullamcorper in facilisis consequat aliquam.
+                                    amet consectetur. In augue ipsum tellus
+                                    ultrices.
                                   </p>
                                   <figure class="cms-image">
                                     <img
@@ -599,10 +776,15 @@
                                   <form class="form-block" @submit.prevent="">
                                     <div class="form-row grid grid-cols-1">
                                       <div class="column">
-                                        <div x-data="{ respuesta: '' }" class="form-line">
+                                        <div
+                                          x-data="{ respuesta: '' }"
+                                          class="form-line"
+                                        >
                                           <span
-                                            >La activación de bloqueo de señales acústicas en la
-                                            ayuda al estacionamiento se encuentra ubicado</span
+                                            >La activación de bloqueo de señales
+                                            acústicas en la ayuda al
+                                            estacionamiento se encuentra
+                                            ubicado</span
                                           >
 
                                           <input
@@ -630,33 +812,66 @@
                               </div>
                             </div>
                           </div>
+                          <div
+                            class="splide__slide-modal"
+                            style="
+                              background-image: url(./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg);
+                            "
+                          >
+                            <div class="splide__slide-modal--content">
+                              3.5 Test de modelos SUV Hyundai
+                              <!-- Modal Trigger -->
+                              <button
+                                class="btn btn-accent"
+                                @click="openModal = true"
+                              >
+                                Realizar test
+                              </button>
+                            </div>
+                          </div>
                         </div>
                       </div>
                       <!-- slide-->
-                      <div class="splide__slide">
+                      <div
+                        class="splide__slide"
+                        data-title="6. Selecciona el único SUV de la lista?"
+                      >
                         <div class="container">
-                          <div class="splide__slide-box">
-                            <div class="progress progress-big progress-green mb-5">
+                          <div class="splide__slide-box splide__slide-box--display">
+                            <div
+                              class="progress progress-big progress-green mb-5"
+                            >
                               <div class="progress-bar--box">
-                                <div class="progress-bar" style="width: 50%"></div>
+                                <div
+                                  class="progress-bar"
+                                  style="width: 50%"
+                                ></div>
                               </div>
-                              <div class="progress-bar--date text-success">50%</div>
+                              <div class="progress-bar--date text-success">
+                                50%
+                              </div>
                             </div>
                             <!-- BOX -->
                             <div class="box" x-data="{ selected: null }">
                               <div class="box-body">
                                 <div class="box-minisection">
                                   <h2 class="title-box">
-                                    <span class="btn btn-square is-small">4</span> Selecciona el
-                                    único SUV de la lista
+                                    <span class="btn btn-square is-small"
+                                      >4</span
+                                    >
+                                    Selecciona el único SUV de la lista
                                   </h2>
                                   <p>
-                                    Ornare amet ligula ornare lacus aliquam aenean. Eu lacus
-                                    imperdiet urna amet congue adipiscing. Faucibus magna nisl
-                                    ullamcorper in facilisis
+                                    Ornare amet ligula ornare lacus aliquam
+                                    aenean. Eu lacus imperdiet urna amet congue
+                                    adipiscing. Faucibus magna nisl ullamcorper
+                                    in facilisis
                                   </p>
                                   <form class="form-block" @submit.prevent="">
-                                    <div x-data="{ selected: 'ioniq' }" class="form-list">
+                                    <div
+                                      x-data="{ selected: 'ioniq' }"
+                                      class="form-list"
+                                    >
                                       <template
                                         x-for="car in [
                                           { id: 'santafe', name: 'Hyundai Santa Fe', image: './assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg' },
@@ -665,7 +880,9 @@
                                       ]"
                                         :key="car.id"
                                       >
-                                        <label class="radio-group radio-group-image">
+                                        <label
+                                          class="radio-group radio-group-image"
+                                        >
                                           <input
                                             type="radio"
                                             x-model="selected"
@@ -714,11 +931,169 @@
                                   </form>
                                 </div>
                               </div>
-                            </div>    
+                            </div>
+                          </div>
+                          <div
+                            class="splide__slide-modal"
+                            style="
+                              background-image: url(./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg);
+                            "
+                          >
+                            <div class="splide__slide-modal--content">
+                              3.5 Test de modelos SUV Hyundai
+                              <!-- Modal Trigger -->
+                              <button
+                                class="btn btn-accent"
+                                @click="openModal = true"
+                              >
+                                Realizar test
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
-                      
+                      <!-- slide-->
+                      <div
+                        class="splide__slide"
+                        data-title="7. Relaciona las marcas con modelo"
+                      >
+                        <div class="container">
+                          <div class="splide__slide-box splide__slide-box--display">
+                            <div
+                              class="progress progress-big progress-green mb-5"
+                            >
+                              <div class="progress-bar--box">
+                                <div
+                                  class="progress-bar"
+                                  style="width: 50%"
+                                ></div>
+                              </div>
+                              <div class="progress-bar--date text-success">
+                                50%
+                              </div>
+                            </div>
+                            <!-- BOX -->
+                            <div class="box" x-data="{ selected: null }">
+                              <div class="box-body">
+                                <div class="box-minisection">
+                                  <h2 class="title-box">
+                                    <span class="btn btn-square is-small"
+                                      >5</span
+                                    >
+                                    Relaciona las marcas con su modelo
+                                  </h2>
+                                  <p>
+                                    Lorem ipsum dolor sit amet consectetur. In
+                                    augue ipsum tellus ultrices. Ac pharetra
+                                    ultrices consectetur consequat tellus massa.
+                                    Nec aliquam cras sagittis duis sed euismod
+                                    arcu hac. Ornare amet ligula ornare lacus
+                                    aliquam aenean. Eu lacus imperdiet urna amet
+                                    congue adipiscing. Faucibus magna nisl
+                                    ullamcorper in facilisis consequat aliquam.
+                                    amet consectetur. In augue ipsum tellus
+                                    ultrices.
+                                  </p>
+                                  <figure class="cms-image">
+                                    <img
+                                      src="./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg"
+                                      alt="cms"
+                                    />
+                                  </figure>
+                                  <form class="form-block" @submit.prevent="">
+                                    <div class="form-row grid grid-cols-1">
+                                      <div class="column column-center">
+                                        <div
+                                          x-data="dragDrop()"
+                                          class="dragDrop-panel"
+                                        >
+                                          <div class="dragDrop-panel--row">
+                                            <!-- Marcas de autos (Zona de Drop) -->
+                                            <div class="dragDrop-panel--col">
+                                              <template
+                                                x-for="brand in brands"
+                                                :key="brand.name"
+                                              >
+                                                <div
+                                                  class="btn btn-brand--line btn-left"
+                                                  :class="brand.models.length ? 'active' : ''"
+                                                  @dragover.prevent
+                                                  @drop="drop(brand, $event)"
+                                                >
+                                                  <span
+                                                    x-text="brand.name + (brand.models.length ? ' + ' + brand.models.join(' + ') : '')"
+                                                  ></span>
+                                                </div>
+                                              </template>
+                                            </div>
+
+                                            <!-- Modelos de autos (Zona Draggable) -->
+                                            <div
+                                              class="flex flex-col space-y-4"
+                                            >
+                                              <template
+                                                x-for="model in models"
+                                                :key="model.id"
+                                              >
+                                                <div
+                                                  class="btn btn-brand--line btn-left"
+                                                  draggable="true"
+                                                  @dragstart="drag(model, $event)"
+                                                >
+                                                  <img
+                                                    src="./assets/images/icon-move.svg"
+                                                    alt="move"
+                                                  />
+                                                  <span
+                                                    x-text="model.name"
+                                                  ></span>
+                                                </div>
+                                              </template>
+                                              <!-- Botón de Reset (Aparece si hay relaciones) -->
+                                              <button
+                                                x-show="hasRelations()"
+                                                @click="reset()"
+                                                class="btn btn-danger"
+                                              >
+                                                Reset
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="column">
+                                        <button
+                                          type="submit"
+                                          class="btn btn-accent btn-full--mobile"
+                                        >
+                                          Responder Pregunta
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="splide__slide-modal"
+                            style="
+                              background-image: url(./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg);
+                            "
+                          >
+                            <div class="splide__slide-modal--content">
+                              3.5 Test de modelos SUV Hyundai
+                              <!-- Modal Trigger -->
+                              <button
+                                class="btn btn-accent"
+                                @click="openModal = true"
+                              >
+                                Realizar test
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -728,299 +1103,301 @@
             <section class="grid-superaula--content---tabs">
               <!--MOBIlE-->
               <aside
-              class="grid-superaula--sidebar grid-superaula--mobile"
-              :class="sidebarOpen ? 'grid-superaula--sidebar---active' : 'grid-superaula--sidebar---disabled'"
-            >
-              <!-- Botón para colapsar -->
-              <button
-                @click="sidebarOpen = !sidebarOpen"
-                class="btn btn-square is-small btn-dark btn-sidebar-control"
+                class="grid-superaula--sidebar grid-superaula--mobile"
+                :class="sidebarOpen ? 'grid-superaula--sidebar---active' : 'grid-superaula--sidebar---disabled'"
               >
-                <img src="./assets/images/icon-close.svg" alt="Close" />
-              </button>
+                <!-- Botón para colapsar -->
+                <button
+                  @click="sidebarOpen = !sidebarOpen"
+                  class="btn btn-square is-small btn-dark btn-sidebar-control"
+                >
+                  <img src="./assets/images/icon-close.svg" alt="Close" />
+                </button>
 
-              <div class="grid-superaula--sidebar---content">
-                <div class="grid-superaula--sidebar---header">
-                  <h2 class="title-base">Índice del Curso</h2>
+                <div class="grid-superaula--sidebar---content">
+                  <div class="grid-superaula--sidebar---header">
+                    <h2 class="title-base">Índice del Curso</h2>
+                  </div>
+                  <div x-show="sidebarOpen">
+                    <!-- Accordion -->
+                    <div
+                      x-data="{ open: false }"
+                      class="grid-superaula--sidebar---accordion"
+                    >
+                      <div
+                        @click="open = !open"
+                        class="grid-superaula--sidebar---accordion-header"
+                      >
+                        <div
+                          class="grid-superaula--sidebar---accordion-header-title"
+                        >
+                          <strong>Sección 1: Introducción</strong>
+                          <span>11/11</span>
+                        </div>
+                        <span class="btn btn-transparent">
+                          <img
+                            :class="{ 'rotate-180': open }"
+                            src="./assets/images/icon-arrow-down.svg"
+                            alt="Arrow"
+                          />
+                        </span>
+                      </div>
+                      <div
+                        x-show="open"
+                        x-collapse
+                        class="grid-superaula--sidebar---accordion-body"
+                      >
+                        <ul>
+                          <li>
+                            <button class="superaula-i-link active">
+                              <span class="check">
+                                <img
+                                  src="./assets/images/icon-minicheck.svg"
+                                  alt="Check"
+                                />
+                              </span>
+                              <div class="superaula-i-link--icon">
+                                <img
+                                  src="./assets/images/icon-indice-01-video.svg"
+                                  alt="pdf"
+                                />
+                              </div>
+                              <div class="superaula-i-link--text">
+                                1. Introducción a la sección
+                              </div>
+                            </button>
+                          </li>
+                          <li>
+                            <button class="superaula-i-link active">
+                              <span class="check">
+                                <img
+                                  src="./assets/images/icon-minicheck.svg"
+                                  alt="Check"
+                                />
+                              </span>
+                              <div class="superaula-i-link--icon">
+                                <img
+                                  src="./assets/images/icon-indice-02-pdf.svg"
+                                  alt="pdf"
+                                />
+                              </div>
+                              <div class="superaula-i-link--text">
+                                2. Respuesta del acelerador
+                              </div>
+                            </button>
+                          </li>
+                          <li>
+                            <button class="superaula-i-link">
+                              <span class="check">
+                                <img
+                                  src="./assets/images/icon-minicheck.svg"
+                                  alt="Check"
+                                />
+                              </span>
+                              <div class="superaula-i-link--icon">
+                                <img
+                                  src="./assets/images/icon-indice-03-img.svg"
+                                  alt="pdf"
+                                />
+                              </div>
+                              <div class="superaula-i-link--text">
+                                3. Galería de imágenes de introducción
+                              </div>
+                            </button>
+                          </li>
+                          <li>
+                            <button class="superaula-i-link">
+                              <span class="check">
+                                <img
+                                  src="./assets/images/icon-minicheck.svg"
+                                  alt="Check"
+                                />
+                              </span>
+                              <div class="superaula-i-link--icon">
+                                <img
+                                  src="./assets/images/icon-indice-04-doc.svg"
+                                  alt="pdf"
+                                />
+                              </div>
+                              <div class="superaula-i-link--text">
+                                4. Texto descriptivo de introducción
+                              </div>
+                            </button>
+                          </li>
+                          <li>
+                            <button class="superaula-i-link">
+                              <span class="check">
+                                <img
+                                  src="./assets/images/icon-minicheck.svg"
+                                  alt="Check"
+                                />
+                              </span>
+                              <div class="superaula-i-link--icon">
+                                <img
+                                  src="./assets/images/icon-indice-05-test.svg"
+                                  alt="pdf"
+                                />
+                              </div>
+                              <div class="superaula-i-link--text">
+                                Test de la sección
+                              </div>
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <!-- END Accordion -->
+                    <!-- Accordion -->
+                    <div
+                      x-data="{ open: false }"
+                      class="grid-superaula--sidebar---accordion"
+                    >
+                      <div
+                        @click="open = !open"
+                        class="grid-superaula--sidebar---accordion-header"
+                      >
+                        <div
+                          class="grid-superaula--sidebar---accordion-header-title"
+                        >
+                          <strong>Sección 1: Introducción</strong>
+                          <span>11/11</span>
+                        </div>
+                        <span class="btn btn-transparent">
+                          <img
+                            :class="{ 'rotate-180': open }"
+                            src="./assets/images/icon-arrow-down.svg"
+                            alt="Arrow"
+                          />
+                        </span>
+                      </div>
+                      <div
+                        x-show="open"
+                        x-collapse
+                        class="grid-superaula--sidebar---accordion-body"
+                      >
+                        <ul>
+                          <li>
+                            <button class="superaula-i-link active">
+                              <span class="check">
+                                <img
+                                  src="./assets/images/icon-minicheck.svg"
+                                  alt="Check"
+                                />
+                              </span>
+                              <div class="superaula-i-link--icon">
+                                <img
+                                  src="./assets/images/icon-indice-01-video.svg"
+                                  alt="pdf"
+                                />
+                              </div>
+                              <div class="superaula-i-link--text">
+                                1. Introducción a la sección
+                              </div>
+                            </button>
+                          </li>
+                          <li>
+                            <button class="superaula-i-link active">
+                              <span class="check">
+                                <img
+                                  src="./assets/images/icon-minicheck.svg"
+                                  alt="Check"
+                                />
+                              </span>
+                              <div class="superaula-i-link--icon">
+                                <img
+                                  src="./assets/images/icon-indice-02-pdf.svg"
+                                  alt="pdf"
+                                />
+                              </div>
+                              <div class="superaula-i-link--text">
+                                2. Respuesta del acelerador
+                              </div>
+                            </button>
+                          </li>
+                          <li>
+                            <button class="superaula-i-link">
+                              <span class="check">
+                                <img
+                                  src="./assets/images/icon-minicheck.svg"
+                                  alt="Check"
+                                />
+                              </span>
+                              <div class="superaula-i-link--icon">
+                                <img
+                                  src="./assets/images/icon-indice-03-img.svg"
+                                  alt="pdf"
+                                />
+                              </div>
+                              <div class="superaula-i-link--text">
+                                3. Galería de imágenes de introducción
+                              </div>
+                            </button>
+                          </li>
+                          <li>
+                            <button class="superaula-i-link">
+                              <span class="check">
+                                <img
+                                  src="./assets/images/icon-minicheck.svg"
+                                  alt="Check"
+                                />
+                              </span>
+                              <div class="superaula-i-link--icon">
+                                <img
+                                  src="./assets/images/icon-indice-04-doc.svg"
+                                  alt="pdf"
+                                />
+                              </div>
+                              <div class="superaula-i-link--text">
+                                4. Texto descriptivo de introducción
+                              </div>
+                            </button>
+                          </li>
+                          <li>
+                            <button class="superaula-i-link">
+                              <span class="check">
+                                <img
+                                  src="./assets/images/icon-minicheck.svg"
+                                  alt="Check"
+                                />
+                              </span>
+                              <div class="superaula-i-link--icon">
+                                <img
+                                  src="./assets/images/icon-indice-05-test.svg"
+                                  alt="pdf"
+                                />
+                              </div>
+                              <div class="superaula-i-link--text">
+                                Test de la sección
+                              </div>
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <!-- END Accordion -->
+                  </div>
                 </div>
-                <div x-show="sidebarOpen">
-<!-- Accordion -->
-<div
-x-data="{ open: false }"
-class="grid-superaula--sidebar---accordion"
->
-<div
-  @click="open = !open"
-  class="grid-superaula--sidebar---accordion-header"
->
-  <div class="grid-superaula--sidebar---accordion-header-title">
-    <strong>Sección 1: Introducción</strong>
-    <span>11/11</span>
-  </div>
-  <span class="btn btn-transparent">
-    <img
-      :class="{ 'rotate-180': open }"
-      src="./assets/images/icon-arrow-down.svg"
-      alt="Arrow"
-    />
-  </span>
-</div>
-<div
-  x-show="open"
-  x-collapse
-  class="grid-superaula--sidebar---accordion-body"
->
-  <ul>
-    <li>
-      <button class="superaula-i-link active">
-        <span class="check">
-          <img
-            src="./assets/images/icon-minicheck.svg"
-            alt="Check"
-          />
-        </span>
-        <div class="superaula-i-link--icon">
-          <img
-            src="./assets/images/icon-indice-01-video.svg"
-            alt="pdf"
-          />
-        </div>
-        <div class="superaula-i-link--text">
-          1. Introducción a la sección
-        </div>
-      </button>
-    </li>
-    <li>
-      <button class="superaula-i-link active">
-        <span class="check">
-          <img
-            src="./assets/images/icon-minicheck.svg"
-            alt="Check"
-          />
-        </span>
-        <div class="superaula-i-link--icon">
-          <img
-            src="./assets/images/icon-indice-02-pdf.svg"
-            alt="pdf"
-          />
-        </div>
-        <div class="superaula-i-link--text">
-          2. Respuesta del acelerador
-        </div>
-      </button>
-    </li>
-    <li>
-      <button class="superaula-i-link">
-        <span class="check">
-          <img
-            src="./assets/images/icon-minicheck.svg"
-            alt="Check"
-          />
-        </span>
-        <div class="superaula-i-link--icon">
-          <img
-            src="./assets/images/icon-indice-03-img.svg"
-            alt="pdf"
-          />
-        </div>
-        <div class="superaula-i-link--text">
-          3. Galería de imágenes de introducción
-        </div>
-      </button>
-    </li>
-    <li>
-      <button class="superaula-i-link">
-        <span class="check">
-          <img
-            src="./assets/images/icon-minicheck.svg"
-            alt="Check"
-          />
-        </span>
-        <div class="superaula-i-link--icon">
-          <img
-            src="./assets/images/icon-indice-04-doc.svg"
-            alt="pdf"
-          />
-        </div>
-        <div class="superaula-i-link--text">
-          4. Texto descriptivo de introducción
-        </div>
-      </button>
-    </li>
-    <li>
-      <button class="superaula-i-link">
-        <span class="check">
-          <img
-            src="./assets/images/icon-minicheck.svg"
-            alt="Check"
-          />
-        </span>
-        <div class="superaula-i-link--icon">
-          <img
-            src="./assets/images/icon-indice-05-test.svg"
-            alt="pdf"
-          />
-        </div>
-        <div class="superaula-i-link--text">
-          Test de la sección
-        </div>
-      </button>
-    </li>
-  </ul>
-</div>
-</div>
-<!-- END Accordion -->
-<!-- Accordion -->
-<div
-x-data="{ open: false }"
-class="grid-superaula--sidebar---accordion"
->
-<div
-  @click="open = !open"
-  class="grid-superaula--sidebar---accordion-header"
->
-  <div class="grid-superaula--sidebar---accordion-header-title">
-    <strong>Sección 1: Introducción</strong>
-    <span>11/11</span>
-  </div>
-  <span class="btn btn-transparent">
-    <img
-      :class="{ 'rotate-180': open }"
-      src="./assets/images/icon-arrow-down.svg"
-      alt="Arrow"
-    />
-  </span>
-</div>
-<div
-  x-show="open"
-  x-collapse
-  class="grid-superaula--sidebar---accordion-body"
->
-  <ul>
-    <li>
-      <button class="superaula-i-link active">
-        <span class="check">
-          <img
-            src="./assets/images/icon-minicheck.svg"
-            alt="Check"
-          />
-        </span>
-        <div class="superaula-i-link--icon">
-          <img
-            src="./assets/images/icon-indice-01-video.svg"
-            alt="pdf"
-          />
-        </div>
-        <div class="superaula-i-link--text">
-          1. Introducción a la sección
-        </div>
-      </button>
-    </li>
-    <li>
-      <button class="superaula-i-link active">
-        <span class="check">
-          <img
-            src="./assets/images/icon-minicheck.svg"
-            alt="Check"
-          />
-        </span>
-        <div class="superaula-i-link--icon">
-          <img
-            src="./assets/images/icon-indice-02-pdf.svg"
-            alt="pdf"
-          />
-        </div>
-        <div class="superaula-i-link--text">
-          2. Respuesta del acelerador
-        </div>
-      </button>
-    </li>
-    <li>
-      <button class="superaula-i-link">
-        <span class="check">
-          <img
-            src="./assets/images/icon-minicheck.svg"
-            alt="Check"
-          />
-        </span>
-        <div class="superaula-i-link--icon">
-          <img
-            src="./assets/images/icon-indice-03-img.svg"
-            alt="pdf"
-          />
-        </div>
-        <div class="superaula-i-link--text">
-          3. Galería de imágenes de introducción
-        </div>
-      </button>
-    </li>
-    <li>
-      <button class="superaula-i-link">
-        <span class="check">
-          <img
-            src="./assets/images/icon-minicheck.svg"
-            alt="Check"
-          />
-        </span>
-        <div class="superaula-i-link--icon">
-          <img
-            src="./assets/images/icon-indice-04-doc.svg"
-            alt="pdf"
-          />
-        </div>
-        <div class="superaula-i-link--text">
-          4. Texto descriptivo de introducción
-        </div>
-      </button>
-    </li>
-    <li>
-      <button class="superaula-i-link">
-        <span class="check">
-          <img
-            src="./assets/images/icon-minicheck.svg"
-            alt="Check"
-          />
-        </span>
-        <div class="superaula-i-link--icon">
-          <img
-            src="./assets/images/icon-indice-05-test.svg"
-            alt="pdf"
-          />
-        </div>
-        <div class="superaula-i-link--text">
-          Test de la sección
-        </div>
-      </button>
-    </li>
-  </ul>
-</div>
-</div>
-<!-- END Accordion -->
-                </div>
-
-                
-              </div>
-            </aside>
-            <!--END MOBIlE-->
+              </aside>
+              <!--END MOBIlE-->
               <div class="container container-superaula">
                 <!-- Tabs -->
                 <div
                   x-data="{
-      selectedId: null,
-      init() {
-          // Set the first available tab on the page on page load.
-          this.$nextTick(() => this.select(this.$id('tab', 1)))
-      },
-      select(id) {
-          this.selectedId = id
-      },
-      isSelected(id) {
-          return this.selectedId === id
-      },
-      whichChild(el, parent) {
-          return Array.from(parent.children).indexOf(el) + 1
-      }
-  }"
+                    selectedId: null,
+                    init() {
+                        // Set the first available tab on the page on page load.
+                        this.$nextTick(() => this.select(this.$id('tab', 1)))
+                    },
+                    select(id) {
+                        this.selectedId = id
+                    },
+                    isSelected(id) {
+                        return this.selectedId === id
+                    },
+                    whichChild(el, parent) {
+                        return Array.from(parent.children).indexOf(el) + 1
+                    }
+                  }"
                   x-id="['tab']"
                   class="tabs-panel"
                 >
@@ -1206,46 +1583,153 @@ class="grid-superaula--sidebar---accordion"
                       class="tabpanels--item tabpanels--item---superaula"
                     >
                       <!-- chat -->
-                      <div
-                        class="box box-chat box-chat--superaula"
-                        x-data="chatApp()"
-                      >
+                      <div class="box box-chat box-chat--superaula">
                         <!-- Mensajes -->
-                        <div class="box-body" id="chat-messages">
+                        <div
+                          class="box-body"
+                          id="chat-messages"
+                          x-ref="chatBox"
+                        >
                           <div class="box-body--scroll">
                             <!-- Renderizar mensajes con Alpine -->
-                            <template
-                              x-for="message in messages"
-                              :key="message.text"
-                            >
-                              <div
-                                :class="message.sender === 'user' ? 'message-in message-in--me' : 'message-in message-in--you'"
-                              >
-                                <template x-if="message.sender !== 'user'">
-                                  <div class="flex items-center gap-2">
-                                    <img
-                                      src="./assets/images/cms-images/avatar-34.jpg"
-                                      class="avatar"
-                                    />
-                                    <span
-                                      class="message-in--name"
-                                      x-text="message.senderName"
-                                    ></span>
-                                  </div>
-                                </template>
-                                <div
-                                  :class="message.sender === 'user' ? 'btn message-me' : 'btn message-you'"
-                                >
-                                  <span x-text="message.text"></span>
-                                </div>
+                            <div class="message-in message-in--me">
+                              <div class="btn message-me">
+                                Aún me queda rellenar un formulario del
+                                itinerario, a ver si me da tiempo en esta
+                                mañana.
                               </div>
-                            </template>
+                            </div>
+                            <div class="message-in message-in--you">
+                              <div class="message-in--user">
+                                <img
+                                  src="./assets/images/cms-images/avatar-34.jpg"
+                                  class="avatar"
+                                />
+                                <span class="message-in--name"
+                                  >Juan Rodríguez</span
+                                >
+                              </div>
+                              <div class="btn message-you">
+                                Recuerda que debes rellenar el formulario para
+                                que se quede el itinerario cerrado.Mañana te
+                                escribo y te digo en que capitulo esta la
+                                referencia que me pides. ¡Un saludo!
+                              </div>
+                            </div>
+                            <div class="message-in message-in--you">
+                              <div class="message-in--user">
+                                <img
+                                  src="./assets/images/cms-images/avatar-34.jpg"
+                                  class="avatar"
+                                />
+                                <span class="message-in--name"
+                                  >Juan Rodríguez</span
+                                >
+                              </div>
+                              <div class="btn message-you">
+                                En el capítulo 5 puedes visualizar algo parecido
+                                a eso. Si no te encaja, coméntamelo de nuevo y
+                                vemos que otra referencia te puedo pasar
+                              </div>
+                            </div>
+                            <div class="message-in message-in--me">
+                              <div class="btn message-me">
+                                Cierto! creo que con esta refencia me ha quedado
+                                claro.
+                              </div>
+                            </div>
+                            <div class="message-in message-in--me">
+                              <div class="btn message-me">
+                                Genial! Muchas gracias
+                              </div>
+                            </div>
+                            <div class="message-in message-in--you">
+                              <div class="message-in--user">
+                                <img
+                                  src="./assets/images/cms-images/avatar-34.jpg"
+                                  class="avatar"
+                                />
+                                <span class="message-in--name"
+                                  >Juan Rodríguez</span
+                                >
+                              </div>
+                              <div class="btn message-you">
+                                De nada. ¡Un saludo!
+                              </div>
+                            </div>
+                            <div class="message-in message-in--date">
+                              <div class="btn message-me">hoy</div>
+                            </div>
+                            <div class="message-in message-in--me">
+                              <div class="btn message-me">
+                                Aún me queda rellenar un formulario del
+                                itinerario, a ver si me da tiempo en esta
+                                mañana.
+                              </div>
+                            </div>
+                            <div class="message-in message-in--you">
+                              <div class="message-in--user">
+                                <img
+                                  src="./assets/images/cms-images/avatar-34.jpg"
+                                  class="avatar"
+                                />
+                                <span class="message-in--name"
+                                  >Juan Rodríguez</span
+                                >
+                              </div>
+                              <div class="btn message-you">
+                                Recuerda que debes rellenar el formulario para
+                                que se quede el itinerario cerrado.Mañana te
+                                escribo y te digo en que capitulo esta la
+                                referencia que me pides. ¡Un saludo!
+                              </div>
+                            </div>
+                            <div class="message-in message-in--you">
+                              <div class="message-in--user">
+                                <img
+                                  src="./assets/images/cms-images/avatar-34.jpg"
+                                  class="avatar"
+                                />
+                                <span class="message-in--name"
+                                  >Juan Rodríguez</span
+                                >
+                              </div>
+                              <div class="btn message-you">
+                                En el capítulo 5 puedes visualizar algo parecido
+                                a eso. Si no te encaja, coméntamelo de nuevo y
+                                vemos que otra referencia te puedo pasar
+                              </div>
+                            </div>
+                            <div class="message-in message-in--me">
+                              <div class="btn message-me">
+                                Cierto! creo que con esta refencia me ha quedado
+                                claro.
+                              </div>
+                            </div>
+                            <div class="message-in message-in--me">
+                              <div class="btn message-me">
+                                Genial! Muchas gracias
+                              </div>
+                            </div>
+                            <div class="message-in message-in--you">
+                              <div class="message-in--user">
+                                <img
+                                  src="./assets/images/cms-images/avatar-34.jpg"
+                                  class="avatar"
+                                />
+                                <span class="message-in--name"
+                                  >Juan Rodríguez</span
+                                >
+                              </div>
+                              <div class="btn message-you">
+                                De nada. ¡Un saludo!
+                              </div>
+                            </div>
                           </div>
                         </div>
                         <!-- Input de mensajes -->
                         <div class="box-chat--input">
                           <input
-                            x-model="newMessage"
                             type="text"
                             placeholder="Escribe tu mensaje"
                             class="formcontrol"
@@ -1259,7 +1743,6 @@ class="grid-superaula--sidebar---accordion"
                           </button>
                         </div>
                       </div>
-                      <!-- end chat-->
                     </div>
                     <!-- Panel 02 FAQs -->
                     <div
@@ -1506,8 +1989,8 @@ class="grid-superaula--sidebar---accordion"
                         >
                           <div
                             x-data="{
-                  id: 1
-            }"
+                                  id: 1
+                            }"
                             class="filter---display----panel"
                             role="region"
                           >
@@ -2399,6 +2882,15 @@ class="grid-superaula--sidebar---accordion"
                       role="tabpanel"
                       class="tabpanels--item tabpanels--item---superaula"
                     >
+                      <div class="tabpanels--item--nav">
+                        <a href="#" class="btn btn-small btn-dark--line">
+                          <img
+                            src="./assets/images/icon-back--circle.svg"
+                            alt="Back"
+                          />
+                          Volver a debates
+                        </a>
+                      </div>
                       <div class="tabpanels--item--section">
                         <div class="tabpanels--item--section---header">
                           <h3 class="title-small">
@@ -2514,11 +3006,11 @@ Escribe aquí tu mensaje</textarea
                                           <input
                                             type="file"
                                             @change="const file = $event.target.files[0]; 
-                    if (file) { 
-                      const reader = new FileReader(); 
-                      reader.onload = e => imagePreview = e.target.result; 
-                      reader.readAsDataURL(file); 
-                    }"
+                                              if (file) { 
+                                                const reader = new FileReader(); 
+                                                reader.onload = e => imagePreview = e.target.result; 
+                                                reader.readAsDataURL(file); 
+                                              }"
                                             class="hidden"
                                           />
 
@@ -3134,6 +3626,15 @@ Escribe aquí tu mensaje</textarea
                           <!-- END MODAL -->
                         </div>
                       </div>
+                      <div class="tabpanels--item--nav">
+                        <a href="#" class="btn btn-small btn-dark--line">
+                          <img
+                            src="./assets/images/icon-back--circle.svg"
+                            alt="Back"
+                          />
+                          Volver a debates
+                        </a>
+                      </div>
                     </div>
                     <!-- Panel 05 Noticias -->
                     <div
@@ -3564,20 +4065,21 @@ Escribe aquí tu mensaje</textarea
                                                     Lorem ipsum dolor sit amet
                                                     consectetur. In augue ipsum
                                                     tellus ultrices. Ac pharetra
-                                                    ultrices consectetur consequat
-                                                    tellus massa. Nec aliquam cras
-                                                    sagittis duis sed euismod arcu
-                                                    hac. Ornare amet ligula ornare
-                                                    lacus aliquam aenean. Eu lacus
+                                                    ultrices consectetur
+                                                    consequat tellus massa. Nec
+                                                    aliquam cras sagittis duis
+                                                    sed euismod arcu hac. Ornare
+                                                    amet ligula ornare lacus
+                                                    aliquam aenean. Eu lacus
                                                     imperdiet urna amet congue
                                                     adipiscing. Faucibus magna
-                                                    nisl ullamcorper in facilisis
-                                                    consequat aliquam. Lorem ipsum
-                                                    dolor sit amet consectetur. In
-                                                    augue ipsum tellus ultrices.
-                                                    Ac pharetra ultrices
-                                                    consectetur consequat tellus
-                                                    massa.
+                                                    nisl ullamcorper in
+                                                    facilisis consequat aliquam.
+                                                    Lorem ipsum dolor sit amet
+                                                    consectetur. In augue ipsum
+                                                    tellus ultrices. Ac pharetra
+                                                    ultrices consectetur
+                                                    consequat tellus massa.
                                                   </p>
                                                   <div
                                                     class="form-row grid grid-cols-1"
@@ -4024,46 +4526,81 @@ Escribe aquí tu mensaje</textarea
                       role="tabpanel"
                       class="tabpanels--item tabpanels--item---superaula"
                     >
-                    <article class="grid post post-general">
- 
-                      <div class="column post-body">
-
-                        <h2 class="title-big">
-                          Suscríbete a un JAECOO 7 con Astara y descubre por qué todo el
-                          mundo habla de esta nueva marca
-                        </h2>
-                        <h4 class="title-med title-med--accent">
-                          JAECOO 7 por suscripción desde 759€/mes
-                        </h4>
-                        <span class="subtitle-small date">Publicado hace 29 días</span>
-                        <p>
-                          La marca promete SUV y todoterrenos intrépidos con mucha
-                          elegancia y cargados de tecnología. Su carta de presentación
-                          es el JAECOO 7, que
-                          <a href="#" class="link">
-                            ya tienes disponible en el catálogo de suscripción de Astara
-                            desde 759 euros al mes</a
-                          >, como siempre con seguro, mantenimiento, asistencia en
-                          carretera e impuestos incluidos.
-                        </p>
-                        <figure class="image">
-                          <img
-                            src="./assets/images/cms-images/dummy_1024x768_ffffff_cccccc.png"
-                            alt="Imagen de actividad"
-                          />
-                        </figure>
-                        <p>
-                          Más del 80% de la carrocería está fabricada con acero de alta
-                          resistencia. Además, el JAECOO 7 incorpora más de 18 sistemas
-                          de ayuda a la conducción, superando con creces el nivel 2 de
-                          conducción autónoma.
-                        </p>
-                      </div>
-                    </article>
-                    
+                      <article class="grid post post-general">
+                        <div class="column post-body">
+                          <h2 class="title-big">
+                            Suscríbete a un JAECOO 7 con Astara y descubre por
+                            qué todo el mundo habla de esta nueva marca
+                          </h2>
+                          <h4 class="title-med title-med--accent">
+                            JAECOO 7 por suscripción desde 759€/mes
+                          </h4>
+                          <span class="subtitle-small date"
+                            >Publicado hace 29 días</span
+                          >
+                          <p>
+                            La marca promete SUV y todoterrenos intrépidos con
+                            mucha elegancia y cargados de tecnología. Su carta
+                            de presentación es el JAECOO 7, que
+                            <a href="#" class="link">
+                              ya tienes disponible en el catálogo de suscripción
+                              de Astara desde 759 euros al mes</a
+                            >, como siempre con seguro, mantenimiento,
+                            asistencia en carretera e impuestos incluidos.
+                          </p>
+                          <figure class="image">
+                            <img
+                              src="./assets/images/cms-images/dummy_1024x768_ffffff_cccccc.png"
+                              alt="Imagen de actividad"
+                            />
+                          </figure>
+                          <p>
+                            Más del 80% de la carrocería está fabricada con
+                            acero de alta resistencia. Además, el JAECOO 7
+                            incorpora más de 18 sistemas de ayuda a la
+                            conducción, superando con creces el nivel 2 de
+                            conducción autónoma.
+                          </p>
+                          <ul>
+                            <li>
+                              Lorem ipsum dolor sit amet consectetur. In augue
+                              ipsum tellus ultrices.
+                            </li>
+                            <li>
+                              Ac pharetra ultrices consectetur consequat tellus
+                              massa.
+                            </li>
+                            <li>
+                              Nec aliquam cras sagittis duis sed euismod arcu
+                              hac.
+                            </li>
+                            <li>
+                              Ornare amet ligula ornare lacus aliquam aenean.
+                            </li>
+                          </ul>
+                          <ol>
+                            <li>
+                              Lorem ipsum dolor sit amet consectetur. In augue
+                              ipsum tellus ultrices.
+                            </li>
+                            <li>
+                              Ac pharetra ultrices consectetur consequat tellus
+                              massa.
+                            </li>
+                            <li>
+                              Nec aliquam cras sagittis duis sed euismod arcu
+                              hac.
+                            </li>
+                            <li>
+                              Ornare amet ligula ornare lacus aliquam aenean.
+                            </li>
+                          </ol>
+                        </div>
+                      </article>
+                    </div>
                   </div>
+                  <!-- END Tabs -->
                 </div>
-                <!-- END Tabs -->
               </div>
             </section>
           </div>
@@ -5151,6 +5688,7 @@ Escribe aquí tu mensaje</textarea
           <li><a class="link" href="stories.html">11. Stories</a></li>
           <li><a class="link" href="evau.html">12. Evaluación</a></li>
           <li><a class="link" href="superaula.html">13. Superaula</a></li>
+          <li><a class="link" href="streaming.html">14. Streaming</a></li>
         </ul>
       </div>
     </div>

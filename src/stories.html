@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0"
+    />
     <title>Stories - Factoriabiz</title>
     <script type="module" src="./js/main.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -440,11 +443,15 @@
       </div>
     </header>
     <!-- END MAIN HEADER -->
-    <div class="scroll-fix scroll-fix--full">
-      <main>
+    <div class="scroll-fix scroll-fix-stories">
+      <main x-data="viewportHeight" :style="{ height: height + 'px' }">
         <!-- Grid Chat -->
-        <section class="panel panel-full bg-darken">
-          <div class="container">
+        <section
+          class="panel panel-full bg-darken"
+        >
+          <div
+            class="container"
+          >
             <div class="panel-full--header">
               <button
                 type="button"
@@ -481,6 +488,274 @@
                       <div class="card card-stories card-stories--big">
                         <!-- Card HEADER-->
                         <div class="card-header">
+                          <!-- CHAT-->
+                          <div
+                            class="chat-panel--overlay"
+                            x-show="showComments"
+                            x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 transform translate-x-10"
+                            x-transition:enter-end="opacity-100 transform translate-x-0"
+                            x-transition:leave="transition ease-in duration-300"
+                            x-transition:leave-start="opacity-100 transform translate-x-0"
+                            x-transition:leave-end="opacity-0 transform translate-x-10"
+                          >
+                            <div
+                              class="box box-chat box-chat--stories"
+                              x-data="chatApp()"
+                            >
+                              <div class="box-header">
+                                <span class="title-small">Comentarios</span>
+                                <button
+                                  class="btn btn-square btn-dark"
+                                  @click="showComments = !showComments"
+                                >
+                                  <img
+                                    src="./assets/images/icon-close.svg"
+                                    alt="Close"
+                                  />
+                                </button>
+                              </div>
+                              <!-- Mensajes -->
+                              <div
+                                class="box-body"
+                                id="chat-messages"
+                                >
+                                <div class="box-body--scroll">
+                                  <!-- Renderizar mensajes con Alpine -->
+                                  <div class="message-in message-in--you">
+                                    <div class="message-in--user">
+                                      <img
+                                        src="./assets/images/cms-images/avatar-34.jpg"
+                                        class="avatar"
+                                      />
+                                      <span class="message-in--name"
+                                        >Nombre del usuario</span
+                                      >
+                                      <date>hace 3 semanas</date>
+                                    </div>
+                                    <div class="message">
+                                      Este es un mensaje de prueba
+                                    </div>
+                                  </div>
+                                  <div class="message-in message-in--you">
+                                    <div class="message-in--user">
+                                      <img
+                                        src="./assets/images/cms-images/avatar-34.jpg"
+                                        class="avatar"
+                                      />
+                                      <span class="message-in--name"
+                                        >Nombre del usuario</span
+                                      >
+                                      <date>hace 3 semanas</date>
+                                    </div>
+                                    <div class="message">
+                                      Este es un mensaje de prueba
+                                    </div>
+                                  </div>
+                                  <div class="message-in message-in--you">
+                                    <div class="message-in--user">
+                                      <img
+                                        src="./assets/images/cms-images/avatar-34.jpg"
+                                        class="avatar"
+                                      />
+                                      <span class="message-in--name"
+                                        >Nombre del usuario</span
+                                      >
+                                      <date>hace 3 semanas</date>
+                                    </div>
+                                    <div class="message">
+                                      Este es un mensaje de prueba
+                                    </div>
+                                  </div>
+                                  <div class="message-in message-in--you">
+                                    <div class="message-in--user">
+                                      <img
+                                        src="./assets/images/cms-images/avatar-34.jpg"
+                                        class="avatar"
+                                      />
+                                      <span class="message-in--name"
+                                        >Nombre del usuario</span
+                                      >
+                                      <date>hace 3 semanas</date>
+                                    </div>
+                                    <div class="message">
+                                      Este es un mensaje de prueba
+                                    </div>
+                                  </div>
+                                  <div class="message-in message-in--you">
+                                    <div class="message-in--user">
+                                      <img
+                                        src="./assets/images/cms-images/avatar-34.jpg"
+                                        class="avatar"
+                                      />
+                                      <span class="message-in--name"
+                                        >Nombre del usuario</span
+                                      >
+                                      <date>hace 3 semanas</date>
+                                    </div>
+                                    <div class="message">
+                                      Este es un mensaje de prueba
+                                    </div>
+                                  </div>
+                                  <div class="message-in message-in--you">
+                                    <div class="message-in--user">
+                                      <img
+                                        src="./assets/images/cms-images/avatar-34.jpg"
+                                        class="avatar"
+                                      />
+                                      <span class="message-in--name"
+                                        >Nombre del usuario</span
+                                      >
+                                      <date>hace 3 semanas</date>
+                                    </div>
+                                    <div class="message">
+                                      Este es un mensaje de prueba
+                                    </div>
+                                  </div>
+                                  <div class="message-in message-in--you">
+                                    <div class="message-in--user">
+                                      <img
+                                        src="./assets/images/cms-images/avatar-34.jpg"
+                                        class="avatar"
+                                      />
+                                      <span class="message-in--name"
+                                        >Nombre del usuario</span
+                                      >
+                                      <date>hace 3 semanas</date>
+                                    </div>
+                                    <div class="message">
+                                      Este es un mensaje de prueba
+                                    </div>
+                                  </div>
+                                  <div class="message-in message-in--you">
+                                    <div class="message-in--user">
+                                      <img
+                                        src="./assets/images/cms-images/avatar-34.jpg"
+                                        class="avatar"
+                                      />
+                                      <span class="message-in--name"
+                                        >Nombre del usuario</span
+                                      >
+                                      <date>hace 3 semanas</date>
+                                    </div>
+                                    <div class="message">
+                                      Este es un mensaje de prueba
+                                    </div>
+                                  </div>
+                                  <div class="message-in message-in--you">
+                                    <div class="message-in--user">
+                                      <img
+                                        src="./assets/images/cms-images/avatar-34.jpg"
+                                        class="avatar"
+                                      />
+                                      <span class="message-in--name"
+                                        >Nombre del usuario</span
+                                      >
+                                      <date>hace 3 semanas</date>
+                                    </div>
+                                    <div class="message">
+                                      Este es un mensaje de prueba
+                                    </div>
+                                  </div>
+                                  <div class="message-in message-in--you">
+                                    <div class="message-in--user">
+                                      <img
+                                        src="./assets/images/cms-images/avatar-34.jpg"
+                                        class="avatar"
+                                      />
+                                      <span class="message-in--name"
+                                        >Nombre del usuario</span
+                                      >
+                                      <date>hace 3 semanas</date>
+                                    </div>
+                                    <div class="message">
+                                      Este es un mensaje de prueba
+                                    </div>
+                                  </div>
+                                  <div class="message-in message-in--you">
+                                    <div class="message-in--user">
+                                      <img
+                                        src="./assets/images/cms-images/avatar-34.jpg"
+                                        class="avatar"
+                                      />
+                                      <span class="message-in--name"
+                                        >Nombre del usuario</span
+                                      >
+                                      <date>hace 3 semanas</date>
+                                    </div>
+                                    <div class="message">
+                                      Este es un mensaje de prueba
+                                    </div>
+                                  </div>
+                                  <div class="message-in message-in--you">
+                                    <div class="message-in--user">
+                                      <img
+                                        src="./assets/images/cms-images/avatar-34.jpg"
+                                        class="avatar"
+                                      />
+                                      <span class="message-in--name"
+                                        >Nombre del usuario</span
+                                      >
+                                      <date>hace 3 semanas</date>
+                                    </div>
+                                    <div class="message">
+                                      Este es un mensaje de prueba
+                                    </div>
+                                  </div>
+                                  <div class="message-in message-in--you">
+                                    <div class="message-in--user">
+                                      <img
+                                        src="./assets/images/cms-images/avatar-34.jpg"
+                                        class="avatar"
+                                      />
+                                      <span class="message-in--name"
+                                        >Nombre del usuario</span
+                                      >
+                                      <date>hace 3 semanas</date>
+                                    </div>
+                                    <div class="message">
+                                      Este es un mensaje de prueba
+                                    </div>
+                                  </div>
+                                  <div class="message-in message-in--you">
+                                    <div class="message-in--user">
+                                      <img
+                                        src="./assets/images/cms-images/avatar-34.jpg"
+                                        class="avatar"
+                                      />
+                                      <span class="message-in--name"
+                                        >Nombre del usuario</span
+                                      >
+                                      <date>hace 3 semanas</date>
+                                    </div>
+                                    <div class="message">
+                                      Este es un mensaje de prueba
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- Input de mensajes -->
+                              <div class="box-chat--input">
+                                <div class="form-group form-group--dark">
+                                  <input
+                                    x-model="newMessage"
+                                    type="text"
+                                    placeholder="Escribe tu mensaje"
+                                    class="formcontrol"
+                                  />
+                                  <button
+                                    @click="sendMessage"
+                                    class="btn btn-icon btn-transparent"
+                                  >
+                                    <img
+                                      src="./assets/images/icon-send.svg"
+                                      alt="Send"
+                                    />
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                           <div class="card-header--top">
                             <ul class="card-header--controls">
                               <li>
@@ -557,87 +832,6 @@
                           </ul>
                         </div>
                       </div>
-                      <!-- CHAT-->
-                      <div
-                        class="chat-panel--overlay"
-                        x-show="showComments"
-                        x-transition:enter="transition ease-out duration-300"
-                        x-transition:enter-start="opacity-0 transform translate-x-10"
-                        x-transition:enter-end="opacity-100 transform translate-x-0"
-                        x-transition:leave="transition ease-in duration-300"
-                        x-transition:leave-start="opacity-100 transform translate-x-0"
-                        x-transition:leave-end="opacity-0 transform translate-x-10"
-                      >
-                        <div
-                          class="box box-chat box-chat--stories"
-                          x-data="chatApp()"
-                        >
-                          <div class="box-header">
-                            <span class="title-small">Comentarios</span>
-                            <button
-                              class="btn btn-square btn-dark"
-                              @click="showComments = !showComments"
-                            >
-                              <img
-                                src="./assets/images/icon-close.svg"
-                                alt="Close"
-                              />
-                            </button>
-                          </div>
-                          <!-- Mensajes -->
-                          <div class="box-body" id="chat-messages">
-                            <div class="box-body--scroll">
-                              <!-- Renderizar mensajes con Alpine -->
-                              <template
-                                x-for="message in messages"
-                                :key="message.text"
-                              >
-                                <div
-                                  :class="message.sender === 'user' ? 'message-in message-in--me' : 'message-in message-in--you'"
-                                >
-                                  <template x-if="message.sender !== 'user'">
-                                    <div class="flex items-center gap-2">
-                                      <img
-                                        src="./assets/images/cms-images/avatar-34.jpg"
-                                        class="avatar"
-                                      />
-                                      <span
-                                        class="message-in--name"
-                                        x-text="message.senderName"
-                                      ></span>
-                                    </div>
-                                  </template>
-                                  <div
-                                    :class="message.sender === 'user' ? 'message message-me' : 'message message-you'"
-                                  >
-                                    <span x-text="message.text"></span>
-                                  </div>
-                                </div>
-                              </template>
-                            </div>
-                          </div>
-                          <!-- Input de mensajes -->
-                          <div class="box-chat--input">
-                            <div class="form-group form-group--dark">
-                              <input
-                                x-model="newMessage"
-                                type="text"
-                                placeholder="Escribe tu mensaje"
-                                class="formcontrol"
-                              />
-                              <button
-                                @click="sendMessage"
-                                class="btn btn-icon btn-transparent"
-                              >
-                                <img
-                                  src="./assets/images/icon-send.svg"
-                                  alt="Send"
-                                />
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                     </li>
                   </template>
                 </ul>
@@ -648,14 +842,14 @@
               document.addEventListener("DOMContentLoaded", function () {
                 new Splide("#stories-slider", {
                   direction: "ttb",
-                  height: "77vh",
+                  height: "85dvh",
                   wheel: true,
                   wheelSleep: 1000, // Tiempo de espera entre desplazamientos
                   pagination: false,
                   arrows: false,
                   breakpoints: {
                     975: {
-                      height: "100vh",
+                      height: "100dvh",
                     },
                   },
                 }).mount();
@@ -718,6 +912,7 @@
           <li><a class="link" href="stories.html">11. Stories</a></li>
           <li><a class="link" href="evau.html">12. Evaluación</a></li>
           <li><a class="link" href="superaula.html">13. Superaula</a></li>
+          <li><a class="link" href="streaming.html">14. Streaming</a></li>
         </ul>
       </div>
     </div>

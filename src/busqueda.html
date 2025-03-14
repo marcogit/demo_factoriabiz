@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0"
+    />
     <title>Búsqueda - Factoriabiz</title>
     <script type="module" src="./js/main.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -483,7 +486,7 @@
             <!-- BODY-->
             <div class="panel-body">
               <div
-                class="grid grid-cards grid-cols-1 md:grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr_1fr] xl:grid-cols-[1fr_1fr_1fr_1fr]"
+                class="hidden lg:grid grid-cards grid-cols-1 md:grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr_1fr] xl:grid-cols-[1fr_1fr_1fr_1fr]"
               >
                 <div class="column">
                   <!-- Card -->
@@ -877,6 +880,367 @@
                   </div>
                 </div>
               </div>
+              <!-- CARDS MOBILE-->
+              <div
+                class="lg:hidden"
+                x-data="{
+        init() {
+            new Splide(this.$refs.splide, {
+                perPage: 4,
+                pagination: false,
+                autoWidth: true,
+                breakpoints: {
+                  975: {
+                    perPage: 3,
+                  }, 
+                  767: {
+                    perPage: 2,
+                  },  
+                500: {
+                        perPage: 1,
+                    },
+                },
+            }).mount()
+        },
+    }"
+              >
+                <div
+                  x-ref="splide"
+                  class="splide splide-absolute"
+                  aria-label="Splide/Alpine.js Carousel Example"
+                >
+                  <div class="splide__track">
+                    <ul class="splide__list">
+                      <li class="splide__slide">
+                        <!-- Card -->
+                        <div class="card card-item">
+                          <!-- Card HEADER-->
+                          <div class="card-header">
+                            <div class="card-header--top">
+                              <span class="badge badge-dark">Obligatorio </span>
+
+                              <button
+                                x-data="{ isActive: false }"
+                                :class="{ 'active': isActive }"
+                                x-on:click="isActive = !isActive"
+                                type="button"
+                                id="save-control"
+                                class="btn btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-save--white.svg"
+                                  alt="Save item"
+                                />
+                              </button>
+                            </div>
+                            <button
+                              type="button"
+                              class="btn btn-accent btn-location"
+                            >
+                              Acceder
+                            </button>
+                            <div class="card-header--bottom">
+                              <div class="progress progress-green">
+                                <div
+                                  class="progress-bar"
+                                  style="width: 50%"
+                                ></div>
+                              </div>
+                            </div>
+                            <img
+                              src="./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg"
+                              alt="Imagen de actividad"
+                              class="card-img-thumb"
+                            />
+                          </div>
+                          <!-- Card BODY-->
+                          <div class="card-body">
+                            <span class="badge badge-transparent"
+                              ><img
+                                src="./assets/images/icon-aulav.svg"
+                                alt="Aula Virtual"
+                              />
+                              Aula virtual</span
+                            >
+                            <h3 class="title-small">Gestión del cambio</h3>
+                            <p class="subtitle-small subtitle-small--accent">
+                              GRUPO SIETE NOVENTA
+                            </p>
+                            <div class="card-body--display">
+                              <div class="card-body--display---box">
+                                <p>
+                                  Bienvenidos al sistema de gestión de
+                                  aprendizaje. Te recordamos que debes cumplir
+                                  con las normas del curso y estar atento a los
+                                  plazos de entrega, ya que no se aceptarán
+                                  tareas después de la fecha límite.
+                                </p>
+                                <div
+                                  class="card-body--display---buttons"
+                                  role="group"
+                                >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    ><img
+                                      src="./assets/images/icon-diploma.svg"
+                                      alt="Descarga tu diploma"
+                                    />Descarga tu diploma</a
+                                  >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    ><img
+                                      src="./assets/images/icon-form.svg"
+                                      alt="Encuesta de satisfacción"
+                                    />Encuesta de satisfacción</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="splide__slide">
+                        <!-- Card -->
+                        <div class="card card-item disabled">
+                          <!-- Card HEADER-->
+                          <div class="card-header">
+                            <div class="card-header--top">
+                              <span class="badge badge-dark">Obligatorio </span>
+
+                              <button
+                                x-data="{ isActive: false }"
+                                :class="{ 'active': isActive }"
+                                x-on:click="isActive = !isActive"
+                                type="button"
+                                id="save-control"
+                                class="btn btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-save--white.svg"
+                                  alt="Save item"
+                                />
+                              </button>
+                            </div>
+                            <button
+                              type="button"
+                              class="btn btn-accent btn-location"
+                            >
+                              Acceder
+                            </button>
+                            <div class="card-header--bottom">
+                              <div class="progress progress-green">
+                                <div
+                                  class="progress-bar"
+                                  style="width: 50%"
+                                ></div>
+                              </div>
+                            </div>
+                            <img
+                              src="./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg"
+                              alt="Imagen de actividad"
+                              class="card-img-thumb"
+                            />
+                          </div>
+                          <!-- Card BODY-->
+                          <div class="card-body">
+                            <span class="badge badge-transparent"
+                              ><img
+                                src="./assets/images/icon-aulao.svg"
+                                alt="Aula Online"
+                              />
+                              Aula online</span
+                            >
+                            <h3 class="title-small">Gestión del cambio</h3>
+                            <p class="subtitle-small subtitle-small--accent">
+                              GRUPO SIETE NOVENTA
+                            </p>
+                            <div class="card-body--display">
+                              <div class="card-body--display---box">
+                                <p>
+                                  Bienvenidos al sistema de gestión de
+                                  aprendizaje. Te recordamos que debes cumplir
+                                  con las normas del curso y estar atento a los
+                                  plazos de entrega, ya que no se aceptarán
+                                  tareas después de la fecha límite.
+                                </p>
+                                <div
+                                  class="card-body--display---buttons"
+                                  role="group"
+                                >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="splide__slide">
+                        <!-- Card -->
+                        <div class="card card-item">
+                          <!-- Card HEADER-->
+                          <div class="card-header">
+                            <div class="card-header--top">
+                              <span class="badge badge-dark">Obligatorio </span>
+
+                              <button
+                                x-data="{ isActive: false }"
+                                :class="{ 'active': isActive }"
+                                x-on:click="isActive = !isActive"
+                                type="button"
+                                id="save-control"
+                                class="btn btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-save--white.svg"
+                                  alt="Save item"
+                                />
+                              </button>
+                            </div>
+                            <button
+                              type="button"
+                              class="btn btn-accent btn-location"
+                            >
+                              Acceder
+                            </button>
+                            <div class="card-header--bottom">
+                              <div class="progress progress-green">
+                                <div
+                                  class="progress-bar"
+                                  style="width: 50%"
+                                ></div>
+                              </div>
+                            </div>
+                            <img
+                              src="./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg"
+                              alt="Imagen de actividad"
+                              class="card-img-thumb"
+                            />
+                          </div>
+                          <!-- Card BODY-->
+                          <div class="card-body">
+                            <span class="badge badge-transparent"
+                              ><img
+                                src="./assets/images/icon-evaulacion.svg"
+                                alt="Evaulación"
+                              />
+                              Evaulación</span
+                            >
+                            <h3 class="title-small">Gestión del cambio</h3>
+                            <p class="subtitle-small subtitle-small--accent">
+                              GRUPO SIETE NOVENTA
+                            </p>
+                            <div class="card-body--display">
+                              <div class="card-body--display---box">
+                                <p>
+                                  Bienvenidos al sistema de gestión de
+                                  aprendizaje. Te recordamos que debes cumplir
+                                  con las normas del curso y estar atento a los
+                                  plazos de entrega, ya que no se aceptarán
+                                  tareas después de la fecha límite.
+                                </p>
+                                <div
+                                  class="card-body--display---buttons"
+                                  role="group"
+                                >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="splide__slide">
+                        <!-- Card -->
+                        <div class="card card-item">
+                          <!-- Card HEADER-->
+                          <div class="card-header">
+                            <div class="card-header--top">
+                              <span class="badge badge-dark">Obligatorio </span>
+
+                              <button
+                                x-data="{ isActive: false }"
+                                :class="{ 'active': isActive }"
+                                x-on:click="isActive = !isActive"
+                                type="button"
+                                id="save-control"
+                                class="btn btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-save--white.svg"
+                                  alt="Save item"
+                                />
+                              </button>
+                            </div>
+                            <button
+                              type="button"
+                              class="btn btn-accent btn-location"
+                            >
+                              Acceder
+                            </button>
+                            <div class="card-header--bottom">
+                              <div class="progress progress-green">
+                                <div
+                                  class="progress-bar"
+                                  style="width: 50%"
+                                ></div>
+                              </div>
+                            </div>
+                            <img
+                              src="./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg"
+                              alt="Imagen de actividad"
+                              class="card-img-thumb"
+                            />
+                          </div>
+                          <!-- Card BODY-->
+                          <div class="card-body">
+                            <span class="badge badge-transparent"
+                              ><img
+                                src="./assets/images/icon-evaulacion.svg"
+                                alt="Evaulación"
+                              />
+                              Evaulación</span
+                            >
+                            <h3 class="title-small">Gestión del cambio</h3>
+                            <p class="subtitle-small subtitle-small--accent">
+                              GRUPO SIETE NOVENTA
+                            </p>
+                            <div class="card-body--display">
+                              <div class="card-body--display---box">
+                                <p>
+                                  Bienvenidos al sistema de gestión de
+                                  aprendizaje. Te recordamos que debes cumplir
+                                  con las normas del curso y estar atento a los
+                                  plazos de entrega, ya que no se aceptarán
+                                  tareas después de la fecha límite.
+                                </p>
+                                <div
+                                  class="card-body--display---buttons"
+                                  role="group"
+                                >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -896,7 +1260,7 @@
             <!-- BODY-->
             <div class="panel-body">
               <div
-                class="grid grid-cards grid-cols-1 md:grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr_1fr] xl:grid-cols-[1fr_1fr_1fr_1fr]"
+                class="hidden lg:grid grid-cards grid-cols-1 md:grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr_1fr] xl:grid-cols-[1fr_1fr_1fr_1fr]"
               >
                 <div class="column">
                   <!-- Card -->
@@ -1287,6 +1651,367 @@
                         </div>
                       </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+              <!-- CARDS MOBILE-->
+              <div
+                class="lg:hidden"
+                x-data="{
+        init() {
+            new Splide(this.$refs.splide, {
+                perPage: 4,
+                pagination: false,
+                autoWidth: true,
+                breakpoints: {
+                  975: {
+                    perPage: 3,
+                  }, 
+                  767: {
+                    perPage: 2,
+                  },  
+                500: {
+                        perPage: 1,
+                    },
+                },
+            }).mount()
+        },
+    }"
+              >
+                <div
+                  x-ref="splide"
+                  class="splide splide-absolute"
+                  aria-label="Splide/Alpine.js Carousel Example"
+                >
+                  <div class="splide__track">
+                    <ul class="splide__list">
+                      <li class="splide__slide">
+                        <!-- Card -->
+                        <div class="card card-item">
+                          <!-- Card HEADER-->
+                          <div class="card-header">
+                            <div class="card-header--top">
+                              <span class="badge badge-dark">Obligatorio </span>
+
+                              <button
+                                x-data="{ isActive: false }"
+                                :class="{ 'active': isActive }"
+                                x-on:click="isActive = !isActive"
+                                type="button"
+                                id="save-control"
+                                class="btn btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-save--white.svg"
+                                  alt="Save item"
+                                />
+                              </button>
+                            </div>
+                            <button
+                              type="button"
+                              class="btn btn-accent btn-location"
+                            >
+                              Acceder
+                            </button>
+                            <div class="card-header--bottom">
+                              <div class="progress progress-green">
+                                <div
+                                  class="progress-bar"
+                                  style="width: 50%"
+                                ></div>
+                              </div>
+                            </div>
+                            <img
+                              src="./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg"
+                              alt="Imagen de actividad"
+                              class="card-img-thumb"
+                            />
+                          </div>
+                          <!-- Card BODY-->
+                          <div class="card-body">
+                            <span class="badge badge-transparent"
+                              ><img
+                                src="./assets/images/icon-aulav.svg"
+                                alt="Aula Virtual"
+                              />
+                              Aula virtual</span
+                            >
+                            <h3 class="title-small">Gestión del cambio</h3>
+                            <p class="subtitle-small subtitle-small--accent">
+                              GRUPO SIETE NOVENTA
+                            </p>
+                            <div class="card-body--display">
+                              <div class="card-body--display---box">
+                                <p>
+                                  Bienvenidos al sistema de gestión de
+                                  aprendizaje. Te recordamos que debes cumplir
+                                  con las normas del curso y estar atento a los
+                                  plazos de entrega, ya que no se aceptarán
+                                  tareas después de la fecha límite.
+                                </p>
+                                <div
+                                  class="card-body--display---buttons"
+                                  role="group"
+                                >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    ><img
+                                      src="./assets/images/icon-diploma.svg"
+                                      alt="Descarga tu diploma"
+                                    />Descarga tu diploma</a
+                                  >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    ><img
+                                      src="./assets/images/icon-form.svg"
+                                      alt="Encuesta de satisfacción"
+                                    />Encuesta de satisfacción</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="splide__slide">
+                        <!-- Card -->
+                        <div class="card card-item disabled">
+                          <!-- Card HEADER-->
+                          <div class="card-header">
+                            <div class="card-header--top">
+                              <span class="badge badge-dark">Obligatorio </span>
+
+                              <button
+                                x-data="{ isActive: false }"
+                                :class="{ 'active': isActive }"
+                                x-on:click="isActive = !isActive"
+                                type="button"
+                                id="save-control"
+                                class="btn btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-save--white.svg"
+                                  alt="Save item"
+                                />
+                              </button>
+                            </div>
+                            <button
+                              type="button"
+                              class="btn btn-accent btn-location"
+                            >
+                              Acceder
+                            </button>
+                            <div class="card-header--bottom">
+                              <div class="progress progress-green">
+                                <div
+                                  class="progress-bar"
+                                  style="width: 50%"
+                                ></div>
+                              </div>
+                            </div>
+                            <img
+                              src="./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg"
+                              alt="Imagen de actividad"
+                              class="card-img-thumb"
+                            />
+                          </div>
+                          <!-- Card BODY-->
+                          <div class="card-body">
+                            <span class="badge badge-transparent"
+                              ><img
+                                src="./assets/images/icon-aulao.svg"
+                                alt="Aula Online"
+                              />
+                              Aula online</span
+                            >
+                            <h3 class="title-small">Gestión del cambio</h3>
+                            <p class="subtitle-small subtitle-small--accent">
+                              GRUPO SIETE NOVENTA
+                            </p>
+                            <div class="card-body--display">
+                              <div class="card-body--display---box">
+                                <p>
+                                  Bienvenidos al sistema de gestión de
+                                  aprendizaje. Te recordamos que debes cumplir
+                                  con las normas del curso y estar atento a los
+                                  plazos de entrega, ya que no se aceptarán
+                                  tareas después de la fecha límite.
+                                </p>
+                                <div
+                                  class="card-body--display---buttons"
+                                  role="group"
+                                >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="splide__slide">
+                        <!-- Card -->
+                        <div class="card card-item">
+                          <!-- Card HEADER-->
+                          <div class="card-header">
+                            <div class="card-header--top">
+                              <span class="badge badge-dark">Obligatorio </span>
+
+                              <button
+                                x-data="{ isActive: false }"
+                                :class="{ 'active': isActive }"
+                                x-on:click="isActive = !isActive"
+                                type="button"
+                                id="save-control"
+                                class="btn btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-save--white.svg"
+                                  alt="Save item"
+                                />
+                              </button>
+                            </div>
+                            <button
+                              type="button"
+                              class="btn btn-accent btn-location"
+                            >
+                              Acceder
+                            </button>
+                            <div class="card-header--bottom">
+                              <div class="progress progress-green">
+                                <div
+                                  class="progress-bar"
+                                  style="width: 50%"
+                                ></div>
+                              </div>
+                            </div>
+                            <img
+                              src="./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg"
+                              alt="Imagen de actividad"
+                              class="card-img-thumb"
+                            />
+                          </div>
+                          <!-- Card BODY-->
+                          <div class="card-body">
+                            <span class="badge badge-transparent"
+                              ><img
+                                src="./assets/images/icon-evaulacion.svg"
+                                alt="Evaulación"
+                              />
+                              Evaulación</span
+                            >
+                            <h3 class="title-small">Gestión del cambio</h3>
+                            <p class="subtitle-small subtitle-small--accent">
+                              GRUPO SIETE NOVENTA
+                            </p>
+                            <div class="card-body--display">
+                              <div class="card-body--display---box">
+                                <p>
+                                  Bienvenidos al sistema de gestión de
+                                  aprendizaje. Te recordamos que debes cumplir
+                                  con las normas del curso y estar atento a los
+                                  plazos de entrega, ya que no se aceptarán
+                                  tareas después de la fecha límite.
+                                </p>
+                                <div
+                                  class="card-body--display---buttons"
+                                  role="group"
+                                >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="splide__slide">
+                        <!-- Card -->
+                        <div class="card card-item">
+                          <!-- Card HEADER-->
+                          <div class="card-header">
+                            <div class="card-header--top">
+                              <span class="badge badge-dark">Obligatorio </span>
+
+                              <button
+                                x-data="{ isActive: false }"
+                                :class="{ 'active': isActive }"
+                                x-on:click="isActive = !isActive"
+                                type="button"
+                                id="save-control"
+                                class="btn btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-save--white.svg"
+                                  alt="Save item"
+                                />
+                              </button>
+                            </div>
+                            <button
+                              type="button"
+                              class="btn btn-accent btn-location"
+                            >
+                              Acceder
+                            </button>
+                            <div class="card-header--bottom">
+                              <div class="progress progress-green">
+                                <div
+                                  class="progress-bar"
+                                  style="width: 50%"
+                                ></div>
+                              </div>
+                            </div>
+                            <img
+                              src="./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg"
+                              alt="Imagen de actividad"
+                              class="card-img-thumb"
+                            />
+                          </div>
+                          <!-- Card BODY-->
+                          <div class="card-body">
+                            <span class="badge badge-transparent"
+                              ><img
+                                src="./assets/images/icon-evaulacion.svg"
+                                alt="Evaulación"
+                              />
+                              Evaulación</span
+                            >
+                            <h3 class="title-small">Gestión del cambio</h3>
+                            <p class="subtitle-small subtitle-small--accent">
+                              GRUPO SIETE NOVENTA
+                            </p>
+                            <div class="card-body--display">
+                              <div class="card-body--display---box">
+                                <p>
+                                  Bienvenidos al sistema de gestión de
+                                  aprendizaje. Te recordamos que debes cumplir
+                                  con las normas del curso y estar atento a los
+                                  plazos de entrega, ya que no se aceptarán
+                                  tareas después de la fecha límite.
+                                </p>
+                                <div
+                                  class="card-body--display---buttons"
+                                  role="group"
+                                >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                  <a href="#" class="btn btn-small btn-light"
+                                    >Ver más</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -1327,7 +2052,7 @@
             <!-- BODY-->
             <div class="panel-body">
               <div
-                class="grid grid-cols-2 md:grid-cols-[1fr_1fr_1fr] lg:grid-cols-[1fr_1fr_1fr_1fr] xl:grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr]"
+                class="hidden lg:grid grid-cols-2 md:grid-cols-[1fr_1fr_1fr] lg:grid-cols-[1fr_1fr_1fr_1fr] xl:grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr]"
               >
                 <div class="column">
                   <!-- Card -->
@@ -1359,7 +2084,10 @@
                     <!-- Card BODY-->
                     <div class="card-body">
                       <h3 class="card-title title-base">
-                        <a href="#">Gestión del cambio</a>
+                        <a href="#"
+                          >Gestión del cambio en dos líneas o más para probar el
+                          truncate de texto</a
+                        >
                       </h3>
                       <span class="badge badge-default">eléctricos</span>
                       <span class="badge badge-default">híbridos</span>
@@ -1631,6 +2359,313 @@
                       <span class="badge badge-default">híbridos</span>
                       <span class="badge badge-default">consumo</span>
                     </div>
+                  </div>
+                </div>
+              </div>
+              <!-- CARDS MOBILE-->
+              <div
+                class="lg:hidden"
+                x-data="{
+          init() {
+              new Splide(this.$refs.splide, {
+                  perPage: 6,
+                  pagination: false,
+                  breakpoints: {
+                    975: {
+                      perPage: 3,
+                    }, 
+                    767: {
+                      perPage: 2,
+                    },  
+                  500: {
+                          perPage: 1,
+                          autoWidth: true,
+                      },
+                  },
+              }).mount()
+          },
+      }"
+              >
+                <div
+                  x-ref="splide"
+                  class="splide splide-stories"
+                  aria-label="Splide/Alpine.js Carousel Example"
+                >
+                  <div class="splide__track">
+                    <ul class="splide__list">
+                      <li class="splide__slide">
+                        <!-- Card -->
+                        <div class="card card-stories">
+                          <!-- Card HEADER-->
+                          <div class="card-header">
+                            <div class="card-header--top">
+                              <button
+                                x-data="{ isActive: false }"
+                                :class="{ 'active': isActive }"
+                                x-on:click="isActive = !isActive"
+                                type="button"
+                                id="save-control"
+                                class="btn btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-save--white.svg"
+                                  alt="Save item"
+                                />
+                              </button>
+                            </div>
+                            <a href="#" class="card-header--link">
+                              <img
+                                src="./assets/images/cms-images/dummy_213x378_ffffff_cccccc.png"
+                                alt="Imagen de actividad"
+                              />
+                            </a>
+                          </div>
+                          <!-- Card BODY-->
+                          <div class="card-body">
+                            <h3 class="card-title title-base">
+                              <a href="#"
+                                >La vida del vehículo híbrido enchufable en
+                                Europa</a
+                              >
+                            </h3>
+                            <span class="badge badge-default">eléctricos</span>
+                            <span class="badge badge-default">híbridos</span>
+                            <span class="badge badge-default">consumo</span>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="splide__slide">
+                        <!-- Card -->
+                        <div class="card card-stories">
+                          <!-- Card HEADER-->
+                          <div class="card-header">
+                            <div class="card-header--top">
+                              <button
+                                x-data="{ isActive: false }"
+                                :class="{ 'active': isActive }"
+                                x-on:click="isActive = !isActive"
+                                type="button"
+                                id="save-control"
+                                class="btn btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-save--white.svg"
+                                  alt="Save item"
+                                />
+                              </button>
+                            </div>
+                            <a href="#" class="card-header--link">
+                              <img
+                                src="./assets/images/cms-images/dummy_213x378_ffffff_cccccc.png"
+                                alt="Imagen de actividad"
+                              />
+                            </a>
+                          </div>
+                          <!-- Card BODY-->
+                          <div class="card-body">
+                            <h3 class="card-title title-base">
+                              <a href="#">Gestión del cambio</a>
+                            </h3>
+                            <span class="badge badge-default">eléctricos</span>
+                            <span class="badge badge-default">híbridos</span>
+                            <span class="badge badge-default">consumo</span>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="splide__slide">
+                        <!-- Card -->
+                        <div class="card card-stories">
+                          <!-- Card HEADER-->
+                          <div class="card-header">
+                            <div class="card-header--top">
+                              <button
+                                x-data="{ isActive: false }"
+                                :class="{ 'active': isActive }"
+                                x-on:click="isActive = !isActive"
+                                type="button"
+                                id="save-control"
+                                class="btn btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-save--white.svg"
+                                  alt="Save item"
+                                />
+                              </button>
+                            </div>
+                            <a href="#" class="card-header--link">
+                              <img
+                                src="./assets/images/cms-images/dummy_213x378_ffffff_cccccc.png"
+                                alt="Imagen de actividad"
+                              />
+                            </a>
+                          </div>
+                          <!-- Card BODY-->
+                          <div class="card-body">
+                            <h3 class="card-title title-base">
+                              <a href="#"
+                                >La vida del vehículo híbrido enchufable en
+                                Europa y el mundo</a
+                              >
+                            </h3>
+                            <span class="badge badge-default">eléctricos</span>
+                            <span class="badge badge-default">híbridos</span>
+                            <span class="badge badge-default">consumo</span>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="splide__slide">
+                        <!-- Card -->
+                        <div class="card card-stories">
+                          <!-- Card HEADER-->
+                          <div class="card-header">
+                            <div class="card-header--top">
+                              <button
+                                x-data="{ isActive: false }"
+                                :class="{ 'active': isActive }"
+                                x-on:click="isActive = !isActive"
+                                type="button"
+                                id="save-control"
+                                class="btn btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-save--white.svg"
+                                  alt="Save item"
+                                />
+                              </button>
+                            </div>
+                            <a href="#" class="card-header--link">
+                              <img
+                                src="./assets/images/cms-images/dummy_213x378_ffffff_cccccc.png"
+                                alt="Imagen de actividad"
+                              />
+                            </a>
+                          </div>
+                          <!-- Card BODY-->
+                          <div class="card-body">
+                            <h3 class="card-title title-base">
+                              <a href="#">Gestión del cambio</a>
+                            </h3>
+                            <span class="badge badge-default">eléctricos</span>
+                            <span class="badge badge-default">híbridos</span>
+                            <span class="badge badge-default">consumo</span>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="splide__slide">
+                        <!-- Card -->
+                        <div class="card card-stories">
+                          <!-- Card HEADER-->
+                          <div class="card-header">
+                            <div class="card-header--top">
+                              <button
+                                x-data="{ isActive: false }"
+                                :class="{ 'active': isActive }"
+                                x-on:click="isActive = !isActive"
+                                type="button"
+                                id="save-control"
+                                class="btn btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-save--white.svg"
+                                  alt="Save item"
+                                />
+                              </button>
+                            </div>
+                            <a href="#" class="card-header--link">
+                              <img
+                                src="./assets/images/cms-images/dummy_213x378_ffffff_cccccc.png"
+                                alt="Imagen de actividad"
+                              />
+                            </a>
+                          </div>
+                          <!-- Card BODY-->
+                          <div class="card-body">
+                            <h3 class="card-title title-base">
+                              <a href="#">Gestión del cambio</a>
+                            </h3>
+                            <span class="badge badge-default">eléctricos</span>
+                            <span class="badge badge-default">híbridos</span>
+                            <span class="badge badge-default">consumo</span>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="splide__slide">
+                        <!-- Card -->
+                        <div class="card card-stories">
+                          <!-- Card HEADER-->
+                          <div class="card-header">
+                            <div class="card-header--top">
+                              <button
+                                x-data="{ isActive: false }"
+                                :class="{ 'active': isActive }"
+                                x-on:click="isActive = !isActive"
+                                type="button"
+                                id="save-control"
+                                class="btn btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-save--white.svg"
+                                  alt="Save item"
+                                />
+                              </button>
+                            </div>
+                            <a href="#" class="card-header--link">
+                              <img
+                                src="./assets/images/cms-images/dummy_213x378_ffffff_cccccc.png"
+                                alt="Imagen de actividad"
+                              />
+                            </a>
+                          </div>
+                          <!-- Card BODY-->
+                          <div class="card-body">
+                            <h3 class="card-title title-base">
+                              <a href="#">Gestión del cambio</a>
+                            </h3>
+                            <span class="badge badge-default">eléctricos</span>
+                            <span class="badge badge-default">híbridos</span>
+                            <span class="badge badge-default">consumo</span>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="splide__slide">
+                        <!-- Card -->
+                        <div class="card card-stories">
+                          <!-- Card HEADER-->
+                          <div class="card-header">
+                            <div class="card-header--top">
+                              <button
+                                x-data="{ isActive: false }"
+                                :class="{ 'active': isActive }"
+                                x-on:click="isActive = !isActive"
+                                type="button"
+                                id="save-control"
+                                class="btn btn-transparent"
+                              >
+                                <img
+                                  src="./assets/images/icon-save--white.svg"
+                                  alt="Save item"
+                                />
+                              </button>
+                            </div>
+                            <a href="#" class="card-header--link">
+                              <img
+                                src="./assets/images/cms-images/dummy_213x378_ffffff_cccccc.png"
+                                alt="Imagen de actividad"
+                              />
+                            </a>
+                          </div>
+                          <!-- Card BODY-->
+                          <div class="card-body">
+                            <h3 class="card-title title-base">
+                              <a href="#">Gestión del cambio</a>
+                            </h3>
+                            <span class="badge badge-default">eléctricos</span>
+                            <span class="badge badge-default">híbridos</span>
+                            <span class="badge badge-default">consumo</span>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -2330,6 +3365,7 @@
           <li><a class="link" href="stories.html">11. Stories</a></li>
           <li><a class="link" href="evau.html">12. Evaluación</a></li>
           <li><a class="link" href="superaula.html">13. Superaula</a></li>
+          <li><a class="link" href="streaming.html">14. Streaming</a></li>
         </ul>
       </div>
     </div>

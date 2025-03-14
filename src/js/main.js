@@ -68,26 +68,33 @@ document.addEventListener("alpine:init", () => {
   }));
 
   Alpine.data("countdownTimer", () => ({
-    duration: 30 * 60 * 60, // 30 hours in seconds
+    duration: 30 * 60 * 60, // 30 horas en segundos
     timer: null,
     hours: "00",
     minutes: "00",
     seconds: "00",
+    isPaused: localStorage.getItem("testPaused") === "true",
     startCountdown() {
-      this.timer = this.duration;
-      setInterval(() => {
-        let hours = parseInt(this.timer / 3600, 10);
-        let minutes = parseInt((this.timer % 3600) / 60, 10);
-        let seconds = parseInt(this.timer % 60, 10);
-
-        this.hours = hours < 10 ? "0" + hours : hours;
-        this.minutes = minutes < 10 ? "0" + minutes : minutes;
-        this.seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        if (--this.timer < 0) {
-          this.timer = this.duration;
+      this.updateTime();
+      this.timer = setInterval(() => {
+        if (!this.isPaused) {
+          this.duration--;
+          this.updateTime();
         }
       }, 1000);
+
+      document.addEventListener("toggle-pause", () => {
+        this.isPaused = localStorage.getItem("testPaused") === "true";
+      });
+    },
+    updateTime() {
+      let hours = parseInt(this.duration / 3600, 10);
+      let minutes = parseInt((this.duration % 3600) / 60, 10);
+      let seconds = parseInt(this.duration % 60, 10);
+
+      this.hours = hours < 10 ? "0" + hours : hours;
+      this.minutes = minutes < 10 ? "0" + minutes : minutes;
+      this.seconds = seconds < 10 ? "0" + seconds : seconds;
     },
   }));
 
@@ -286,6 +293,31 @@ document.addEventListener("alpine:init", () => {
           },
         },
       }).mount();
+    },
+  }));
+
+  Alpine.data("chatScroll", () => ({
+    isScrolling(event) {
+      const chat = event.target;
+      const atTop = chat.scrollTop === 0;
+      const atBottom = chat.scrollTop + chat.clientHeight >= chat.scrollHeight;
+
+      // Solo bloquear el swipe si el usuario está haciendo scroll
+      if (!atTop && !atBottom) {
+        event.stopPropagation();
+      }
+    },
+  }));
+
+  Alpine.data("viewportHeight", () => ({
+    height: window.innerHeight,
+    init() {
+      this.updateHeight(); // Ajusta la altura al iniciar
+      window.addEventListener("resize", () => this.updateHeight());
+      window.addEventListener("orientationchange", () => this.updateHeight());
+    },
+    updateHeight() {
+      this.height = window.innerHeight;
     },
   }));
 });

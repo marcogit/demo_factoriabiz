@@ -13,8 +13,14 @@
   }
 
   .scroll-fix {
-    &.scroll-fix--full {
-      @apply flex flex-col min-h-screen;
+    @apply flex flex-col min-h-screen overflow-x-hidden;
+
+    &.scroll-fix-stories {
+      @apply min-h-0;
+      
+      .main-footer {
+        @apply z-30;
+      }
     }
   }
 
@@ -187,6 +193,10 @@
       @apply text-danger-dark hover:text-danger;
     }
 
+    &.link-accent {
+      @apply text-accent-dark hover:text-accent;
+    }
+
     &.active {
       @apply text-accent;
     }
@@ -286,8 +296,20 @@
       .grid-superaula--content {
         @apply flex flex-col w-full transition-all;
 
+        &.grid-superaula--content---video {
+          @apply h-full bg-neutral-dark bg-opacity-95 justify-center items-center;
+
+          .container {
+            @apply flex justify-center items-center h-full mx-auto;
+
+            iframe {
+              @apply w-full lg:w-auto;
+            }
+          }
+        }
+
         .grid-superaula--content---slider {
-          @apply max-h-[600px] flex justify-center items-center transition-all duration-300 ease-in-out;
+          @apply max-h-[600px] flex justify-center items-center transition-all duration-300 ease-in-out relative;
 
           @media screen and (max-width: 1600px) {
             max-height: auto;
@@ -376,6 +398,46 @@
 
           .grid-superaula--sidebar---header {
             @apply p-5;
+          }
+        }
+      }
+
+      &.grid-superaula--streaming {
+        @apply h-auto lg:h-full lg:max-h-[600px];
+
+        .grid-superaula--sidebar {
+          @apply  overflow-y-visible;
+
+          &.grid-streaming--sidebar {
+            @apply bg-neutral-dark relative;
+
+            .btn-sidebar-control {
+              @apply absolute lg:fixed lg:hidden;
+            }
+
+            .grid-superaula--sidebar---content {
+              @apply h-auto lg:h-full px-3 lg:px-0;
+
+              .fix-height {
+                @apply h-full;
+              }
+
+              .grid-superaula--sidebar---header {
+                @apply lg:bg-neutral text-white border-b lg:border-none border-neutral pl-3 lg:pl-5;
+
+                .title-base {
+                  @apply text-white;
+                }
+              }
+            }
+
+            &.grid-superaula--desktop {
+              @apply block;
+              
+              @media screen and (max-width: 1600px) {
+                width: 100%;
+              }
+            }
           }
         }
       }
@@ -563,10 +625,10 @@
       z-index: 5000;
     }
     &.panel-full {
-      @apply pt-0 pb-0 h-full z-[7000] md:z-10;
+      @apply pt-0 pb-0 z-[7000] md:z-10 h-full;
 
       .container {
-        @apply h-full relative;
+        @apply relative h-full;
         @media (max-width: 768px) {
           max-width: inherit;
           padding-left: 0;
@@ -607,7 +669,7 @@
   }
 
   main {
-    @apply flex-grow pt-[54px] xl:pt-[72px] overflow-x-hidden;
+    @apply flex-grow pt-[54px] xl:pt-[72px];
 
     &.bg-light {
       @apply bg-neutral-bg;
@@ -623,7 +685,7 @@
   }
 
   .chat-panel--overlay {
-    @apply absolute right-0 bottom-0 md:bottom-24 top-0 md:top-7 w-full md:w-1/4 bg-black/80 p-5 pt-14 md:pt-0 md:p-0 z-30;
+    @apply absolute bottom-0 top-0 left-0 lg:left-[calc(100%+15px)] right-0 w-full bg-black/80 p-5 pt-14 md:pt-0 md:p-0 z-30;
 
     .box-chat--stories {
       @apply h-full;
