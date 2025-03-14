@@ -568,7 +568,7 @@
                         <li class="tab-list--item">
                           <button
                             :id="$id('tab', whichChild($el.parentElement, $refs.tablist))"
-                            @click="select($el.id)"
+                            @click="select($el.id); close($refs.button)"
                             @mousedown.prevent
                             @focus="select($el.id)"
                             type="button"
@@ -585,7 +585,7 @@
                         <li class="tab-list--item">
                           <button
                             :id="$id('tab', whichChild($el.parentElement, $refs.tablist))"
-                            @click="select($el.id)"
+                            @click="select($el.id); close($refs.button)"
                             @mousedown.prevent
                             @focus="select($el.id)"
                             type="button"
@@ -602,7 +602,7 @@
                         <li class="tab-list--item">
                           <button
                             :id="$id('tab', whichChild($el.parentElement, $refs.tablist))"
-                            @click="select($el.id)"
+                            @click="select($el.id); close($refs.button)"
                             @mousedown.prevent
                             @focus="select($el.id)"
                             type="button"
@@ -618,7 +618,7 @@
                         <li class="tab-list--item">
                           <button
                             :id="$id('tab', whichChild($el.parentElement, $refs.tablist))"
-                            @click="select($el.id)"
+                            @click="select($el.id); close($refs.button)"
                             @mousedown.prevent
                             @focus="select($el.id)"
                             type="button"

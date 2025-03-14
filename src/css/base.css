@@ -309,16 +309,7 @@
         }
 
         .grid-superaula--content---slider {
-          @apply max-h-[600px] flex justify-center items-center transition-all duration-300 ease-in-out relative;
-
-          @media screen and (max-width: 1600px) {
-            max-height: auto;
-          }
-
-          @media screen and (max-width: 767px) {
-            max-height: inherit;
-            height: auto;
-          }
+          @apply h-[365px] md:h-[600px] flex justify-center items-center transition-all duration-300 ease-in-out relative z-10;
 
           .splide__track {
             @apply max-h-[600px];
@@ -334,7 +325,7 @@
           }
 
           .grid-superaula--content---slider-data {
-            @apply w-full h-full;
+            @apply w-full h-full absolute z-20;
           }
           .container {
             @apply h-full flex flex-col justify-center;
@@ -358,10 +349,10 @@
         }
 
         &.grid-superaula--desktop {
-          @apply hidden lg:block;
+          @apply hidden xl:block;
 
           &.grid-superaula--sidebar---active {
-            @apply w-96;
+            @apply w-[420px];
           }
 
           &.grid-superaula--sidebar---disabled {
@@ -370,7 +361,7 @@
         }
 
         &.grid-superaula--mobile {
-          @apply block lg:hidden relative;
+          @apply block xl:hidden relative;
 
           &.grid-superaula--sidebar---active {
             @apply h-auto;
@@ -693,7 +684,7 @@
   }
 
   .main-header {
-    @apply border bg-white border-b-neutral-lighter fixed top-0 w-full z-[6000];
+    @apply border bg-white border-b-neutral-lighter fixed top-0 w-full z-[6500];
 
     .navbar {
       @apply flex justify-between items-center items-center py-1.5 xl:py-3;
@@ -838,8 +829,17 @@
   }
 
   .main-header--page {
-    @apply w-full pt-5 pb-3 xl:pb-5 xl:pt-7;
+    @apply w-full pt-5 pb-3 xl:pb-5 xl:pt-7 z-[6000] relative;
 
+    .filter---display {
+
+      .filter---display----panel {
+
+        .control-expanded {
+          overflow: inherit !important;
+        }
+      }
+    }
     .form-block {
       @apply pb-0;
     }

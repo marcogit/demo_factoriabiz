@@ -1346,14 +1346,14 @@
       @apply block w-2 h-2 bg-danger rounded-full absolute top-0 right-0 border border-white;
     }
     img {
-      @apply w-auto;
+      @apply w-auto transition-all;
     }
 
     svg {
-      @apply transition-all m-0;
+      @apply transition-all m-0 transition-all;
 
       path {
-        @apply fill-neutral;
+        @apply fill-neutral transition-all;
       }
     }
 
@@ -1415,7 +1415,7 @@
         svg {
           path,
           rect {
-            @apply fill-accent;
+            @apply fill-white;
           }
         }
       }
@@ -1423,6 +1423,23 @@
 
     &.btn-accent--line {
       @apply bg-transparent border border-accent text-neutral hover:bg-accent hover:text-white;
+
+      svg {
+        path,
+        rect {
+          @apply bg-neutral-dark;
+        }
+      }
+
+      &:hover,
+      &:focus {
+        svg {
+          path,
+          rect {
+            @apply fill-white;
+          }
+        }
+      }
     }
 
     &.btn-brand--line {
@@ -1487,7 +1504,7 @@
     }
 
     &.btn-light {
-      @apply text-neutral-light border border-solid border-neutral-lighter hover:border-neutral-light;
+      @apply text-neutral-light border border-solid border-neutral-lighter hover:border-neutral-light hover:text-neutral-dark;
     }
 
     &.btn-danger {
@@ -2246,7 +2263,7 @@
     }
 
     &.splide-mini {
-      @apply -mr-5 -ml-5 mb-0;
+      @apply -ml-5 -mr-7 mb-0 pb-[310px];
 
       &::before {
         @apply left-0;
@@ -2271,7 +2288,7 @@
       }
 
       .splide__track {
-        @apply overflow-x-hidden pb-6 pl-3 !important;
+        @apply absolute left-0 right-0 overflow-x-hidden pl-3 pb-7 !important;
 
         overflow: hidden;
         &::after,
@@ -2331,7 +2348,7 @@
       }
 
       .splide__track {
-        @apply overflow-hidden pt-8 xl:pt-0;;
+        @apply overflow-hidden pt-11 xl:pt-0;
 
         &::after,
         &::before {
@@ -2344,6 +2361,10 @@
 
             .container {
               @apply px-0 lg:px-5;
+
+              &.p-0 {
+                @apply lg:px-0;
+              }
 
               @media screen and (max-width: 1600px) {
                 max-width: inherit;
@@ -2359,7 +2380,7 @@
               @apply flex w-full h-full mt-5 pt-3 pb-10 pr-5 flex-col items-start justify-start overflow-y-auto;
 
               &.splide__slide-box--display {
-                @apply hidden lg:flex
+                @apply hidden md:flex;
               }
 
               .post-general {
@@ -2384,16 +2405,16 @@
             }
 
             .splide__slide-modal {
-             @apply flex lg:hidden flex-col items-center justify-center h-full w-full bg-neutral bg-cover relative min-h-[320px];
+              @apply flex md:hidden flex-col items-center justify-center h-full w-full bg-neutral bg-cover relative min-h-[320px];
 
-             &::before {
-              content: "";
-              @apply absolute top-0 left-0 right-0 bottom-0 bg-neutral-dark bg-opacity-70 z-10;
-             }
+              &::before {
+                content: "";
+                @apply absolute top-0 left-0 right-0 bottom-0 bg-neutral-dark bg-opacity-70 z-10;
+              }
 
-             .splide__slide-modal--content {
-              @apply relative z-20 text-accent flex flex-col items-center justify-center gap-2;
-             }
+              .splide__slide-modal--content {
+                @apply relative z-20 text-accent flex flex-col items-center justify-center gap-2;
+              }
             }
           }
         }

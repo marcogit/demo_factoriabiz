@@ -447,7 +447,7 @@
       <main class="main-aula" x-data="{ sidebarOpen: true, sliderOpen: true }">
         <div
           x-data="{ sidebarOpen: true }"
-          class="grid grid-1 lg:grid-cols-[1fr,auto] grid-superaula"
+          class="grid grid-1 lg:grid-cols-[1fr_auto] grid-superaula"
         >
           <!-- Zona de Contenido -->
           <div class="grid-superaula--content">
@@ -552,10 +552,12 @@
                           </figure>
                         </div>
                       </div>
-                      <!-- slide ok
+                      <!-- slide ok -->
                       <div class="splide__slide" data-title="4. artículo">
                         <div class="container">
-                          <div class="splide__slide-box">
+                          <div
+                            class="splide__slide-box splide__slide-box--display"
+                          >
                             <article class="grid post post-general">
                               <div class="column post-body">
                                 <h2 class="title-big">
@@ -632,15 +634,34 @@
                               </div>
                             </article>
                           </div>
+                          <div
+                            class="splide__slide-modal"
+                            style="
+                              background-image: url(./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg);
+                            "
+                          >
+                            <div class="splide__slide-modal--content">
+                              3.5 Test de modelos SUV Hyundai
+                              <!-- Modal Trigger -->
+                              <button
+                                class="btn btn-accent"
+                                @click="openModal = true"
+                              >
+                                Realizar test
+                              </button>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                       slide ok-->
+                      <!-- slide ok-->
                       <div
                         class="splide__slide"
                         data-title="4. ¿Qué opinas del nuevo sistema de bloqueo de señales acústicas?"
                       >
                         <div class="container">
-                          <div class="splide__slide-box splide__slide-box--display">
+                          <div
+                            class="splide__slide-box splide__slide-box--display"
+                          >
                             <div
                               class="progress progress-big progress-green mb-5"
                             >
@@ -711,7 +732,7 @@
                             style="
                               background-image: url(./assets/images/cms-images/dummy_330x206_ffffff_cccccc.jpg);
                             "
-                            >
+                          >
                             <div class="splide__slide-modal--content">
                               3.5 Test de modelos SUV Hyundai
                               <!-- Modal Trigger -->
@@ -731,7 +752,9 @@
                         data-title="5. Rellena el hueco con la palabra adecuada?"
                       >
                         <div class="container">
-                          <div class="splide__slide-box splide__slide-box--display">
+                          <div
+                            class="splide__slide-box splide__slide-box--display"
+                          >
                             <div
                               class="progress progress-big progress-green mb-5"
                             >
@@ -837,7 +860,9 @@
                         data-title="6. Selecciona el único SUV de la lista?"
                       >
                         <div class="container">
-                          <div class="splide__slide-box splide__slide-box--display">
+                          <div
+                            class="splide__slide-box splide__slide-box--display"
+                          >
                             <div
                               class="progress progress-big progress-green mb-5"
                             >
@@ -958,7 +983,9 @@
                         data-title="7. Relaciona las marcas con modelo"
                       >
                         <div class="container">
-                          <div class="splide__slide-box splide__slide-box--display">
+                          <div
+                            class="splide__slide-box splide__slide-box--display"
+                          >
                             <div
                               class="progress progress-big progress-green mb-5"
                             >
