@@ -1340,7 +1340,7 @@
   }
   /*buttons*/
   .btn {
-    @apply flex gap-3 font-medium rounded-xl text-base px-3 lg:px-5 py-2 lg:py-3  transition-all text-center items-center justify-center leading-tight relative cursor-pointer;
+    @apply flex gap-3 font-medium rounded-xl text-base px-3 lg:px-5 py-2 lg:py-3  transition-all text-center items-center justify-center leading-tight relative cursor-pointer z-10;
 
     .not {
       @apply block w-2 h-2 bg-danger rounded-full absolute top-0 right-0 border border-white;
